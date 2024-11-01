@@ -9,11 +9,11 @@ source .env/bin/active    (*only works on linux/mac)
 ```
 pip install -r requirements.txt
 ```
-4. migrate models changes
+3. migrate models changes
 ```
 python3 manage.py migrate
 ```
-6. start up server
+4. start up server
 ```
 python3 manage.py runserver
 ```
