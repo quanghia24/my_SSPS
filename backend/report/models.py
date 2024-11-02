@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import User
+from user.models import Student
 # Create your models here.
 
 class Report(models.Model):
@@ -7,4 +7,4 @@ class Report(models.Model):
     content = models.TextField()
     rating = models.IntegerField()
     date_created = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, related_name='reported_users', on_delete=models.CASCADE)
+    student_id = models.ForeignKey(Student, related_name='reported_users', on_delete=models.CASCADE)

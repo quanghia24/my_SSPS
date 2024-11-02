@@ -89,10 +89,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'v3_ssps',
+        'USER': 'root',
+        'PASSWORD': '12345',
+        'HOST':'localhost',
+        'PORT':'3306',
     }
 }
 
@@ -137,3 +143,22 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# LOGIN_REDIRECT_URL = '/'
+# if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
+#     EMAIL_BACKEND = 'django.core.email.backends.smtp.EmailBackend'
+#     EMAIL_HOST ='smtp.gmail.com'
+#     EMAIL_HOST_USER = env('EMAIL_ADDRESS')
+#     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+#     EMAIL_PORT = 587 # secure http connection
+#     EMAIL_USE_TLS = True # encrypted connection
+#     DEFAULT_FROM_EMAIL = 'my_ssps'
+#     ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+# else:
+#     EMAIL_BACKEND = 'django.core.email.backends.console.EmailBackend'
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_EMAIL_REQUIRED = True
+
+# ACCOUNT_USERNAME_BLACKLIST = ['admin', 'accounts', 'profile', 'category', 'post', 'inbox']
+
+MEDIA_DIR = BASE_DIR / 'media'
