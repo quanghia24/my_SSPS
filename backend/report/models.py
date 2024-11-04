@@ -8,3 +8,6 @@ class Report(models.Model):
     rating = models.IntegerField()
     date_created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, related_name='reported_users', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title + " | reviewed by " + self.user.user_id
