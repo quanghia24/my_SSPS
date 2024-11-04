@@ -9,8 +9,7 @@ class print_order(models.Model):
     time_start = models.DateTimeField(auto_now_add=True)
     time_end = models.DateTimeField(null=True)
     status = models.CharField(max_length=10, choices=(('success', 'success'), ('failed', 'failed'), ('pending', 'pending')))
-    # pages_to_be_printed = models.CharField(max_length=64, null=True)
-    
+    file_to_be_printed = models.FileField()
     num_pages_printed = models.IntegerField(null=True)
     student_id = models.ForeignKey(Student, related_name='orders_users', on_delete=models.CASCADE)
 

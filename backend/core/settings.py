@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'v3_ssps',
+        'NAME': 'my_ssps',
         'USER': 'root',
         'PASSWORD': '12345',
         'HOST':'localhost',
