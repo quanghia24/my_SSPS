@@ -3,7 +3,8 @@
 ```
 python3 -m venv .env
 source .env/bin/active    (*only works on linux/mac)
-.env\Scripts\activate.bat (*only works on window)
+.env\Scripts\activate.bat (*or)
+.. or you to find you self the way to activate it in your system
 ```
 2. install required libraries
 ```
