@@ -7,8 +7,10 @@ from datetime import datetime
 
 # Create your models here.
 class print_order(models.Model):
-    status = models.CharField(max_length=7, choices=(('success', 'success'), ('failed', 'failed'), ('pending', 'pending')))
+    file_name = models.CharField(max_length=125, blank=True, null=True)
     file_to_be_printed = models.FileField(upload_to='files/')
+    
+    status = models.CharField(max_length=7, choices=(('success', 'success'), ('failed', 'failed'), ('pending', 'pending')))
 
     orientation = models.CharField(max_length=10, choices=(('portrait', 'portrait'), ('landscape', 'landscape')), default='portrait')
     sided = models.CharField(max_length=6, choices=(('single', 'single'), ('double', 'double')), default='single')    

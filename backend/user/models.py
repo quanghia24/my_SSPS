@@ -2,6 +2,15 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
+
+    # username
+    # password
+
+    # mssv
+    # name
+    # username
+    # password
+
     user_id        = models.CharField(max_length=10, unique = True)
     name           = models.CharField(max_length=40)
     username       = models.CharField(max_length=40, unique=True)
@@ -11,6 +20,8 @@ class User(models.Model):
     phone_number   = models.CharField(max_length=10, null=True, blank=True)
     balance        = models.IntegerField(default=100)
     last_signed_in = models.DateTimeField(auto_now_add=True)
+    
+    # role 
     allowed_rule   = models.CharField(max_length=20, default='customer') # or 'admin'
 
     def __str__(self):
