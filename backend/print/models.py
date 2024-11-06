@@ -22,52 +22,15 @@ class print_order(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     printer = models.ForeignKey(Printer, on_delete=models.CASCADE)
-
     page_cost = models.IntegerField(default=0, blank=True)
 
-    # def calculate_page_count(self):
-    #     if not self.file_to_be_printed:
-    #         return 0
-        
-    #     # Open the file and count the pages
-    #     try:
-    #         with self.file_to_be_printed.open('rb') as file:
-    #             pdf_reader = PdfReader(file)
-    #             num_pages = len(pdf_reader.pages)
-    #             return num_pages
-    #     except Exception as e:
-    #         print(f"Error reading file: {e}")
-    #         return 0
-        
-    # def calculate_total_cost(self):
-    #     num_pages = self.calculate_page_count()
-        
-    #     if num_pages == 0:
-    #         return 0
-        
-    #     total_cost = num_pages * self.copies
-
-    #     # Adjust cost based on sided and page size
-    #     if(self.sided == 'double' and self.page_size == 'A3'):
-    #         pass
-    #     elif self.sided == 'double':
-    #         total_cost = (total_cost + 1) // 2
-    #     elif self.page_size == 'A3':
-    #         total_cost = total_cost * 2
-
-    #     return total_cost
         
     def save(self, *args, **kwargs):
-        # self.page_cost = self.calculate_total_cost()
-
-        # if(self.page_cost > self.user.balance):
-        #     self.status = 'failed'
-
-        # Set `timer_end` to the current time if the status is 'success'
         if self.status == 'success' and not self.timer_end:
             self.timer_end = datetime.now()
 
         super(print_order, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return self.user.name + "\'s order"
