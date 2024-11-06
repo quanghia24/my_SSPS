@@ -4,7 +4,7 @@ from user.models import User
 class purchase_order(models.Model):
     purchase_time = models.DateTimeField(auto_now_add=True)
     amount = models.IntegerField()
-    price = models.FloatField(default=2.25)
+    price = models.FloatField(default=2.25, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     total_amount = models.FloatField(default=0, blank=True, null=True)
 

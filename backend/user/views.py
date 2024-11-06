@@ -10,6 +10,8 @@ from django.http import HttpResponse, JsonResponse
 
 
 # Create your views here.
+
+# CRUD  
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
