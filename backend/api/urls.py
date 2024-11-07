@@ -16,7 +16,7 @@ urlpatterns = [
     path('users/', include('user.urls')),
     # path('buy/', include('buy.urls')),
     # path('print/', include('print.urls')),
-    # path('printer/', include('printer.urls')),
+    path('printer/', include('printer.urls')),
     path('report/', include('report.urls')),
     
 ]

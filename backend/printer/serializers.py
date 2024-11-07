@@ -4,4 +4,5 @@ from .models import Printer
 class PrinterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Printer
-        fields = ['id', 'image', 'model', 'brand', 'location', 'allowed_types']
+        # filed should be include in respond
+        fields = ['id', 'image', 'model', 'brand', 'location', 'allow_types']
