@@ -17,7 +17,7 @@ First => I register my account:
 
 
 ![branch](./image/register.jpg)
-After that I click on register:
+After that I click on forgot password:
 
 
 ![branch](./image/click.jpg)
