@@ -4,7 +4,8 @@ import BuyPaper from '../../../assets/buyPaper.png'
 import SendFeedback from '../../../assets/sendFeedback.png'
 import HistoryPrinting from '../../../assets/historyPrinting.png'
 import Print from '../../../assets/print.png'
-import Navbar from './NavBar'
+import Navbar from '../../NavFooter/NavBar'
+import Footer from '../../NavFooter/Footer'
 const HomeStudent = () => {
   return (
   <div className="">
@@ -29,7 +30,7 @@ const HomeStudent = () => {
       </div>
       </div>
     </div>
-
+    <Footer/>
     </div>
   
   )

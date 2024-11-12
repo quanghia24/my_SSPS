@@ -1,5 +1,7 @@
 import './App.css';
 import HomeStudent from './components/HomePage/HomeStudent/HomeStudent';
+import PrintingHistory from './components/PrintingLog/PrintingHistory';
+
 
 function App() {
   
@@ -11,7 +13,9 @@ function App() {
       
 
       {/* <input type="file" onChange={handleChange} /> */}
-      <HomeStudent/>
+      {/* <HomeStudent/> */}
+      <PrintingHistory/>
+      
 
     </div>
   );

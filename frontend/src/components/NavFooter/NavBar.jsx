@@ -1,7 +1,8 @@
 // src/components/Navbar.jsx
 import React from 'react';
 import './NavBar.css';
-import LogoBK from '../../../assets/logoBK.png'
+import LogoBK from '../../assets/logoBK.png'
+import StudentFeature from './StudentFeature';
 function Navbar() {
   return (
     <nav className="navbar">
@@ -16,10 +17,7 @@ function Navbar() {
         <li>Mua giấy</li>
         <li>Lịch sử</li>
       </ul>
-      <div className="navbar-icons">
-        <button>🔔</button>
-        <button>👤</button>
-      </div>
+      <StudentFeature/>
     </nav>
   );
 }
