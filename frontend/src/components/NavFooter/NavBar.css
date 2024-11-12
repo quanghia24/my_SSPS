@@ -40,6 +40,7 @@
     font-family: 'Inter', sans-serif;
     margin: auto;
    margin-right: 80vh;
+   border-radius: 10px;
   }
   
   .navbar-links li {
