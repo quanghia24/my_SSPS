@@ -1,4 +1,5 @@
 import './App.css';
+import HomeStudent from './components/HomePage/HomeStudent/HomeStudent';
 
 function App() {
   
@@ -7,10 +8,10 @@ function App() {
   }
   return (
     <div>
-      You are now inside the App
+      
 
-      <input type="file" onChange={handleChange} />
-
+      {/* <input type="file" onChange={handleChange} /> */}
+      <HomeStudent/>
 
     </div>
   );
