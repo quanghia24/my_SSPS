@@ -1,4 +1,5 @@
 import './App.css';
+import BuyPrintingPaper from './components/BuyPaper/BuyPrintingPaper';
 import HomeStudent from './components/HomePage/HomeStudent/HomeStudent';
 import PrintingHistory from './components/PrintingLog/PrintingHistory';
 
@@ -14,7 +15,8 @@ function App() {
 
       {/* <input type="file" onChange={handleChange} /> */}
       {/* <HomeStudent/> */}
-      <PrintingHistory/>
+      {/* <PrintingHistory/> */}
+      <BuyPrintingPaper/>
       
 
     </div>
