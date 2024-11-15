@@ -1,11 +1,7 @@
-# printer/urls.py
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import PrinterViewSet
-
-router = DefaultRouter()
-router.register(r'printers', PrinterViewSet, basename='printer')
+from django.urls import path
+from .views import set_printer_status
 
 urlpatterns = [
-    path('', include(router.urls)),
+    # Route for the function-based view
+    path('<int:pk>/set_status/', set_printer_status, name='set_printer_status'),
 ]

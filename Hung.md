@@ -5,10 +5,10 @@
 
     
     
-- I create ability for SPSO to set status of printer
+- I create ability for SPSO to set status of printer (@API_VIEW)
 
 
-![branch](./image/set_status.jpg)
+![branch](./image/again_API.jpg)
 
 
 - I create email for forgot password (so waste my time)
