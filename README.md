@@ -1,3 +1,13 @@
+Ynhi: 
+navbar,footer of student page
+homepage for student
+buyPaper page
+printing History
+sendFeedback
+
+
+
+
 ### backend
 1. setup your virtual environment
 ```
