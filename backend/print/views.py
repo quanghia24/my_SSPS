@@ -9,3 +9,7 @@ from rest_framework import viewsets
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = purchase_order.objects.all()
     serializer_class = OrderSerializer
+
+# spso set status
+
+
