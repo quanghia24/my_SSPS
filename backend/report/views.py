@@ -28,13 +28,13 @@ def report_view(request):
 
     elif request.method == 'POST':
         # Create a new report
+        data = json.loads(request.body)
         try: 
             user = get_object_or_404(User, user_id=data['user_id'])  # Ensure the user exists
         except ObjectDoesNotExist:
             return JsonResponse({'error': 'User not found'}, status=404)
         
         try:
-            data = json.loads(request.body)
             report = Report.objects.create(
                 title=data['title'],
                 content=data['content'],
