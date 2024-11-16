@@ -1,7 +1,8 @@
 from django.db import models
 from user.models import User
+
 # Create your models here.
-class purchase_order(models.Model):
+class PurchaseOrder(models.Model):
     purchase_time = models.DateTimeField(auto_now_add=True)
     amount = models.IntegerField()
     price = models.FloatField(default=2.25, blank=True)
@@ -11,7 +12,7 @@ class purchase_order(models.Model):
     def save(self, *args, **kwargs):
         # Calculate the total_amount before saving the instance
         self.total_amount = self.price * self.amount
-        super(purchase_order, self).save(*args, **kwargs)
+        super(PurchaseOrder, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.user.name + " bought " + str(self.amount)
