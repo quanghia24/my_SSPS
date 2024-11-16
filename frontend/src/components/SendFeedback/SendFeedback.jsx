@@ -10,10 +10,30 @@ import Navbar from '../NavFooter/NavBar';
 import Footer from '../NavFooter/Footer';
 
 const Feedback = () => {
+   ;
+  const [rating,setRating] = useState(5);
+  const [title,setTitle] = useState('');
+  const [content,setContent] = useState('');
   const [selectedEmoji, setSelectedEmoji] = useState(null);
 
   const handleEmojiClick = (emoji) => {
     setSelectedEmoji((prevEmoji) => (prevEmoji === emoji ? null : emoji));
+  };
+  const handleSend = () => {
+   // url = 'http://localhost:8000/api/reports/';
+    // fetch(url,{
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     rating,
+    //     title,
+    //     content,
+    //   }),
+    // }).then((res) =>  res.json())
+    // .then(res => console.log(res))
+    console.log('hello');
   };
 
   return (
@@ -28,41 +48,50 @@ const Feedback = () => {
           <div className="d-flex justify-content-center mb-4">
             <div
               className={`d-flex align-items-center me-3 ${selectedEmoji === 'emotion1' ? 'select' : ''}`}
-              onClick={() => handleEmojiClick('emotion1')}
+              onClick={() => {handleEmojiClick('emotion1');setRating(1)}}
             >
               <img src={Emotion1} alt="Sad Emoji" className="me-2 emotion-icon" />
             </div>
             <div
               className={`d-flex align-items-center me-3 ${selectedEmoji === 'emotion2' ? 'select' : ''}`}
-              onClick={() => handleEmojiClick('emotion2')}
+              onClick={() => {handleEmojiClick('emotion2');setRating(2)}}
             >
               <img src={Emotion2} alt="Neutral Emoji" className="me-2 emotion-icon" />
             </div>
             <div
               className={`d-flex align-items-center me-3 ${selectedEmoji === 'emotion3' ? 'select' : ''}`}
-              onClick={() => handleEmojiClick('emotion3')}
+              onClick={() => {handleEmojiClick('emotion3');setRating(3)}}
             >
               <img src={Emotion3} alt="Happy Emoji" className="me-2 emotion-icon" />
             </div>
             <div
               className={`d-flex align-items-center me-3 ${selectedEmoji === 'emotion4' ? 'select' : ''}`}
-              onClick={() => handleEmojiClick('emotion4')}
+              onClick={() => {handleEmojiClick('emotion4');setRating(4)}}
             >
               <img src={Emotion4} alt="Excited Emoji" className="me-2 emotion-icon" />
             </div>
             <div
               className={`d-flex align-items-center ${selectedEmoji === 'emotion5' ? 'select' : ''}`}
-              onClick={() => handleEmojiClick('emotion5')}
+              onClick={() => {handleEmojiClick('emotion5');setRating(5)}}
             >
               <img src={Emotion5} alt="Love Emoji" className="me-2 emotion-icon" />
             </div>
           </div>
+          <textarea 
+            className="form-control mb-4"
+            rows={4}
+            placeholder="abc..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          ></textarea>
           <textarea
             className="form-control mb-4"
             rows={4}
             placeholder="Chia sẻ ý kiến của bạn..."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
           ></textarea>
-          <button className="btn btn-primary button-feedback">Gửi ngay</button>
+          <button className="btn btn-primary button-feedback" onClick={handleSend}>Gửi ngay</button>
         </div>
       </div>
       <Footer />
