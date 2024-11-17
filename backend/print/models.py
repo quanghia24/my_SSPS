@@ -10,7 +10,7 @@ class print_order(models.Model):
     file_name = models.CharField(max_length=125, blank=True, null=True)
     file_to_be_printed = models.FileField(upload_to='files/')
     
-    status = models.CharField(max_length=7, choices=(('success', 'success'), ('failed', 'failed'), ('pending', 'pending')))
+    status = models.CharField(max_length=7, choices=(('success', 'success'), ('failed', 'failed'), ('pending', 'pending')), default='pending')
 
     orientation = models.CharField(max_length=10, choices=(('portrait', 'portrait'), ('landscape', 'landscape')), default='portrait')
     sided = models.CharField(max_length=6, choices=(('single', 'single'), ('double', 'double')), default='single')    
@@ -33,6 +33,7 @@ class print_order(models.Model):
 
 
     def __str__(self):
-        return self.user.name + "\'s order"
+        return self.file_name
+
 
     
