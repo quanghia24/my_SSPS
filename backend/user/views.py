@@ -35,6 +35,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 def getRoutes(request):
     routes = [
         'login',
+        'register',
         'login/refresh'
     ]
     return Response(routes)

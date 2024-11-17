@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Student, SPSO
+from .models import User
 
-admin.site.register(Student)
-admin.site.register(SPSO)
+admin.site.register(User)
 # Register your models here.

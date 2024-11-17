@@ -19,8 +19,8 @@ class User(models.Model):
 
     #working
     user_id = models.CharField(max_length=10, unique=True)
+    username = models.CharField(max_length=40, unique=True)
     name = models.CharField(max_length=40)
-    username = models.CharField(max_length=40)
     password = models.CharField(max_length=20)
     image = models.ImageField(upload_to='users/', null=True, blank=True)
     day_of_birth = models.DateField(null=True, blank=True)
@@ -32,4 +32,4 @@ class User(models.Model):
     is_superuser = models.CharField(max_length=20, default='customer')  # or 'admin'
 
     def __str__(self):
-        return self.name + " " + self.allowed_rule
+        return self.name + " " + self.is_superuser

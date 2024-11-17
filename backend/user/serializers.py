@@ -61,12 +61,3 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 
-# class SPSOSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = SPSO
-#         fields = ['spso_id', 'name', 'email', 'password', 'day_of_birth', 'phone_number', 'last_signed_in']
-
-#         extra_kwargs = {'password':{
-#             'write_only': True,
-#             'required': True,
-#         }}

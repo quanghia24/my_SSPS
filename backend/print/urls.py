@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from .views import PrintOrderViewSet, download_file
 
 router = DefaultRouter()
-router.register('prints', PrintOrderViewSet, basename='printing_logs')
+router.register('orders', PrintOrderViewSet, basename='printing_logs')
 
 
 urlpatterns = [

@@ -33,7 +33,7 @@ class print_order(models.Model):
 
 
     def __str__(self):
-        return self.file_name
+        return f"{self.file_name} by {self.user.name}"
 
 
     

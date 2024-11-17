@@ -2,21 +2,18 @@ from django.db import models
 import json
 
 class Printer(models.Model):
-    status = models.CharField(max_length=1, choices=(('1', 'ready'), ('2', 'busy'), ('3', 'offline')))
-    model = models.CharField(max_length=100)
-    brand = models.CharField(max_length=100)
-    location = models.CharField(max_length=200)
-    allow_types = models.TextField(null=True) # JSON-serialized (text) version of your list
+    model = models.CharField(max_length = 100) #Model máy in
+    brand = models.CharField(max_length = 100) #Hãng máy in
+    location = models.CharField(max_length = 100) # Vị trí máy in (VD: H6-103)
+    status = models.CharField(max_length = 50, choices = [('active', 'Active'), ('inactive', 'Inactive')], default = 'active') #Trạng thái
+    image = models.URLField(max_length = 200, blank = True, null = True) #Ảnh minh họa tùy chọn
+    allowed_types = models.JSONField(default=list, blank=True)  # Lưu danh sách như ["pdf", "docx", "xls"]
 
-    # STORING
-    # import json 
-    # ...
+    def add_type(self, filetype:str):
+        if filetype not in self.allowed_types:
+            self.allowed_types.append(filetype)
+            self.save()
 
-    # myModel = MyModel()
-    # listIWantToStore = [1,2,3,4,5,'hello']
-    # myModel.myList = json.dumps(listIWantToStore)
-    # myModel.save()
+    def __str__(self):
+        return f"{self.model} - {self.brand} [{self.status}]" 
 
-    # RETRIEVING 
-    # jsonDec = json.decoder.JSONDecoder()
-    # myPythonList = jsonDec.decode(myModel.myList)
