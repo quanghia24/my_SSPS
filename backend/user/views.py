@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .serializers import UserSerializer
-from .models import User
+from .serializers import StudentSerializer, SPSOSerializer
+from .models import Student, SPSO
 from rest_framework import viewsets
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -10,8 +10,11 @@ from django.http import HttpResponse, JsonResponse
 
 
 # Create your views here.
+class StudentViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
 
-# CRUD  
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class SPSOViewSet(viewsets.ModelViewSet):
+    queryset = SPSO.objects.all()
+    serializer_class = SPSOSerializer
+
