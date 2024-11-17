@@ -4,4 +4,4 @@ from .models import Report
 class ReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
-        fields = ['id', 'title', 'content', 'rating', 'data_created', 'user']
+        fields = ['id', 'title', 'content', 'rating', 'date_created', 'user']

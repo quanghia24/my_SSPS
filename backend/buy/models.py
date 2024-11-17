@@ -1,11 +1,18 @@
 from django.db import models
-from user.models import Student
+from user.models import User
+
 # Create your models here.
-class purchase_order(models.Model):
+class PurchaseOrder(models.Model):
     purchase_time = models.DateTimeField(auto_now_add=True)
     amount = models.IntegerField()
-    price = models.FloatField()
-    status = models.CharField(max_length=10, choices=[('unpaid', 'Unpaid'), ('paid', 'Paid')], default='unpaid')
-    student_id = models.ForeignKey(Student, related_name="purchase_orders", on_delete=models.CASCADE)
+    price = models.FloatField(default=2.25, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    total_amount = models.FloatField(default=0, blank=True, null=True)
 
-    
+    def save(self, *args, **kwargs):
+        # Calculate the total_amount before saving the instance
+        self.total_amount = self.price * self.amount
+        super(PurchaseOrder, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.user.name + " bought " + str(self.amount)
