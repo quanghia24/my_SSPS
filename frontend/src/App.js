@@ -6,10 +6,7 @@ import SendFeedback from './components/SendFeedback/SendFeedback';
 
 
 function App() {
-  
-  function handleChange(event) {
-    console.log(`Selected file - ${event.target.files[0].name}`);
-  }
+
   return (
     <div>
       

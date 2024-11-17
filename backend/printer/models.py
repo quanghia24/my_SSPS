@@ -2,8 +2,8 @@ from django.db import models
 
 # Create your models here.
 class Printer(models.Model):
-    status   = models.CharField(max_length=1, choices=(('1', 'available'), ('2', 'occupied'), ('3', 'offline')))
-    image    = models.ImageField(upload_to='printer/', null=True)
+    status   = models.CharField(max_length=1, choices=(('1', 'available'), ('2', 'occupied'), ('3', 'offline')), default='1')
+    image    = models.ImageField(upload_to='printer/', null=True, blank=True)
     model    = models.CharField(max_length=100) # e123
     brand    = models.CharField(max_length=100) # dell hp sony 
     location = models.CharField(max_length=200) # H6-103
@@ -13,3 +13,4 @@ class Printer(models.Model):
     def __str__(self):
         return self.location + " " + self.brand + " " + self.model
     
+

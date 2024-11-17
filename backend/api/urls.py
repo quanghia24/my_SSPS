@@ -17,6 +17,6 @@ urlpatterns = [
     # path('buy/', include('buy.urls')),
     # path('print/', include('print.urls')),
     # path('printer/', include('printer.urls')),
-    path('report/', include('report.urls')),
+    path('reports/', include('report.urls')),
     
 ]

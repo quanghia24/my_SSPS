@@ -10,7 +10,7 @@ import Navbar from '../NavFooter/NavBar';
 import Footer from '../NavFooter/Footer';
 
 const Feedback = () => {
-   ;
+   const [userID,setUserID] = useState('2212432');
   const [rating,setRating] = useState(5);
   const [title,setTitle] = useState('');
   const [content,setContent] = useState('');
@@ -20,20 +20,24 @@ const Feedback = () => {
     setSelectedEmoji((prevEmoji) => (prevEmoji === emoji ? null : emoji));
   };
   const handleSend = () => {
-   // url = 'http://localhost:8000/api/reports/';
-    // fetch(url,{
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     rating,
-    //     title,
-    //     content,
-    //   }),
-    // }).then((res) =>  res.json())
-    // .then(res => console.log(res))
-    console.log('hello');
+    const PayLoad={
+      'user_id':userID,
+      'rating': rating,
+      'title': title,
+      'content': content,
+    };
+    const url = 'http://localhost:8000/api/reports/';
+    fetch(url,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(PayLoad) ,
+    }).then((res) =>  res.json())
+    .then(res => console.log(res))
+     console.log("send");
+     console.log(PayLoad);
+   
   };
 
   return (
