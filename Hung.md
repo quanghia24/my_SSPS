@@ -5,13 +5,15 @@
 
     
     
-- I create ability for SPSO to set status of printer (@API_VIEW)
+- I create an ability for SPSO to set status of printer (@API_VIEW) and hide printer_id from URL. If you want to find my API, this is my link:
+
+        https://docs.google.com/spreadsheets/d/1jCvhyteSWicAXYXb6aer0u6OcrsnQEqivEJ67c9ZJLo/edit?gid=1575679770#gid=1575679770
 
 
 ![branch](./image/again_API.jpg)
 
 
-- I create email for forgot password (so waste my time)
+- I create email for forgot password (so wasting my time)
 
 First => I register my account:
 
