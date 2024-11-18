@@ -1,11 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-# from .views import 
+from .views import PurchaseOrderViewSet, UserPurchaseOrderViewSet
+
 
 router = DefaultRouter()
-# router.register('reports', ReportViewSet, basename='users')
 
+router.register('', PurchaseOrderViewSet, basename='purchase-order')
+router.register('user', UserPurchaseOrderViewSet, basename='user-order')
 
-urlpatterns = [
-    path('', include(router.urls)),
-]
+urlpatterns = router.urls

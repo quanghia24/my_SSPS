@@ -1,9 +1,10 @@
 import './App.css';
 
 function App() {
+
   return (
     <div>
-      You are inside the App
+      You are now inside the App
     </div>
   );
 }

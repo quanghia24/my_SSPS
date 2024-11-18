@@ -1,15 +1,19 @@
 from django.db import models
+import json
 
-# Create your models here.
 class Printer(models.Model):
-    status = models.CharField(max_length=1, choices=(('1', 'available'), ('2', 'occupied'), ('3', 'offline')))
-    image = models.ImageField(upload_to='printer/', null=True)
-    model = models.CharField(max_length=100) # e123
-    brand = models.CharField(max_length=100) # dell hp sony 
-    location = models.CharField(max_length=200) # H6-103
+    model = models.CharField(max_length = 100) #Model máy in
+    brand = models.CharField(max_length = 100) #Hãng máy in
+    location = models.CharField(max_length = 100) # Vị trí máy in (VD: H6-103)
+    status = models.CharField(max_length = 50, choices = [('active', 'Active'), ('inactive', 'Inactive')], default = 'active') #Trạng thái
+    image = models.URLField(max_length = 200, blank = True, null = True) #Ảnh minh họa tùy chọn
+    allowed_types = models.JSONField(default=list, blank=True)  # Lưu danh sách như ["pdf", "docx", "xls"]
 
-    allow_types = models.TextField(null=True) # {'pdf', 'docs', 'word'} json string type
+    def add_type(self, filetype:str):
+        if filetype not in self.allowed_types:
+            self.allowed_types.append(filetype)
+            self.save()
 
     def __str__(self):
-        return self.location + " " + self.brand + " " + self.model
-    
+        return f"{self.model} - {self.brand} [{self.status}]" 
+

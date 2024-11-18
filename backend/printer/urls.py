@@ -1,7 +1,10 @@
-from django.urls import path
-from .views import set_printer_status
+from django.urls import path, include
+from . import views
+
 
 urlpatterns = [
-    # Route for the function-based view
-    path('set_status/', set_printer_status, name='set_printer_status'),
+    path('', views.printer_list, name = 'printer-list'),
+    path('<int:pk>/', views.printer_details, name = 'printer-details'),
+    path('active/', views.active_printers, name = 'active_printers'),
+    path('brand/<str:brand>/', views.brand_printers, name = 'brand_printers'),
 ]

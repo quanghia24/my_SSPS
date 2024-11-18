@@ -1,15 +1,17 @@
-from django.shortcuts import render
 from .serializers import ReportSerializer
 from .models import Report
 from rest_framework import viewsets
-from django.views.decorators.csrf import csrf_exempt
-import json
-from django.contrib.auth import authenticate, login, logout
-from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponse, JsonResponse
+from rest_framework.response import Response
 
 
 # Create your views here.
 class ReportViewSet(viewsets.ModelViewSet):
     queryset = Report.objects.all()
     serializer_class = ReportSerializer
+
+
+class UserReportViewSet(viewsets.ViewSet):
+    def retrieve(self, request, pk=None):
+        reports = Report.objects.filter(user=pk)
+        serializer = ReportSerializer(reports, many=True)
+        return Response(serializer.data)
