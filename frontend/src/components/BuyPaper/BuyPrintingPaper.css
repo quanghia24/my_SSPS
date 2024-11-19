@@ -1,0 +1,103 @@
+.container-buyPrintingPaper{
+  background-color:   rgba(235, 244, 255, 1);
+ 
+  height: 100vh;
+  padding: 20vh;
+  padding-left: 55vh;
+  padding-right: 55vh;
+}
+.form-bg{
+  background-color: white;
+  padding: 5vh;
+
+}
+
+  
+  .buyPrintingPaper__body {
+    width: 70%;
+  }
+  .buyPrintingPaper__body p {
+    margin: 0;
+  }
+  
+  .buyPrintingPaper__body .infor-title, .buyPrintingPaper-detail {
+    border-bottom: 1px solid black;
+  }
+  
+  .buyPrintingPaper__body .infor-title {
+  
+    color: #0D99FF;
+    font-weight: 600;
+    font-size: 1.8rem;
+  }
+  
+  
+  .buyPrintingPaper-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+  }
+  
+  .buyPrintingPaper-input .paperNo {
+    color: #0D99FF;
+    font-weight: 500;
+    font-size: 2.5vh;
+  }
+  
+  .buyPrintingPaper-input .paperNo-input {
+    border: none;
+    border-radius: 10px;
+    padding: 0.3em 0.6em;
+    font-weight: 600;
+  }
+  
+  .buyPrintingPaper-detail {
+    margin: 2em 0;
+    padding-bottom: 2em;
+  }
+  
+  .buyPrintingPaper-detail .paperSum, .buyPrintingPaper-detail .PriceSum {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .buyPrintingPaper-detail .paperSum {
+    font-size: 2.5vh;
+    font-weight: 600;
+  }
+  
+  .buyPrintingPaper-detail .PriceSum {
+    color: #ACACAC;
+  }
+  
+  .buyPrintingPaper-conclude {
+    margin-bottom: 1.5em;
+  }
+  
+  .buyPrintingPaper-conclude .title {
+    text-align: left;
+    color: #0A0D13;
+    font-weight: 500;
+  }
+  
+  .buyPrintingPaper-conclude .price {
+    text-align: right;
+    margin-top: 1em;
+    color: #0D99FF;
+    font-size: 3vh;
+    font-weight: 500;
+  }
+  .buyPrintingPaper__body .transaction {
+    width: 100%;
+    background: #0D99FF;
+    color: white;
+    height: 5vh;
+    font-size: 2vh;
+    border-radius: 10px;
+  }
+  
+  .buyPrintingPaper__body .transaction:hover {
+    background: rgba(26, 52, 83, 1);
+  }
