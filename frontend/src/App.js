@@ -12,11 +12,6 @@ function App() {
     <div>
       
 
-      {/* <input type="file" onChange={handleChange} /> */}
-      {/* <HomeStudent/> */}
-      {/* <PrintingHistory/> */}
-      {/* <BuyPrintingPaper/> */}
-      {/* <SendFeedback/> */}
       <Blank/>
       
 

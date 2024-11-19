@@ -11,10 +11,11 @@ import Blank from './components/Blank/Blank';
 import SendFeedback from './components/SendFeedback/SendFeedback';
 import PrintingHistory from './components/PrintingLog/PrintingHistory';
 import BuyPrintingPaper from './components/BuyPaper/BuyPrintingPaper';
+import App from './App';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Blank/>,
+    element: <App/>,
     children:[
       {
         path: '/student',
