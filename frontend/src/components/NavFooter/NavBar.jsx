@@ -1,4 +1,5 @@
 // src/components/Navbar.jsx
+import { Link } from 'react-router-dom'; 
 import React from 'react';
 import './NavBar.css';
 import LogoBK from '../../assets/logoBK.png'
@@ -12,10 +13,10 @@ function Navbar() {
       </div>
      
       <ul className="navbar-links">
-        <li >In tài liệu</li>
-        <li>Đóng góp ý kiến</li>
-        <li>Mua giấy</li>
-        <li>Lịch sử</li>
+        <li> <Link to="/in-tai-lieu">In tài liệu</Link></li>
+        <li><Link to="/send_feedback">Đóng góp ý kiến</Link></li>
+        <li><Link to="/buy_printing_paper">Mua giấy</Link></li>
+        <li><Link to="/print_history">Lịch sử</Link></li>
       </ul>
       <StudentFeature/>
     </nav>

@@ -48,9 +48,9 @@ function PrintingHistory() {
 
     return (
         <div className='printing-history-container'>
-        <Navbar/>
+        
 
-        <div className='d-flex flex-column justify-content-center align-items-center m-5 p-3' style={{ height: 'auto', width: '200vh'}}>
+        <div className='d-flex flex-column justify-content-center align-items-center p-5' style={{ height: 'auto', width: 'auto'}}>
        <div> <h1 className='text-black'>Printing Log</h1></div>
        <Search/>
             <div className='w-100 p-4 rounded ' style={{ borderRadius: '20px', overflow: 'hidden' }}>
@@ -83,7 +83,7 @@ function PrintingHistory() {
                 </Pagination>
             </div>
         </div>
-        <Footer/>
+       
         </div>
     );
 }

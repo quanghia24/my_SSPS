@@ -1,4 +1,5 @@
 import './App.css';
+import Blank from './components/Blank/Blank';
 import BuyPrintingPaper from './components/BuyPaper/BuyPrintingPaper';
 import HomeStudent from './components/HomePage/HomeStudent/HomeStudent';
 import PrintingHistory from './components/PrintingLog/PrintingHistory';
@@ -15,7 +16,8 @@ function App() {
       {/* <HomeStudent/> */}
       {/* <PrintingHistory/> */}
       {/* <BuyPrintingPaper/> */}
-      <SendFeedback/>
+      {/* <SendFeedback/> */}
+      <Blank/>
       
 
     </div>

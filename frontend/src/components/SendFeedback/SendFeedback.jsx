@@ -42,10 +42,10 @@ const Feedback = () => {
 
   return (
     <div className="container-feedback">
-      <Navbar />
+      
       <div className="card-content">
         <div className="card-body">
-          <h2 className="card-title mb-4">Đóng góp Ý kiến</h2>
+          <h2 className="card-title p-3">Đóng góp Ý kiến</h2>
           <p className="card-text text-muted mb-6">
             Đóng góp của bạn là vô cùng quan trọng và cần thiết trong quá trình phát triển của chúng tôi.
           </p>
@@ -98,7 +98,7 @@ const Feedback = () => {
           <button className="btn btn-primary button-feedback" onClick={handleSend}>Gửi ngay</button>
         </div>
       </div>
-      <Footer />
+      
     </div>
   );
 };

@@ -9,7 +9,7 @@ import Footer from '../../NavFooter/Footer'
 const HomeStudent = () => {
   return (
   <div className="">
-      <Navbar/>
+      
     <div className='container'>
        <div className="main-content  ">
       <div className="card ">
@@ -30,7 +30,7 @@ const HomeStudent = () => {
       </div>
       </div>
     </div>
-    <Footer/>
+    
     </div>
   
   )

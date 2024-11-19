@@ -56,9 +56,9 @@ function BuyPrintingPaperBody() {
 function BuyPrintingPaper() {
   return (
     <div className="buyPrintingPaper">
-      <Navbar/>
+      
       <BuyPrintingPaperBody />
-      <Footer/>
+     
     </div>
   );
 }

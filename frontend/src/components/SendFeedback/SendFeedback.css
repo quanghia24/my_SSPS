@@ -1,6 +1,7 @@
 .container-feedback{
     background-color: rgba(235, 244, 255, 1);
-    height: 120vh;
+    min-width: 100%;
+    min-height: 100vh;
    
    
 }
@@ -12,7 +13,7 @@
     
 }
 .card-content{
-    margin-top: 20vh;
+   
     margin-left: 60vh;
     margin-right: 60vh;
 }

@@ -4,7 +4,7 @@ import LogoBK from'../../assets/logoBK.png'
 import './Footer.css';
 const Footer = () => {
   return (
-    <footer className=" text-white" >
+    <footer className=" text-white"  >
       <div className="footer-container">
         <div className="row pt-3">
           {/* Logo and Description Section */}
