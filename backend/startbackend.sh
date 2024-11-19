@@ -1,7 +1,13 @@
-python3 manange.py makemigrations
+#!/bin/bash
 
-python3 manange.py migrate
+echo "Running makemigrations..."
+python3 manage.py makemigrations
 
+echo "Running migrate..."
+python3 manage.py migrate
+
+echo "Creating superuser..."
 python3 manage.py createsuperuser
 
+echo "Starting the server..."
 python3 manage.py runserver
