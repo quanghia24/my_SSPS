@@ -11,4 +11,4 @@ class Report(models.Model):
     user_id = models.ForeignKey(User, to_field='user_id', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title + " | reviewed by " + self.user_id
+        return self.title + " | reviewed by " + self.user_id.user_id
