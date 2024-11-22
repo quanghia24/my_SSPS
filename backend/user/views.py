@@ -157,3 +157,17 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+@api_view(['GET'])
+def getRoutes(request):
+    routes = [
+        'login',
+        'login/refresh'
+    ]
+    return Response(routes)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getNote(request):
+    user = User.objects.all()
+    serializer = UserSerializer(user, many = True)
+    return Response(serializer.data)

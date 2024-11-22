@@ -4,4 +4,4 @@ from .models import Printer
 class PrinterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Printer
-        fields = ['id', 'image', 'model', 'brand', 'location', 'allowed_types']
+        fields = '__all__'
