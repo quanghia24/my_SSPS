@@ -6,9 +6,8 @@ import Footer from '../NavFooter/Footer';
 function Blank() {
     return (
         <div className="blank">
-          <NavBar/>
           <Outlet/>
-          <Footer/>
+         
         </div>
     );
 }

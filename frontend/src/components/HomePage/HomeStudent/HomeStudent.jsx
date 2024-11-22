@@ -6,7 +6,18 @@ import HistoryPrinting from '../../../assets/historyPrinting.png'
 import Print from '../../../assets/print.png'
 import Navbar from '../../NavFooter/NavBar'
 import Footer from '../../NavFooter/Footer'
+import { useNavigate } from 'react-router-dom'
 const HomeStudent = () => {
+  const navigate = useNavigate();
+  const handleSendFeedbackClick = () => {
+    navigate ('/student/send_feedback');
+  }
+  const handleBuyPaperClick = () => {
+    navigate ('/student/buy_printing_paper');
+  }
+  const handlePrintingHisClick = () => {
+    navigate ('/student/printing_history');
+  }
   return (
   <div className="">
       
@@ -17,15 +28,15 @@ const HomeStudent = () => {
         
       </div>
       <div className="card ">
-        <img src={SendFeedback} alt="Đóng góp ý kiến" />
+        <img onClick={handleSendFeedbackClick} src={SendFeedback} alt="Đóng góp ý kiến" />
        
       </div>
       <div className="card ">
-        <img src={BuyPaper} alt="Mua giấy" />
+        <img onClick={handleBuyPaperClick} src={BuyPaper} alt="Mua giấy" />
       
       </div>
       <div className="card ">
-        <img src={HistoryPrinting} alt="Lịch sử in ấn" />
+        <img onClick={handlePrintingHisClick} src={HistoryPrinting} alt="Lịch sử in ấn" />
      
       </div>
       </div>
