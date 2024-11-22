@@ -33,7 +33,8 @@ class UserView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # update user profile image
-    def put(self, request):
+    def patch(self, request):
+
         user = User.objects.get(email=request.user.email)
 
         updated_fields = []
@@ -66,8 +67,25 @@ class BalanceView(APIView):
     def get(self, request):
         if "email" not in request.data:
             return Response({'message': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
-        user = User.objects.get(email=request.data['email'])
+        try:
+            user = User.objects.get(email=request.data['email'])
+        except User.DoesNotExist:
+            return Response({'message': 'User with this email does not exist.'}, status=status.HTTP_404_NOT_FOUND)
         return Response({'balance': user.balance}, status=status.HTTP_200_OK)
+class DeleteView(APIView):
+    permission_classes = (IsAdminUser,)
+    def delete(self, request):
+        if "email" not in request.data:
+            return Response({'message': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            user  = User.objects.get(email=request.data['email'])
+        except User.DoesNotExist:
+            return Response({'message': 'User with this email does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+        if user.is_superuser:
+            return Response({'message': 'Cannot delete admin user.'}, status=status.HTTP_400_BAD_REQUEST)
+        temp  = user.email
+        user.delete()
+        return Response({'message': f"Deleted user with email:{temp}"}, status=status.HTTP_200_OK)
 class AllUsersView(APIView):
     permission_classes = (IsAdminUser,)
 
@@ -86,14 +104,16 @@ class AllUsersView(APIView):
         serializer = UserProfileSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def put(self, request):
-        print (request.data)
+    def patch(self, request):
         if 'email' not in request.data:
             return Response({'message': 'Email is required.'},
                             status=status.HTTP_400_BAD_REQUEST)
-        user = User.objects.get(email=request.data['email'])
+        try:
+            user = User.objects.get(email=request.data['email'])
+        except User.DoesNotExist:
+            return Response({'message': 'User with this email does not exist.'},
+                            status=status.HTTP_404_NOT_FOUND)
 
-        print(user)
 
         updated_fields = []
 
