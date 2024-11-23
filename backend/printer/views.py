@@ -15,13 +15,14 @@ from .serializers import PrinterSerializer
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser  # Dùng để phân tích dữ liệu JSON từ request.
 from django.views.decorators.csrf import csrf_exempt  # Tắt bảo vệ CSRF cho các view này.
-
+from django.contrib.auth.decorators import user_passes_test
 # Tạo các view xử lý ở đây.
 
 @csrf_exempt # Tắt bảo vệ CSRF cho view
 def printer_list(request):
     if request.method == "GET":
         printers = Printer.objects.all()
+
         serializer = PrinterSerializer(printers, many = True)
         return JsonResponse(serializer.data, safe = False)
 
@@ -31,6 +32,15 @@ def printer_list(request):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status = 201)
+        return JsonResponse(serializer.errors, status = 400)
+    
+    elif request.method == 'PATCH':
+        data = JSONParser().parse(request)
+        printer = Printer.objects.get(id=data['id'])
+        serializer = PrinterSerializer(printer, data = data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status = 400)
 
 @csrf_exempt
