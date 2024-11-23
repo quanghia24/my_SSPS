@@ -18,12 +18,11 @@ class UserProfileManager(BaseUserManager):
         related_name='custom_user_permissions_set',  # Change this to a unique name
         blank=True
     )
-    def create_user(self, email, name, user_id, password=None):
+    def create_user(self, email, password=None, name=None, user_id=None):
         if not email:
             raise ValueError('Users must have an email')
 
         email = self.normalize_email(email)
-
         user = self.model(email=email, name=name, user_id = user_id)
 
         user.set_password(password)
@@ -40,7 +39,7 @@ class UserProfileManager(BaseUserManager):
         user.save(using=self._db)
 
 class User(AbstractBaseUser, PermissionsMixin):
-    name = models.TextField()
+    name = models.TextField(null=True)
     email = models.EmailField(max_length=255, unique=True)
     user_id = models.CharField(max_length=7,null=True, unique=True)
     # username = models.CharField(max_length=255)

@@ -24,7 +24,7 @@ class RegisterUserView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class UserView(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     parser_classes = [JSONParser, MultiPartParser, FormParser]
 
     def get(self, request):
@@ -34,7 +34,7 @@ class UserView(APIView):
     # update user profile image
     def patch(self, request):
 
-        user = User.objects.get(email=request.user.email)
+        user = User.objects.get(user_id=request.user.user_id)
 
         updated_fields = []
 
@@ -61,32 +61,32 @@ class UserView(APIView):
         else:
             return Response({'message': 'No updates made'}, status=status.HTTP_200_OK)
 class BalanceView(APIView):
-    permission_classes = {}
+    # permission_classes = {}
+    permission_classes = (IsAuthenticated,)
+
     def get(self, request):
-        if "user_id" not in request.data:
-            return Response({'message': 'User_id is required.'}, status=status.HTTP_400_BAD_REQUEST)
         try:
-            # user = User.objects.get(email=request.data['email'])
-            user = User.objects.get(user_id=request.data['user_id'])
+            user = User.objects.get(user_id=request.user.user_id)
         except User.DoesNotExist:
             return Response({'message': 'User with this id does not exist.'}, status=status.HTTP_404_NOT_FOUND)
         return Response({'balance': user.balance}, status=status.HTTP_200_OK)
 class DeleteView(APIView):
     permission_classes = (IsAdminUser,)
     def delete(self, request):
-        if "email" not in request.data:
-            return Response({'message': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if "user_id" not in request.data:
+            return Response({'message': 'User_id is required.'}, status=status.HTTP_400_BAD_REQUEST)
         try:
-            user  = User.objects.get(email=request.data['email'])
+            user  = User.objects.get(user_id=request.data['user_id'])
         except User.DoesNotExist:
-            return Response({'message': 'User with this email does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'message': 'User with this ID does not exist.'}, status=status.HTTP_404_NOT_FOUND)
         if user.is_superuser:
             return Response({'message': 'Cannot delete admin user.'}, status=status.HTTP_400_BAD_REQUEST)
-        temp  = user.email
+        temp  = user.user_id
         user.delete()
-        return Response({'message': f"Deleted user with email:{temp}"}, status=status.HTTP_200_OK)
+        return Response({'message': f"Deleted user with id:{temp}"}, status=status.HTTP_200_OK)
 class AllUsersView(APIView):
     permission_classes = (IsAdminUser,)
+
 
     def get(self, request):
         user_id = request.data.get('user_id', None)
@@ -104,13 +104,13 @@ class AllUsersView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def patch(self, request):
-        if 'email' not in request.data:
-            return Response({'message': 'Email is required.'},
+        if 'user_id' not in request.data:
+            return Response({'message': 'Users id is required.'},
                             status=status.HTTP_400_BAD_REQUEST)
         try:
-            user = User.objects.get(email=request.data['email'])
+            user = User.objects.get(user_id=request.data['user_id'])
         except User.DoesNotExist:
-            return Response({'message': 'User with this email does not exist.'},
+            return Response({'message': 'User with this id does not exist.'},
                             status=status.HTTP_404_NOT_FOUND)
 
 
