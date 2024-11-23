@@ -1,11 +1,15 @@
 from django.shortcuts import render
-from .models import print_order
+from .models import print_order, print_file
 from user.models import User
-from .serializers import PrintOrderSerializer 
+from .serializers import PrintOrderSerializer, PrintFileSerializer
 from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets
 from django.http import FileResponse, Http404
 import os
+
+class PrintFileViewSet(viewsets.ModelViewSet):
+    queryset = print_file.objects.all()
+    serializer_class = PrintFileSerializer
 
 # Create your views here.
 class PrintOrderViewSet(viewsets.ModelViewSet):

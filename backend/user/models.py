@@ -22,7 +22,7 @@ class User(models.Model):
     username = models.CharField(max_length=40, unique=True)
     name = models.CharField(max_length=40)
     password = models.CharField(max_length=20)
-    image = models.ImageField(upload_to='users/', null=True, blank=True)
+    image = models.TextField(blank=True, null=True)
     day_of_birth = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=10, null=True, blank=True)
     balance = models.IntegerField(default=100)

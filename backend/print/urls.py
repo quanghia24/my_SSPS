@@ -1,10 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from .views import PrintOrderViewSet, download_file
+from .views import PrintOrderViewSet, download_file, PrintFileViewSet
 
 router = DefaultRouter()
 router.register('orders', PrintOrderViewSet, basename='printing_logs')
+router.register('files', PrintFileViewSet, basename='files_logs')
 
 
 urlpatterns = [
