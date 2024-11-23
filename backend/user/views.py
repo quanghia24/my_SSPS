@@ -23,7 +23,6 @@ class RegisterUserView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 class UserView(APIView):
     permission_classes = (IsAuthenticated,)
     parser_classes = [JSONParser, MultiPartParser, FormParser]
@@ -61,16 +60,16 @@ class UserView(APIView):
             return Response({'message': f'Updated: {", ".join(updated_fields)}'}, status=status.HTTP_200_OK)
         else:
             return Response({'message': 'No updates made'}, status=status.HTTP_200_OK)
-
 class BalanceView(APIView):
     permission_classes = {}
     def get(self, request):
-        if "email" not in request.data:
-            return Response({'message': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if "user_id" not in request.data:
+            return Response({'message': 'User_id is required.'}, status=status.HTTP_400_BAD_REQUEST)
         try:
-            user = User.objects.get(email=request.data['email'])
+            # user = User.objects.get(email=request.data['email'])
+            user = User.objects.get(user_id=request.data['user_id'])
         except User.DoesNotExist:
-            return Response({'message': 'User with this email does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'message': 'User with this id does not exist.'}, status=status.HTTP_404_NOT_FOUND)
         return Response({'balance': user.balance}, status=status.HTTP_200_OK)
 class DeleteView(APIView):
     permission_classes = (IsAdminUser,)
@@ -90,14 +89,14 @@ class AllUsersView(APIView):
     permission_classes = (IsAdminUser,)
 
     def get(self, request):
-        mssv = request.data.get('mssv', None)
+        user_id = request.data.get('user_id', None)
         email = request.data.get('email', None)
 
-        if not mssv and not email:
+        if not user_id and not email:
             users = User.objects.all()
         else:
-            if mssv:
-                users = User.objects.filter(mssv=mssv)
+            if user_id:
+                users = User.objects.filter(user_id=user_id)
             elif email:
                 users = User.objects.filter(email=email)
 
@@ -146,14 +145,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
 
         # Add custom claims
-        token['username'] = user.username
+        # token['username'] = user.username
         token['email'] = user.email
         token['password'] = user.password
         token['role'] = "admin" if user.is_superuser else "customer"
 
 
         return token
-
-
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer

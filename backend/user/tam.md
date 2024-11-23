@@ -35,7 +35,7 @@ http://127.0.0.1:8000/api/users/ + ...
 -BalanceView:  
 [GET] Returns the balance of the input email, if the email is None return error message (no permissions needed)   
 -AllusersView:   
-[GET] Returns all users if request body is empty, else return specific user (need mssv or email) (admin permission)  
+[GET] Returns all users if request body is empty, else return specific user (need user_id or email) (admin permission)  
 [PATCH] Updates specific user fields, email required (admin permission)  
 -DeleteView: 
 [DELETE] Delete the specific user with email, email required (admin permission)

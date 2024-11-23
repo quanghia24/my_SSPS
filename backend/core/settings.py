@@ -138,12 +138,12 @@ DATABASES = {
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'my_ssps',
-#         'USER': 'root',
-#         'PASSWORD': '12345',
-#         'HOST':'localhost',
-#         'PORT':'3306',
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': 'defaultdb',
+#         'USER': 'avnadmin',
+#         'PASSWORD': 'AVNS_-ChbzYZjql8pUKDd33Z',
+#         'HOST': 'ssps-quanghia-quanghia.b.aivencloud.com',   # Or an IP Address that your DB is hosted on
+#         'PORT': '25554',
 #     }
 # }
 
