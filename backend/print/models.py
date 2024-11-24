@@ -8,16 +8,16 @@ from datetime import datetime
 
 class print_file(models.Model):
     file = models.FileField()
-    # user_id = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
-    def __sef__(self):
-        return f"by {self.user_id}"
+    def __str__(self):
+        return f"File {self.file} | by {self.user.name}"
 
 
 class print_order(models.Model):
     file = models.ForeignKey(print_file, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+
 
     order_name = models.CharField(max_length=125, blank=True, null=True)
     status = models.CharField(max_length=7, choices=(('success', 'success'), ('failed', 'failed'), ('pending', 'pending')), default='pending')
