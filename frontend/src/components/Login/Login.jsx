@@ -4,7 +4,9 @@ import image from "../../assets/image (1).png";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { jwtDecode } from 'jwt-decode'
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,20 +20,26 @@ function Login() {
 
   const login = async (data) => {
     try {
-      const response = await axios.post("/api/users", {
-        username: data.email,
+      const response = await axios.post("http://127.0.0.1:8000/api/users/login/", {
+        email: data.email,
         password: data.password,
       });
-      const user = response.data.data;
-      if (user && user.token) {
-        localStorage.setItem("token", user.token);
-        localStorage.setItem("role", user.role);
-        localStorage.setItem("id", user.id);
-        localStorage.setItem("name", user.username);
-        const role = user.role;
+      const user = response.data;
+      if (user && user.access) {
+        localStorage.setItem("access", user.access);
+        localStorage.setItem("refresh", user.refresh);
+        const decoded = jwtDecode(user.access);
+        localStorage.setItem("user_id", decoded.user_id);
+        localStorage.setItem("username", decoded.username);
+        localStorage.setItem("role", decoded.role);
+        const role = decoded.role
         switch (role) {
-          default:
+          case 'customer':       
+            navigate('/member/student')
             break;
+          case 'admin': 
+            navigate('/admin/printInformation')
+            break;       
         }
       }
       toast.success("Login success");
@@ -54,7 +62,7 @@ function Login() {
             </div>
             <div className="text-3xl mt-2 font-bold">ĐĂNG NHẬP</div>
             <div className="w-full">
-              <div className="relative w-full mt-8 bg-gray-200 rounded-lg">
+            <div className="relative w-full mt-8 bg-gray-200 rounded-lg">
                 <div className="rounded-xl px-3 flex w-full gap-4 relative">
                   <svg
                     width={30}
@@ -74,7 +82,7 @@ function Login() {
                     <input
                       type="text"
                       placeholder="example@hcmut.edu.vn"
-                      className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:font-bold bg-gray-200"
+                      className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
                       {...register("email", {
                         required: "Email is required",
                         pattern: {
@@ -90,7 +98,7 @@ function Login() {
                     )}
                   </div>
                 </div>
-              </div>
+              </div>   
               <div className="relative w-full mt-8 bg-gray-200 rounded-lg">
                 <div className="rounded-xl px-3 flex justify-between items-center gap-4">
                   <div className="flex gap-4">
@@ -113,7 +121,7 @@ function Login() {
                       <input
                         type={showPassword ? "text" : "password"}
                         placeholder="**************"
-                        className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:font-bold bg-gray-200"
+                        className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
                         {...register("password", {
                           required: "Password is required",
                         })}
@@ -154,8 +162,8 @@ function Login() {
                 </div>
               </div>
             </div>
-            <Link className="text-blue-800 no-underline text-end w-full mt-3">
-              Forgot Password?
+            <Link to='/forgotPassword' className="text-blue-800 no-underline text-end w-full mt-3">
+              Quên mật khẩu?
             </Link>
             <button
               type="submit"

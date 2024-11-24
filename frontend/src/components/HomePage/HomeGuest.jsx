@@ -5,9 +5,11 @@ import image_2 from "../../assets/image_2.png";
 import work from "../../assets/work.png";
 import group from "../../assets/Group.png";
 import av1 from "../../assets/Avater_01.png";
+import Footer from '../NavFooter/Footer';
 
 function HomeGuest() {
   return (
+    <>
     <div className="">
       <div className="bg-customBlue fixed w-full z-10 px-14 py-4 flex justify-between">
         <div className="flex gap-4 items-center">
@@ -328,6 +330,8 @@ function HomeGuest() {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

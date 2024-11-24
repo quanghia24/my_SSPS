@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,15 +22,16 @@ function Register() {
 
   const login = async (data) => {
     try {
-      const response = await axios.post("/api/users", {
-        username: data.email,
+      await axios.post("http://127.0.0.1:8000/api/users/register/", {
+        email: data.email,
         password: data.password,
+        name: data.name,
+        user_id: Math.random(),
       });
-
       toast.success("Register success");
       navigate("/login");
     } catch (err) {
-      toast.error("Invalid username or password!!!");
+      toast.error("Register fail!!");
       console.log(err);
     }
   };
@@ -67,7 +69,7 @@ function Register() {
                     <input
                       type="text"
                       placeholder="example@hcmut.edu.vn"
-                      className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:font-bold bg-gray-200"
+                      className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
                       {...register("email", {
                         required: "Email is required",
                         pattern: {
@@ -83,7 +85,41 @@ function Register() {
                     )}
                   </div>
                 </div>
+              </div>         
+              <div className="relative w-full mt-8 bg-gray-200 rounded-lg">
+                <div className="rounded-xl px-3 flex w-full gap-4 relative">
+                  <svg
+                    width={30}
+                    height={24}
+                    viewBox="0 0 30 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mt-[35px]"
+                  >
+                    <path
+                      d="M27 0H3C1.35 0 0.015 1.35 0.015 3L0 21C0 22.65 1.35 24 3 24H27C28.65 24 30 22.65 30 21V3C30 1.35 28.65 0 27 0ZM27 6L15 13.5L3 6V3L15 10.5L27 3V6Z"
+                      fill="black"
+                    />
+                  </svg>
+                  <div className="flex flex-col w-full py-3">
+                    <div className="text-lg">Name</div>
+                    <input
+                      type="text"
+                      placeholder="Nguyen Van A"
+                      className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
+                      {...register("name", {
+                        required: "Name is required",         
+                      })}
+                    />
+                    {errors.name && (
+                      <p className="text-red-500 absolute top-20 text-lg">
+                        {errors.name.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
+              
               <div className="relative w-full mt-8 bg-gray-200 rounded-lg">
                 <div className="rounded-xl px-3 flex justify-between items-center gap-4">
                   <div className="flex gap-4">
@@ -106,7 +142,7 @@ function Register() {
                       <input
                         type={showPassword ? "text" : "password"}
                         placeholder="**************"
-                        className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:font-bold bg-gray-200"
+                        className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
                         {...register("password", {
                           required: "Password is required",
                         })}
@@ -168,7 +204,7 @@ function Register() {
                       <input
                         type={showPassword ? "text" : "password"}
                         placeholder="**************"
-                        className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:font-bold bg-gray-200"
+                        className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
                         {...register("confirm_password", {
                           required: "Confirm Password is required",
                           validate: (value) =>
