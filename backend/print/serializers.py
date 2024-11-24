@@ -10,7 +10,7 @@ class PrintOrderSerializer(serializers.ModelSerializer):
 class PrintFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = print_file
-        fields = ['id', 'file', 'user_id']  # User will be set automatically
+        fields = ['id', 'file', 'user']  # User will be set automatically
 
     def create(self, validated_data):
         # Link the file with the authenticated user

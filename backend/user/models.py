@@ -52,10 +52,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_signed_in = models.DateTimeField(auto_now_add=True)
     images = models.TextField(blank=True)
     objects = UserProfileManager()
+    money_spent = models.FloatField(default=0)
 
     USERNAME_FIELD = 'email'
     # REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return f"{self.user_id} | {self.email.split('@')[0]} | Balance: {self.balance} | Faculty of {self.faculty}"
+        return f"{self.email.split('@')[0]} | {self.user_id} | Balance: {self.balance} | Spent: {self.money_spent} | Faculty of {self.faculty}"
 

@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from rest_framework.status import HTTP_204_NO_CONTENT
 from django.shortcuts import get_object_or_404, get_list_or_404
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 class ReportViewSet(
     viewsets.GenericViewSet,
@@ -15,6 +16,7 @@ class ReportViewSet(
 ):
     queryset = Report.objects.all()
     serializer_class = ReportSerializer
+    # permission_classes = [IsAuthenticated]
 
 
     def get(self, request, *args, **kwargs):
@@ -30,16 +32,28 @@ class ReportViewSet(
 
         if report_id:
             report = get_object_or_404(Report, id=report_id)
+            if not request.user.is_staff and report.user_id != request.user:
+                raise ValidationError(detail="Permission denied.")
             serializer = self.serializer_class(report)
             return Response(serializer.data)
 
+        if not request.user.is_staff:
+            reports = Report.objects.filter(user = request.user)
+            serializer = self.serializer_class(reports, many=True)
+            return Response(serializer.data)
+        
         if user_id:
             reports = get_object_or_404(User, user_id=user_id).report_set.all()
         else:
             reports = get_list_or_404(Report)
 
-        serializer = self.serializer_class(reports, many=True)
-        return Response(serializer.data)
+
+        if request.user.is_staff: 
+            serializer = self.serializer_class(reports, many=True)
+            return Response(serializer.data)
+        
+        raise ValidationError(detail="Unknown error.")
+        
 
 
     def get_permissions(self):
