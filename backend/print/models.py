@@ -8,8 +8,8 @@ from datetime import datetime
 
 class print_file(models.Model):
     file = models.FileField()
-    user_id = models.IntegerField()
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user_id = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __sef__(self):
         return f"by {self.user_id}"

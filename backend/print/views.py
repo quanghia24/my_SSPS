@@ -14,18 +14,17 @@ from rest_framework import status
 class PrintFileViewSet(viewsets.ModelViewSet):
     queryset = print_file.objects.all()
     serializer_class = PrintFileSerializer
-    # permission_classes = [IsAuthenticated]  # Require authentication
+    permission_classes = [IsAuthenticated]  # Require authentication
     parser_classes = [MultiPartParser, FormParser]  # Enable handling file uploads
 
     def create(self, request, *args, **kwargs):
         file = request.FILES.get('file')  # Get the uploaded file
+        user = User.objects.get(user_id=request.user.user_id)
+
         if not file:
             return Response({'error': 'File is required'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if "user_id" not in request.data:
-            return Response({'message': 'User_id is required.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer = self.get_serializer(data={'file': file, 'user_id': request.data['user_id'],})
+        serializer = self.get_serializer(data={'file': file, 'user': user})
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
