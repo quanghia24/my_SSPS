@@ -45,7 +45,6 @@ def printer_list(request):
 
 @csrf_exempt
 def printer_details(request, pk):
-
     try:
         printer = Printer.objects.get(pk = pk)
 
