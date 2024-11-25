@@ -46,7 +46,7 @@ def printer_details(request, pk):
         serializer = PrinterSerializer(printer)
         return JsonResponse(serializer.data)
 
-    elif request.method == "PUT":
+    elif request.method == "PATCH":
         data = JSONParser().parse(request)
         serializer = PrinterSerializer(printer, data = data)
         if serializer.is_valid():
@@ -59,21 +59,51 @@ def printer_details(request, pk):
 
 # Get all printer that on status
 @csrf_exempt
-def active_printers(request):
-    if request.method == "GET":
-        printers = Printer.objects.filter(status = 'active') 
-        serializer = PrinterSerializer(printers, many = True)
-        return JsonResponse(serializer.data, safe = False)  
-    return HttpResponse(status = 405)
+def status_printers(request):
+    if request.method == "POST":
+        try:
+            # Lấy dữ liệu từ body
+            data = json.loads(request.body) if request.body else {}
+            status = data.get('status', '')  # Lấy status từ body request
+
+            if not status:
+                return JsonResponse({"message": "Status is required."}, status=400)
+            
+            printers = Printer.objects.filter(status=status)
+            if not printers.exists():
+                return JsonResponse({"message": "No printers found for this status."}, status=404)
+            
+            serializer = PrinterSerializer(printers, many=True)
+            return JsonResponse(serializer.data, safe=False)
+        
+        except json.JSONDecodeError:
+            return JsonResponse({"message": "Invalid JSON format."}, status=400)
+
+    return HttpResponse(status=405)
+
 
 # Get all printers of brand
-def brand_printers(request, brand):
-    if request.method == "GET":
-        printers = Printer.objects.filter(brand__iexact=brand)  # Sửa lại filter
-        if not printers.exists():
-            return JsonResponse({"message": "No printers found for this brand."}, status=404)
-        serializer = PrinterSerializer(printers, many=True)
-        return JsonResponse(serializer.data, safe=False)
+@csrf_exempt
+def brand_printers(request):
+    if request.method == "POST":
+        try:
+            # Lấy dữ liệu từ body
+            data = json.loads(request.body) if request.body else {}
+            brand = data.get('brand', '')  # Lấy brand từ body request
+
+            if not brand:
+                return JsonResponse({"message": "Brand is required."}, status=400)
+            
+            printers = Printer.objects.filter(brand__iexact=brand)
+            if not printers.exists():
+                return JsonResponse({"message": "No printers found for this brand."}, status=404)
+            
+            serializer = PrinterSerializer(printers, many=True)
+            return JsonResponse(serializer.data, safe=False)
+        
+        except json.JSONDecodeError:
+            return JsonResponse({"message": "Invalid JSON format."}, status=400)
+
     return HttpResponse(status=405)
 
 
