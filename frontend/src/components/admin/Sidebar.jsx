@@ -10,7 +10,7 @@ import book from '../../assets/book.png';
 import user from '../../assets/user_icon.png';
 
 const navItems = [
-  { icon_: home, label_: "Trang chủ", path_: "admin_home/home", centered: true },
+  { icon_: home, label_: "Trang chủ", path_: "admin_home/admin_SPSO", centered: true },
   { icon_: printer, label_: "Máy in", path_: "admin_home/printer", centered: true },
   { icon_: slider, label_: "Cấu hình", path_: "admin_home/settings", centered: true },
   { icon_: chart, label_: "Báo cáo", path_: "admin_home/reports", centered: true },

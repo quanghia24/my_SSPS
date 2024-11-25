@@ -19,6 +19,7 @@ import AdminPayment from './components/admin/AdminPayment/AdminPayment';
 import AdminListUser from './components/admin/AdminUser/AdminListUser';
 import AddUser from './components/admin/AdminUser/AddUser';
 import UpdateUser from './components/admin/AdminUser/UpdateUser';
+import AdminSPSO from '../src/components/admin/AdminSPSO/admin_home';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
         path: 'admin_home',
         element: <Admin/>,
         children:[
+          // {
+          //   path: 'admin_SPSO',
+          //   element: <AdminSPSO/>
+          // },
           {
             path: 'history',
             element: <AdminPrintHis/>

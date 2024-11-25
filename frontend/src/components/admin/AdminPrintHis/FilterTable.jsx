@@ -50,15 +50,18 @@ function MyTable() {
     ));
 
     return (
-        <div className="d-flex flex-column justify-content-center align-items-center m-2 p-2" style={{ height: '84vh', width: '180vh' }}>
-           <h1 style={{marginLeft:'-160vh'}}>Lịch sử in</h1>
-            {/* Nút mở modal */}
-            <div className="d-flex justify-content-end w-100 mb-3">
-                <Button variant="info" onClick={handleShowFilter}>
-                    Lọc kết quả
-                </Button>
+        <div >
+            <div className='d-flex justify-content-start align-items-center p-3 border border-start-0  border-dark rounded-end-3 ' style={{ width: '25vh', marginBottom: '5vh'}}>
+                 <h1 >Lịch sử in</h1>
             </div>
-            <div className="w-100 bg-white p-4 rounded" style={{ borderRadius: '20px', overflow: 'hidden' }}>
+          
+            {/* Nút mở modal */}
+            <div className="d-flex align-items-center justify-content-end" style={{ width: '175vh'}}>
+          <Button variant="info" onClick={handleShowFilter}>
+            <i className="bi bi-funnel"></i> Lọc kết quả
+          </Button>
+            </div>
+            <div className="d-flex flex-column justify-content-center align-items-center p-2" style={{ height: '50vh', width: '175vh', marginTop:'14vh'}}>
                 <Table bordered hover className="mb-0" style={{ borderRadius: '20px', overflow: 'hidden', fontSize: '1.3rem' }}>
                     <thead>
                         <tr>

@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 // import 'font-awesome/css/font-awesome.min.css';
-import Search from '../../../components/PrintingLog/search';
+import Search from '../../PrintingLog/search';
 import FilterForm from './FilterLibrary';
 
 // Dữ liệu mẫu
@@ -62,12 +62,12 @@ function MyTable() {
     );
   }
 
-  const handleViewClick = () => {
-    navigate('update_user');
+  const handleAddClick = () => {
+    navigate('add_user');
   };
 
   const handleUpdateClick = () => {
-    navigate('add_user');
+    navigate('update_user');
   };
 
   const handleRemoveClick = (id) => {
@@ -88,13 +88,10 @@ function MyTable() {
       <td className="text-center">{info.phone}</td>
       <td className="text-center">{info.role}</td>
       <td className="text-center">
-        <Button variant="info" size="sm" className="me-2" onClick={handleViewClick}>
-          <i className="bi bi-eye"></i>
-        </Button>
-        <Button variant="primary" size="sm" className="me-2" onClick={handleUpdateClick}>
+        <Button variant="primary" className="me-2" onClick={handleUpdateClick}>
           <i className="bi bi-pencil"></i>
         </Button>
-        <Button variant="danger" size="sm" onClick={() => handleRemoveClick(info.id)}>
+        <Button variant="danger" className="me-2" onClick={() => handleRemoveClick(info.id)}>
           <i className="bi bi-trash"></i>
         </Button>
       </td>
@@ -102,55 +99,56 @@ function MyTable() {
   ));
 
   return (
-    <div className="container1 mt-4 p-3" style={{scale:'0.9'}}>
-      <h1>Thông tin người dùng</h1>
-
-      <div className="d-flex align-items-center justify-content-between">
-        <Button variant="info" onClick={handleShowFilter}>
-          <i className="bi bi-funnel"></i> Lọc kết quả
-        </Button>
-
-        <div className="ms-auto" style={{ width: '100%', marginRight: '-70vh' }}>
-          <Search />
+    <div>
+      <div className='d-flex justify-content-start align-items-center p-3 border border-start-0  border-dark rounded-end-3 ' style={{ width: '50vh', marginBottom: '5vh'}}>
+        <h1>Thông tin người dùng </h1> 
+      </div>
+      <div className="d-flex align-items-center justify-content-end" style={{ width: '175vh'}}>
+          <Button variant="info" onClick={handleShowFilter}>
+            <i className="bi bi-funnel"></i> Lọc kết quả
+          </Button>
+          <Button variant="primary" style={{marginLeft:'1rem'}} onClick={handleAddClick}>
+            <i class="bi bi-person-plus-fill"></i> Thêm người dùng
+          </Button>
         </div>
+      <div className="container-12">
+        <div className="d-flex flex-column justify-content-center align-items-center p-2" style={{ height: '50vh', width: '175vh', marginTop:'14vh'}}>
+          <Table bordered hover className="mb-0" style={{ borderRadius: '20px', overflow: 'hidden', fontSize: '1.3rem' }}>
+            <thead>
+              <tr>
+                <th className="my-sm-3 bg-info text-center">MSSV</th>
+                <th className="my-sm-3 bg-info text-center">Họ tên</th>
+                <th className="my-sm-3 bg-info text-center">Email</th>
+                <th className="my-sm-3 bg-info text-center">SDT</th>
+                <th className="my-sm-3 bg-info text-center">Vai trò</th>
+                <th className="my-sm-3 bg-info text-center">Hành động</th>
+              </tr>
+            </thead>
+            <tbody>{DisplayData}</tbody>
+          </Table>
+
+          <Pagination className="justify-content-end mt-3">
+            <Pagination.Prev
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            />
+            {paginationItems}
+            <Pagination.Next
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+            />
+          </Pagination>
+        </div>
+
+        <Modal show={showFilter} onHide={handleCloseFilter} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Lọc kết quả</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <FilterForm />
+          </Modal.Body>
+        </Modal>
       </div>
-
-      <div className="d-flex flex-column justify-content-center align-items-center p-2" style={{ height: '84vh', width: '180vh' }}>
-        <Table bordered hover className="mb-0" style={{ borderRadius: '20px', overflow: 'hidden', fontSize: '1.3rem' }}>
-          <thead>
-            <tr>
-              <th className="my-sm-3 bg-info text-center">MSSV</th>
-              <th className="my-sm-3 bg-info text-center">Họ tên</th>
-              <th className="my-sm-3 bg-info text-center">Email</th>
-              <th className="my-sm-3 bg-info text-center">SDT</th>
-              <th className="my-sm-3 bg-info text-center">Vai trò</th>
-              <th className="my-sm-3 bg-info text-center">Hành động</th>
-            </tr>
-          </thead>
-          <tbody>{DisplayData}</tbody>
-        </Table>
-
-        <Pagination className="justify-content-end mt-3">
-          <Pagination.Prev
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-          />
-          {paginationItems}
-          <Pagination.Next
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={currentPage === totalPages}
-          />
-        </Pagination>
-      </div>
-
-      <Modal show={showFilter} onHide={handleCloseFilter} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Lọc kết quả</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <FilterForm />
-        </Modal.Body>
-      </Modal>
     </div>
   );
 }
