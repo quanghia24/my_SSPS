@@ -12,7 +12,11 @@ pip install -r requirements.txt
 ```
 3. connect django with mySQL
 ```
-port: 3306
+start your DBMS
+instablish connection to port: 3306
+host: root
+password: 12345
+
 create database my_ssps;
 use my_ssps;
 ```
