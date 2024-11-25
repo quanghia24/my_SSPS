@@ -33,59 +33,29 @@ def printer_list(request):
             return JsonResponse(serializer.data, status = 201)
         return JsonResponse(serializer.errors, status = 400)
     
-@csrf_exempt
-def printer_details(request):
-    # Lấy dữ liệu từ body
-    data = json.loads(request.body) if request.body else {}
+@csrf_exempt 
+def printer_details(request, pk):
+    
+    try:
+        printer = Printer.objects.get(pk = pk)
+    
+    except Printer.DoesNotExist:
+        return HttpResponse(status = 404)
+    
+    if request.method == "GET":
+        serializer = PrinterSerializer(printer)
+        return JsonResponse(serializer.data)
 
-    if request.method == "POST":
-        action = data.get('action', None)
-        
-        if action == "GET":
-            pk = data.get('pk', None)  # Lấy pk từ body của request
-            if pk:
-                try:
-                    printer = Printer.objects.get(pk=pk)
-                    serializer = PrinterSerializer(printer)
-                    return JsonResponse(serializer.data)
-                except Printer.DoesNotExist:
-                    return JsonResponse({"message": "Printer not found."}, status=404)
-            else:
-                return JsonResponse({"message": "PK not provided."}, status=400)
-        
-        elif action == "PATCH":
-            pk = data.get('pk', None)  # Lấy pk từ body của request
-            if pk:
-                try:
-                    printer = Printer.objects.get(pk=pk)
-                    # Cập nhật dữ liệu cho printer
-                    serializer = PrinterSerializer(printer, data=data, partial=True)
-                    if serializer.is_valid():
-                        serializer.save()
-                        return JsonResponse(serializer.data)
-                    return JsonResponse(serializer.errors, status=400)
-                except Printer.DoesNotExist:
-                    return JsonResponse({"message": "Printer not found."}, status=404)
-            else:
-                return JsonResponse({"message": "PK not provided."}, status=400)
-
-        elif action == "DELETE":
-            pk = data.get('pk', None)  # Lấy pk từ body của request
-            if pk:
-                try:
-                    printer = Printer.objects.get(pk=pk)
-                    printer.delete()
-                    return JsonResponse({"message": "Printer deleted successfully."}, status=200)
-                except Printer.DoesNotExist:
-                    return JsonResponse({"message": "Printer not found."}, status=404)
-            else:
-                return JsonResponse({"message": "PK not provided."}, status=400)
-
-        else:
-            return JsonResponse({"message": "Action not provided or invalid."}, status=400)
-
-    else:
-        return JsonResponse({"message": "Method not allowed."}, status=405)
+    elif request.method == "PATCH":
+        data = JSONParser().parse(request)
+        serializer = PrinterSerializer(printer, data = data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status = 400)
+    elif request.method == "DELETE":
+        printer.delete()
+        return HttpResponse(status = 204)
 
 # Get all printer that on status
 @csrf_exempt
