@@ -46,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     balance = models.IntegerField(default=100)
-    phone_number = models.CharField(max_length=10,null=True, blank=True)
+    phone_number = models.CharField(max_length=10, default="", null=True, blank=True)
     dob = models.DateField(auto_now_add=True)
     faculty = models.CharField(max_length=100, default="Computer Science and Engineering")
     last_signed_in = models.DateTimeField(auto_now_add=True)

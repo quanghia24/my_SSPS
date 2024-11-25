@@ -16,9 +16,11 @@ from django.http import JsonResponse
 from rest_framework.parsers import JSONParser  # Dùng để phân tích dữ liệu JSON từ request.
 from django.views.decorators.csrf import csrf_exempt  # Tắt bảo vệ CSRF cho các view này.
 import json
+from django.contrib.auth.decorators import login_required
 # Tạo các view xử lý ở đây.
 
 @csrf_exempt # Tắt bảo vệ CSRF cho view
+@login_required
 def printer_list(request):
     if request.method == "GET":
         printers = Printer.objects.all()
@@ -55,13 +57,6 @@ def printer_details(request, pk):
         serializer = PrinterSerializer(printer)
         return JsonResponse(serializer.data)
 
-    elif request.method == "PATCH":
-        data = JSONParser().parse(request)
-        serializer = PrinterSerializer(printer, data = data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status = 400)
     elif request.method == "DELETE":
         printer.delete()
         return HttpResponse(status = 204)
