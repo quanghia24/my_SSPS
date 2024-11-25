@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import './StudentFeature.css';
 
@@ -7,12 +7,22 @@ import { NavLink } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
 
 function Setting() {
+  const {balance,setBalance} = useState(0);
+  useEffect(()=>{
+    const fetchData = async ()=>{
+      const response = await fetch('http://127.0.0.1:8000/api/users/balance/', {});
+      const data = await response.json();
+      setBalance(data.balance);
+    }
+  fetchData();
+  
+  },[])
   return (
     <div className="setting">
     
       <div className="setting-block paperNo">
         <p >Số trang in</p>
-        <p>100</p>
+        {balance}
       </div>
       <div className="setting-block logo AccountInfo">
         <NavLink to="/" className="setting-block-link">
