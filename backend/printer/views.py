@@ -15,7 +15,7 @@ from .serializers import PrinterSerializer
 from django.http import JsonResponse  
 from rest_framework.parsers import JSONParser  # Dùng để phân tích dữ liệu JSON từ request.
 from django.views.decorators.csrf import csrf_exempt  # Tắt bảo vệ CSRF cho các view này.
-
+import json
 # Tạo các view xử lý ở đây.
 
 @csrf_exempt # Tắt bảo vệ CSRF cho view
@@ -75,3 +75,45 @@ def brand_printers(request, brand):
         serializer = PrinterSerializer(printers, many=True)
         return JsonResponse(serializer.data, safe=False)
     return HttpResponse(status=405)
+
+
+@csrf_exempt
+def add_filetypes(request):
+    if request.method == "POST":
+        try:
+            # Lấy dữ liệu từ body
+            data = json.loads(request.body) if request.body else {}
+            printer_id = data.get('printer_id', None)  # Lấy printer_id từ body
+            filetypes = data.get('filetypes', '')  # Lấy filetypes từ body
+
+            if not printer_id:
+                return JsonResponse({"message": "Printer ID is required."}, status=400)
+            
+            if not filetypes or not isinstance(filetypes, str):
+                return JsonResponse({"message": "Invalid or no filetypes provided."}, status=400)
+
+            # Tách chuỗi 'filetypes' thành các phần tử và loại bỏ trùng lặp
+            filetypes_list = list(set(filetypes.split()))
+
+            # Lấy printer từ database
+            try:
+                printer = Printer.objects.get(id=printer_id)
+            except Printer.DoesNotExist:
+                return JsonResponse({"message": "Printer not found."}, status=404)
+
+            # Lấy các allowed_types hiện tại và đảm bảo là một list
+            current_allowed_types = printer.allowed_types or []
+
+            # Kết hợp các allowed_types cũ với filetypes mới
+            updated_allowed_types = list(set(current_allowed_types + filetypes_list))
+
+            # Thêm từng filetype vào allowed_types
+            for filetype in updated_allowed_types:
+                printer.add_type(filetype)
+
+            return JsonResponse({"message": "Filetypes added successfully", "allowed_types": printer.allowed_types}, status=200)
+
+        except json.JSONDecodeError:
+            return JsonResponse({"message": "Invalid JSON format."}, status=400)
+
+    return JsonResponse({"message": "Method not allowed."}, status=405)
