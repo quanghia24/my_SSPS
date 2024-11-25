@@ -5,8 +5,8 @@ from user.models import User
 class PurchaseOrder(models.Model):
     purchase_time = models.DateTimeField(auto_now_add=True)
     amount = models.IntegerField()
-    price = models.FloatField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    price = models.FloatField(default=2.25)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     total_amount = models.FloatField(default=0, blank=True, null=True)
 
     def save(self, *args, **kwargs):

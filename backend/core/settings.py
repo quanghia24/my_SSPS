@@ -51,7 +51,7 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=90),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": True,
@@ -78,7 +78,7 @@ SIMPLE_JWT = {
     "JTI_CLAIM": "jti",
 
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
-    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
+    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=30),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 
     "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
@@ -128,22 +128,32 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'my_ssps',
+        'USER': 'root',
+        'PASSWORD': '12345',
+        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
 
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'my_ssps',
-#         'USER': 'root',
-#         'PASSWORD': '12345',
-#         'HOST':'localhost',
-#         'PORT':'3306',
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': 'defaultdb',
+#         'USER': 'avnadmin',
+#         'PASSWORD': 'AVNS_-ChbzYZjql8pUKDd33Z',
+#         'HOST': 'ssps-quanghia-quanghia.b.aivencloud.com',   # Or an IP Address that your DB is hosted on
+#         'PORT': '25554',
 #     }
 # }
 
@@ -188,7 +198,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+AUTH_USER_MODEL = 'user.User'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'  # Adjust as needed
 # settings.py

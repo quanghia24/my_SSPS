@@ -12,7 +12,7 @@
 from django.shortcuts import render, HttpResponse
 from .models import Printer
 from .serializers import PrinterSerializer
-from django.http import JsonResponse  
+from django.http import JsonResponse
 from rest_framework.parsers import JSONParser  # Dùng để phân tích dữ liệu JSON từ request.
 from django.views.decorators.csrf import csrf_exempt  # Tắt bảo vệ CSRF cho các view này.
 import json
@@ -22,9 +22,10 @@ import json
 def printer_list(request):
     if request.method == "GET":
         printers = Printer.objects.all()
+
         serializer = PrinterSerializer(printers, many = True)
         return JsonResponse(serializer.data, safe = False)
-    
+
     elif request.method == "POST":
         data = JSONParser().parse(request) # Phân tích dữ liệu JSON từ phần body của yêu cầu.
         serializer = PrinterSerializer(data = data)
@@ -33,15 +34,23 @@ def printer_list(request):
             return JsonResponse(serializer.data, status = 201)
         return JsonResponse(serializer.errors, status = 400)
     
-@csrf_exempt 
+    elif request.method == 'PATCH':
+        data = JSONParser().parse(request)
+        printer = Printer.objects.get(id=data['id'])
+        serializer = PrinterSerializer(printer, data = data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status = 400)
+
+@csrf_exempt
 def printer_details(request, pk):
-    
     try:
         printer = Printer.objects.get(pk = pk)
-    
+
     except Printer.DoesNotExist:
         return HttpResponse(status = 404)
-    
+
     if request.method == "GET":
         serializer = PrinterSerializer(printer)
         return JsonResponse(serializer.data)
