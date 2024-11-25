@@ -154,11 +154,6 @@ DATABASES = {
         'PASSWORD': 'AVNS_-ChbzYZjql8pUKDd33Z',
         'HOST': 'ssps-quanghia-quanghia.b.aivencloud.com',   # Or an IP Address that your DB is hosted on
         'PORT': '25554',
-        'OPTIONS': {
-            'ssl': {
-                'ca': '..\..\my_SSPS\ca.pem',  # Replace with the path to your CA certificate
-            }
-        },
     }
 }
 
