@@ -10,6 +10,16 @@ source .env/bin/active    (*only works on linux/mac)
 ```
 pip install -r requirements.txt
 ```
+3. connect django with mySQL
+```
+start your DBMS
+instablish connection to port: 3306
+host: root
+password: 12345
+
+create database my_ssps;
+use my_ssps;
+```
 3. migrate models changes
 ```
 python3 manage.py migrate
