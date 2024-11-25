@@ -11,10 +11,15 @@ class Printer(models.Model):
     printed_papers = models.IntegerField(default = 0, blank = True, null = True)
     allowed_types = models.JSONField(default=list, blank=True)  # Lưu danh sách như ["pdf", "docx", "xls"]
 
-    def add_type(self, filetype:str):
-        if filetype not in self.allowed_types:
-            self.allowed_types.append(filetype)
-            self.save()
+    def add_type(self, filetype: str):
+    # Kiểm tra kiểu dữ liệu của allowed_types là list, nếu không thì chuyển nó thành list
+        if isinstance(self.allowed_types, list):
+            if filetype not in self.allowed_types:
+                self.allowed_types.append(filetype)
+        else:
+            # Nếu là dict hoặc kiểu khác, chuyển thành list và thêm filetype
+            self.allowed_types = [filetype]
+        self.save()
 
     def __str__(self):
         return f"{self.model} - {self.brand} [{self.status}]" 
