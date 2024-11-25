@@ -29,6 +29,7 @@ function Setting() {
     </div>
   );
 }
+const username = localStorage.getItem('username')
 
 function StudentFeature() {
   const [showSetting, setShowSetting] = useState (false);
@@ -56,7 +57,7 @@ function StudentFeature() {
             className="navbar-nav-ul-li-link navbar-nav-ul-li-link__admin"
           >
             <i className="bx bx-user-circle"></i>
-            <p>Nhi</p>
+            <p>{username}</p>
           </NavLink>
         </li>
         <li className="navbar-nav-ul-li">
