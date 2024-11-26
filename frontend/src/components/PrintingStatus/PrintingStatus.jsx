@@ -19,7 +19,7 @@ function PrintingStatus() {
     {
         id: 2,
         abc: '104A3',
-        Trangthai: 'Đang in',
+        Trangthai: 'Sẵn sàng',
         giay: '10',
         hieusuat: '30',
         phong: 101,
@@ -37,7 +37,7 @@ function PrintingStatus() {
     {
         id: 4,
         abc: '101A5',
-        Trangthai: 'Ngoại tuyến',
+        Trangthai: 'Sẵn sàng',
         giay: '10',
         hieusuat: '30',
         phong: 101,
@@ -55,7 +55,7 @@ function PrintingStatus() {
     {
         id: 6,
         abc: '101A5',
-        Trangthai: 'Lỗi',
+        Trangthai: 'Sẵn sàng',
         giay: '10',
         hieusuat: '30',
         phong: 101,
@@ -64,7 +64,7 @@ function PrintingStatus() {
     {
       id: 7,
       abc: '102C5',
-      Trangthai: 'Sẵn sàng',
+      Trangthai: 'Lỗi',
       giay: '10',
       hieusuat: '30',
       phong: 111,

@@ -26,7 +26,7 @@ function Register() {
         email: data.email,
         password: data.password,
         name: data.name,
-        user_id: Math.random(),
+        user_id: Math.floor(Math.random() * 9000000) + 1000000,
       });
       toast.success("Register success");
       navigate("/login");

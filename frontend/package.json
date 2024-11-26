@@ -24,6 +24,7 @@
     "react-select": "^5.8.3",
     "react-toastify": "^10.0.6",
     "sisteransi": "^1.0.5",
+    "sweetalert2": "^11.14.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

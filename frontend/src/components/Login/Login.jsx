@@ -20,34 +20,38 @@ function Login() {
 
   const login = async (data) => {
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/users/login/", {
-        email: data.email,
-        password: data.password,
-      });
-      const user = response.data;
+      const response = await axios.post(
+        'http://127.0.0.1:8000/api/users/login/',
+        {
+          email: data.email,
+          password: data.password,
+        }
+      )
+      const user = response.data
       if (user && user.access) {
-        localStorage.setItem("access", user.access);
-        localStorage.setItem("refresh", user.refresh);
-        const decoded = jwtDecode(user.access);
-        localStorage.setItem("user_id", decoded.user_id);
-        localStorage.setItem("username", decoded.username);
-        localStorage.setItem("role", decoded.role);
+        localStorage.setItem('access', user.access)
+        localStorage.setItem('refresh', user.refresh)
+        const decoded = jwtDecode(user.access)
+        localStorage.setItem('user_id', decoded.user_id)
+        localStorage.setItem('username', decoded.name)
+        localStorage.setItem('role', decoded.role)
         const role = decoded.role
+        // eslint-disable-next-line default-case
         switch (role) {
-          case 'customer':       
+          case 'customer':
             navigate('/member/student')
-            break;
-          case 'admin': 
+            break
+          case 'admin':
             navigate('/admin/printInformation')
-            break;       
+            break
         }
       }
-      toast.success("Login success");
+      toast.success('Login success')
     } catch (err) {
-      toast.error("Invalid username or password!!!");
-      console.log(err);
+      toast.error('Invalid username or password!!!')
+      console.log(err)
     }
-  };
+  }
 
   return (
     <div>
@@ -62,7 +66,7 @@ function Login() {
             </div>
             <div className="text-3xl mt-2 font-bold">ĐĂNG NHẬP</div>
             <div className="w-full">
-            <div className="relative w-full mt-8 bg-gray-200 rounded-lg">
+              <div className="relative w-full mt-8 bg-gray-200 rounded-lg">
                 <div className="rounded-xl px-3 flex w-full gap-4 relative">
                   <svg
                     width={30}
@@ -83,11 +87,11 @@ function Login() {
                       type="text"
                       placeholder="example@hcmut.edu.vn"
                       className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
-                      {...register("email", {
-                        required: "Email is required",
+                      {...register('email', {
+                        required: 'Email is required',
                         pattern: {
                           value: /^[a-zA-Z0-9._%+-]+@hcmut\.edu\.vn$/,
-                          message: "Email is inValid",
+                          message: 'Email is inValid',
                         },
                       })}
                     />
@@ -98,7 +102,7 @@ function Login() {
                     )}
                   </div>
                 </div>
-              </div>   
+              </div>
               <div className="relative w-full mt-8 bg-gray-200 rounded-lg">
                 <div className="rounded-xl px-3 flex justify-between items-center gap-4">
                   <div className="flex gap-4">
@@ -119,11 +123,11 @@ function Login() {
                     <div className="flex flex-col py-3 w-full">
                       <div className="text-lg">Password</div>
                       <input
-                        type={showPassword ? "text" : "password"}
+                        type={showPassword ? 'text' : 'password'}
                         placeholder="**************"
                         className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
-                        {...register("password", {
-                          required: "Password is required",
+                        {...register('password', {
+                          required: 'Password is required',
                         })}
                       />
                       {errors.password && (
@@ -162,7 +166,10 @@ function Login() {
                 </div>
               </div>
             </div>
-            <Link to='/forgotPassword' className="text-blue-800 no-underline text-end w-full mt-3">
+            <Link
+              to="http://127.0.0.1:8000/password-reset/"
+              className="text-blue-800 no-underline text-end w-full mt-3"
+            >
               Quên mật khẩu?
             </Link>
             <button
@@ -178,7 +185,7 @@ function Login() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default Login;
