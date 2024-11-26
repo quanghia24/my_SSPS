@@ -149,8 +149,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['email'] = user.email
         token['password'] = user.password
         token['role'] = "admin" if user.is_superuser else "customer"
-
-
+        
         return token
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer

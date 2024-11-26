@@ -9,6 +9,8 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.status import HTTP_204_NO_CONTENT
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework import status
+
 
 class ReportViewSet(
     viewsets.GenericViewSet,
@@ -16,7 +18,23 @@ class ReportViewSet(
 ):
     queryset = Report.objects.all()
     serializer_class = ReportSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
+    def create(self, request, *args, **kwargs):
+        data = request.data
+
+        # Automatically associate the report with the logged-in user
+        payload = {
+            "title": data.get("title"),
+            "content": data.get("content"),
+            "rating": data.get("rating"),
+            "user": request.user.id,  # Pass the user ID for serialization
+        }
+
+        serializer = self.serializer_class(data=payload)
+        serializer.is_valid(raise_exception=True)  # Automatically raises a 400 if invalid
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 
     def get(self, request, *args, **kwargs):
