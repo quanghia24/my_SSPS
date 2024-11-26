@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { CookiesProvider } from 'react-cookie';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import HomeStudent from './components/HomePage/HomeStudent/HomeStudent';
 import Blank from './components/Blank/Blank';
@@ -12,7 +12,7 @@ import SendFeedback from './components/SendFeedback/SendFeedback';
 import PrintingHistory from './components/PrintingLog/PrintingHistory';
 import BuyPrintingPaper from './components/BuyPaper/BuyPrintingPaper';
 import App from './App';
-import Home from './components/HomePage/HomeStudent/Home';
+// import Home from './components/HomePage/HomeStudent/Home';
 import Admin from '../src/components/admin/Admin';
 import AdminPrintHis from './components/admin/AdminPrintHis/AdminPrintHis';
 import AdminPayment from './components/admin/AdminPayment/AdminPayment';
@@ -20,11 +20,37 @@ import AdminListUser from './components/admin/AdminUser/AdminListUser';
 import AddUser from './components/admin/AdminUser/AddUser';
 import UpdateUser from './components/admin/AdminUser/UpdateUser';
 import AdminSPSO from '../src/components/admin/AdminSPSO/admin_home';
+import PrintingInformation from '../src/components/PrintingInformation/PrintingInformation';
+import PrintingStatus from '../src/components/PrintingStatus/PrintingStatus';
+// import BuyPrintingPaper from '../src/components/BuyPaper/BuyPrintingPaper';
+
+import Register from './components/Register/Register';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import Login from './components/Login/Login';
+
+import HomeGuest from './components/HomePage/HomeGuest';
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Blank/>,
     children:[
+      {
+        path: 'home_guest',
+        element: <HomeGuest />
+      },
+      {
+        path: 'register',
+        element: <Register />
+      },
+      {
+        path: 'forgotPassword',
+        element: <ForgotPassword />
+      },
+      {
+        path: 'login',
+        element: <Login />
+      },
       {
         path: 'student',
         element: <App />,
@@ -44,7 +70,7 @@ const router = createBrowserRouter([
         {
         path: 'buy_printing_paper',
         element: <BuyPrintingPaper/>
-        }
+        },
       ]
       },
       {
@@ -74,7 +100,20 @@ const router = createBrowserRouter([
           {
             path: 'users/update_user',
             element: <UpdateUser/>,
-          }
+          },
+          {
+            path: 'printInformation',
+            element: <PrintingInformation />,
+          },
+          {
+            path: 'printStatus',
+            element: <PrintingStatus />
+          },
+          
+          {
+            path: 'buy_printing_paper',
+            element: <BuyPrintingPaper/>
+          },
         ]
       }
       

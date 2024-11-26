@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import  axios  from "axios";
 import './StudentFeature.css';
 
 
@@ -7,38 +7,50 @@ import { NavLink } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
 
 function Setting() {
-  const {balance,setBalance} = useState(0);
+  const [balance,setBalance] = useState(0);
   useEffect(()=>{
-    const fetchData = async ()=>{
-      const response = await fetch('http://127.0.0.1:8000/api/users/balance/', {});
-      const data = await response.json();
-      setBalance(data.balance);
+   const fetchTokenBalance = async () => {
+    try {
+      const tokens ={
+        refresh: localStorage.getItem("refresh"),
+        access: localStorage.getItem("access")
+      }
+      const userResponse = await axios.get('http://127.0.0.1:8000//api/users/balance/',{
+        headers:{
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      });
+      setBalance(userResponse.data.balance);
+      console.log(userResponse.data.balance);
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
-  fetchData();
-  
+   }
+   fetchTokenBalance(); 
   },[])
   return (
     <div className="setting">
     
       <div className="setting-block paperNo">
         <p >Số trang in</p>
-        {balance}
+       <p>{balance}</p> 
       </div>
       <div className="setting-block logo AccountInfo">
         <NavLink to="/" className="setting-block-link">
-          <i class="bx bx-user"></i>
+          <i className="bx bx-user"></i>
           <p>Thông tin tài khoản</p>
         </NavLink>
       </div>
       <div className="setting-block logo logOut">
         <NavLink to="/" className="setting-block-link">
-          <i class="bx bx-log-out"></i>
+          <i className="bx bx-log-out"></i>
           <p>Đăng xuất</p>
         </NavLink>
       </div>
     </div>
   );
 }
+const username = localStorage.getItem('user_id')
 
 function StudentFeature() {
   const [showSetting, setShowSetting] = useState (false);
@@ -66,7 +78,7 @@ function StudentFeature() {
             className="navbar-nav-ul-li-link navbar-nav-ul-li-link__admin"
           >
             <i className="bx bx-user-circle"></i>
-            <p>Nhi</p>
+            <p>{username}</p>
           </NavLink>
         </li>
         <li className="navbar-nav-ul-li">

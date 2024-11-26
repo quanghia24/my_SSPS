@@ -9,7 +9,7 @@
     color: #000;
     text-align: right;
     font: 500 24px Inter, sans-serif;
-    max-width: 230px;
+    max-width: auto;
     max-height: 872px;
 }
 

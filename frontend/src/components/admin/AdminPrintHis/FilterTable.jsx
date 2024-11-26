@@ -51,9 +51,11 @@ function MyTable() {
 
     return (
         <div >
-            <div className='d-flex justify-content-start align-items-center p-3 border border-start-0  border-dark rounded-end-3 ' style={{ width: '25vh', marginBottom: '5vh'}}>
-                 <h1 >Lịch sử in</h1>
-            </div>
+             <div  style={{margin: '-3.5vh', marginLeft: '-9vh'}}>
+        <div className='text-4xl font-semibold shadow-xl rounded-br-lg p-3 border border-black w-fit'>
+          Lịch sử in
+        </div>
+      </div>
           
             {/* Nút mở modal */}
             <div className="d-flex align-items-center justify-content-end" style={{ width: '175vh'}}>
