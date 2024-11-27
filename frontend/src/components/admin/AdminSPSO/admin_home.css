@@ -1,0 +1,15 @@
+.admin_home_container {
+    background: #fff;
+    display: flex;
+}
+
+.admin_home_chart {
+    display: block;
+    width: 650px;
+    margin-left: 20px;
+}
+
+.admin_home_recent {
+    display: block;
+    width: 1100px;
+}

@@ -1,35 +1,62 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth.models import AbstractUser, Group, Permission
 
 
 
 # Create your models here.
-class User(models.Model):
-    email_validator = RegexValidator(
-        regex=r'^[a-zA-Z0-9._%+-]+@hcmut\.edu\.vn$',
-        message="Email must end with @hcmut.edu.vn"
+class UserProfileManager(BaseUserManager):
+    """Manager for user profiles"""
+    groups = models.ManyToManyField(
+        Group,
+        related_name='custom_user_set',  # Change this to a unique name
+        blank=True
     )
-
-    email = models.EmailField(
-        unique=True,  # Đảm bảo email là duy nhất
-        validators=[email_validator],  # Sử dụng validator đã định nghĩa
-        max_length=255
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name='custom_user_permissions_set',  # Change this to a unique name
+        blank=True
     )
+    def create_user(self, email, password=None, name=None, user_id=None):
+        if not email:
+            raise ValueError('Users must have an email')
 
-    #working
-    user_id = models.CharField(max_length=10, unique=True)
-    username = models.CharField(max_length=40, unique=True)
-    name = models.CharField(max_length=40)
-    password = models.CharField(max_length=20)
-    image = models.ImageField(upload_to='users/', null=True, blank=True)
-    day_of_birth = models.DateField(null=True, blank=True)
-    phone_number = models.CharField(max_length=10, null=True, blank=True)
+        email = self.normalize_email(email)
+        user = self.model(email=email, name=name, user_id = user_id)
+
+        user.set_password(password)
+        user.save(using=self._db)
+
+        return user
+
+    # def create_superuser(self, email, username, password):
+    #     user = self.create_user(email, username, password)
+    def create_superuser(self, email, password):
+        user = self.create_user(email, password)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save(using=self._db)
+
+class User(AbstractBaseUser, PermissionsMixin):
+    name = models.TextField(null=True)
+    email = models.EmailField(max_length=255, unique=True)
+    user_id = models.CharField(max_length=7,null=True, unique=True)
+    # username = models.CharField(max_length=255)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
     balance = models.IntegerField(default=100)
+    phone_number = models.CharField(max_length=10, default="", null=True)
+    dob = models.DateField(auto_now_add=True)
+    faculty = models.CharField(max_length=100, default="Computer Science and Engineering")
     last_signed_in = models.DateTimeField(auto_now_add=True)
+    images = models.TextField(blank=True)
+    objects = UserProfileManager()
+    money_spent = models.FloatField(default=0)
 
-    # role
-    is_superuser = models.CharField(max_length=20, default='customer')  # or 'admin'
+    USERNAME_FIELD = 'email'
+    # REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return self.name + " " + self.is_superuser
+        return f"{self.email.split('@')[0]} | {self.user_id} | Balance: {self.balance} | Spent: {self.money_spent} | Faculty of {self.faculty}"
+

@@ -1,30 +1,22 @@
-#__________________MODEL VIEW SET__________________________________
-# from rest_framework.viewsets import ModelViewSet
-# from .models import Printer
-# from .serializers import PrinterSerializer
-
-# # Create your views here.
-# class PrinterViewSet(ModelViewSet):
-#     queryset = Printer.objects.all()
-#     serializer_class = PrinterSerializer
 
 #___________________FUNCTION BASE__________________________________
 from django.shortcuts import render, HttpResponse
 from .models import Printer
 from .serializers import PrinterSerializer
-from django.http import JsonResponse  
+from django.http import JsonResponse
 from rest_framework.parsers import JSONParser  # Dùng để phân tích dữ liệu JSON từ request.
 from django.views.decorators.csrf import csrf_exempt  # Tắt bảo vệ CSRF cho các view này.
-
+from django.contrib.auth.decorators import user_passes_test
 # Tạo các view xử lý ở đây.
 
 @csrf_exempt # Tắt bảo vệ CSRF cho view
 def printer_list(request):
     if request.method == "GET":
         printers = Printer.objects.all()
+
         serializer = PrinterSerializer(printers, many = True)
         return JsonResponse(serializer.data, safe = False)
-    
+
     elif request.method == "POST":
         data = JSONParser().parse(request) # Phân tích dữ liệu JSON từ phần body của yêu cầu.
         serializer = PrinterSerializer(data = data)
@@ -33,15 +25,23 @@ def printer_list(request):
             return JsonResponse(serializer.data, status = 201)
         return JsonResponse(serializer.errors, status = 400)
     
-@csrf_exempt 
+    elif request.method == 'PATCH':
+        data = JSONParser().parse(request)
+        printer = Printer.objects.get(id=data['id'])
+        serializer = PrinterSerializer(printer, data = data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status = 400)
+
+@csrf_exempt
 def printer_details(request, pk):
-    
     try:
         printer = Printer.objects.get(pk = pk)
-    
+
     except Printer.DoesNotExist:
         return HttpResponse(status = 404)
-    
+
     if request.method == "GET":
         serializer = PrinterSerializer(printer)
         return JsonResponse(serializer.data)
@@ -61,9 +61,9 @@ def printer_details(request, pk):
 @csrf_exempt
 def active_printers(request):
     if request.method == "GET":
-        printers = Printer.objects.filter(status = 'active') 
+        printers = Printer.objects.filter(status = 'active')
         serializer = PrinterSerializer(printers, many = True)
-        return JsonResponse(serializer.data, safe = False)  
+        return JsonResponse(serializer.data, safe = False)
     return HttpResponse(status = 405)
 
 # Get all printers of brand
