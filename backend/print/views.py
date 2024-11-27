@@ -12,6 +12,7 @@ class PrintOrderViewSet(viewsets.ModelViewSet):
     queryset = print_order.objects.all()
     serializer_class = PrintOrderSerializer
 
+
     def get_queryset(self):
         # Fetch the user_id from query parameters
         user_id = self.request.data.get('user_id')

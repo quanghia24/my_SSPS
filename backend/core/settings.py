@@ -134,16 +134,20 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "libsql.db.backends.sqlite3",
+#         "NAME": "libsql://myssps-quanghia24.turso.io?authToken=eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3MzE4OTQ2NTksImlkIjoiNzYzYTFiNGItODNmYi00MmQwLTgxZTMtYTAwODBmOTdkZTRhIn0.juaPE3KN341ENWWy1-UmSGCg9B6NT8QN253FzcLLloBD3nVhZ-SR0JHboUETO81d5s3HTFrG0bEMmRP1hTyiDQ",
+#     }
+# }
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'my_ssps',
-#         'USER': 'root',
-#         'PASSWORD': '12345',
-#         'HOST':'localhost',
-#         'PORT':'3306',
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': 'defaultdb',
+#         'USER': 'avnadmin',
+#         'PASSWORD': 'AVNS_-ChbzYZjql8pUKDd33Z',
+#         'HOST': 'ssps-quanghia-quanghia.b.aivencloud.com',   # Or an IP Address that your DB is hosted on
+#         'PORT': '25554',
 #     }
 # }
 
