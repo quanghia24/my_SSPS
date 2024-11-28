@@ -1,0 +1,33 @@
+.statisticalContainer {
+    margin-left: 194px;
+    position: relative;
+}
+
+.bar1Container {
+    width: 800px;
+    position: relative;
+}
+
+#bar1Select {
+    position: absolute;
+    background-color: #F8F8FF;
+    width: 150px;
+    border-radius: 12px;
+    right: 0;
+}
+
+#bar2Select {
+    position: absolute;
+    background-color: #F8F8FF;
+    width: 150px;
+    border-radius: 12px;
+    right: 0;
+}
+
+.bar2Container {
+    width: 800px;
+    position: absolute;
+    left: 30%;
+    top: 100%;
+}
+

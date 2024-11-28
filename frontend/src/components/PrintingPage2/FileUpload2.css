@@ -1,0 +1,84 @@
+.MainContent {
+    width: 792px;
+    margin: 96px 0 0 86px;
+}
+
+.FileUpload2Main {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.balance2 {
+    position: absolute;
+    right: 10%;
+    top: 10%;
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.config2Container {
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    height: 106px;
+    align-items: center;
+}
+
+.allConfig {
+    border: 1px solid black;
+    margin-top: 38px;
+    border-radius: 8px;
+}
+
+.configFileName {
+    height: 122px;
+    display: grid;
+    place-items: center;
+    border-bottom: 1px solid black;
+}
+
+.fileName {
+    width: 700px;
+    height: 52px;
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+.fileName p{
+    font-weight: bold;
+}
+.config3Container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+    height: 260px;
+
+}
+
+.config3Container .item1,
+.config3Container .item3,
+.config3Container .item5 {
+    margin: 0 0 0 62px;
+}
+
+.config3Container div input {
+    width: 320px;
+    background-color: #EDF5F4;
+}
+
+.config3Container div label {
+    display: block;
+}
+
+.printer {
+    margin: 190px 0 0 172px;
+}
+
+.printer img {
+    height: 400px;
+    width: 400px;
+}
