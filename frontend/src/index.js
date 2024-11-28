@@ -27,16 +27,16 @@ import PrintingStatus from '../src/components/PrintingStatus/PrintingStatus';
 import Register from './components/Register/Register';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import Login from './components/Login/Login';
-
+import Profile from './components/User/UserProfile';
 import HomeGuest from './components/HomePage/HomeGuest';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Blank/>,
-    children:[
+    element: <Blank />,
+    children: [
       {
-        path: 'home_guest',
+        path: '',
         element: <HomeGuest />
       },
       {
@@ -55,51 +55,55 @@ const router = createBrowserRouter([
         path: 'student',
         element: <App />,
         children: [
-        {
-          path:'student_home',
-          element: <HomeStudent/>
-        },
-        {
-          path: 'send_feedback',
-          element: <SendFeedback/>
-        },
-        {
-          path:'printing_history',
-          element: <PrintingHistory/>
-        },
-        {
-        path: 'buy_printing_paper',
-        element: <BuyPrintingPaper/>
-        },
-      ]
+          {
+            path: 'student_home',
+            element: <HomeStudent />
+          },
+          {
+            path: 'profile',
+            element: <Profile />
+          },
+          {
+            path: 'send_feedback',
+            element: <SendFeedback />
+          },
+          {
+            path: 'printing_history',
+            element: <PrintingHistory />
+          },
+          {
+            path: 'buy_printing_paper',
+            element: <BuyPrintingPaper />
+          },
+        ]
       },
       {
         path: 'admin_home',
-        element: <Admin/>,
-        children:[
+        element: <Admin />,
+        children: [
           // {
           //   path: 'admin_SPSO',
           //   element: <AdminSPSO/>
           // },
           {
             path: 'history',
-            element: <AdminPrintHis/>
+            element: <AdminPrintHis />
           },
           {
-            path:'admin_payment',
-            element: <AdminPayment/>
+            path: 'admin_payment',
+            element: <AdminPayment />
           },
           {
             path: 'users',
-            element: <AdminListUser/>,
+            element: <AdminListUser />,
           },
           {
             path: 'users/add_user',
-            element: <AddUser/>,
+            element: <AddUser />,
           },
           {
             path: 'users/update_user',
-            element: <UpdateUser/>,
+            element: <UpdateUser />,
           },
           {
             path: 'printInformation',
@@ -109,16 +113,16 @@ const router = createBrowserRouter([
             path: 'printStatus',
             element: <PrintingStatus />
           },
-          
+
           {
             path: 'buy_printing_paper',
-            element: <BuyPrintingPaper/>
+            element: <BuyPrintingPaper />
           },
         ]
       }
-      
-      
-     
+
+
+
     ]
   },
 ]);
