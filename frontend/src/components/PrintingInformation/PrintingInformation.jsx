@@ -4,32 +4,32 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { DataGrid } from '@mui/x-data-grid'
 import Paper from '@mui/material/Paper'
-import { Link } from "react-router-dom";
-import { FaPlus } from "react-icons/fa";
-import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom'
+import { FaPlus } from 'react-icons/fa'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import Swal from "sweetalert2";
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Switch from '@mui/material/Switch'
+import Swal from 'sweetalert2'
 
 function PrintingInformation() {
-  const [print, setPrint] = useState([]);
-  const [isAddFormVisible, setIsAddFormVisible] = useState(false);
+  const [print, setPrint] = useState([])
+  const [isAddFormVisible, setIsAddFormVisible] = useState(false)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm()
 
   const createInformation = async (data) => {
     try {
-      const access = localStorage.getItem("access");
+      const access = localStorage.getItem('access')
 
       await axios.post(
-        "http://127.0.0.1:8000/api/printers/",
+        'http://127.0.0.1:8000/api/printers/',
         {
           model: data.model,
           brand: data.brand,
@@ -42,84 +42,84 @@ function PrintingInformation() {
             Authorization: `Bearer ${access}`,
           },
         }
-      );
-      getPrint();
-      toggleAddFormVisibility();
-      toast.success("Tạo thành công");
+      )
+      getPrint()
+      toggleAddFormVisibility()
+      toast.success('Tạo thành công')
     } catch (err) {
-      toast.error("Create fail!!!");
-      console.log(err);
+      toast.error('Create fail!!!')
+      console.log(err)
     }
-  };
+  }
 
   const toggleAddFormVisibility = () => {
-    setIsAddFormVisible(!isAddFormVisible);
+    setIsAddFormVisible(!isAddFormVisible)
     reset({
-      model: "",
-      brand: "",
-      location: "",
-      allowed_types: "",
-      active: "",
-    });
-  };
+      model: '',
+      brand: '',
+      location: '',
+      allowed_types: '',
+      active: '',
+    })
+  }
 
   const getPrint = async () => {
     try {
-      const access = localStorage.getItem("access");
-      const res = await axios.get("http://127.0.0.1:8000/api/printers/", {
+      const access = localStorage.getItem('access')
+      const res = await axios.get('http://127.0.0.1:8000/api/printers/', {
         headers: {
           Authorization: `Bearer ${access}`,
         },
-      });
-      setPrint(res.data);
+      })
+      setPrint(res.data)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    getPrint();
-  }, []);
+    getPrint()
+  }, [])
 
   const deletePrint = async (id) => {
     const { isConfirmed } = await Swal.fire({
-      title: "Are you sure?",
-      text: "You won’t be able to revert this!",
-      icon: "warning",
+      title: 'Are you sure?',
+      text: 'You won’t be able to revert this!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    });
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    })
 
     if (!isConfirmed) {
-      return;
+      return
     }
     try {
-      const access = localStorage.getItem("access");
+      const access = localStorage.getItem('access')
       await axios.delete(`http://127.0.0.1:8000/api/printers/${id}/`, {
         headers: {
           Authorization: `Bearer ${access}`,
         },
-      });
-      getPrint();
-      toast.success("Xóa thành công");
+      })
+      getPrint()
+      toast.success('Xóa thành công')
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const columns = [
-    { field: "id", headerName: "ID", width: "100" },
-    { field: "model", headerName: "Hãng", flex: 0.4 },
-    { field: "brand", headerName: "Mẫu mã", flex: 0.5 },
-    { field: "location", headerName: "Tòa", flex: 0.3 },
-    { field: "status", headerName: "Trạng thái", flex: 0.3 },
-    { field: "allowed_types", headerName: "allowed_types", flex: 0.3 },
+    { field: 'id', headerName: 'ID', width: '100' },
+    { field: 'model', headerName: 'Hãng', flex: 0.4 },
+    { field: 'brand', headerName: 'Mẫu mã', flex: 0.5 },
+    { field: 'location', headerName: 'Tòa', flex: 0.3 },
+    { field: 'status', headerName: 'Trạng thái', flex: 0.3 },
+    { field: 'allowed_types', headerName: 'allowed_types', flex: 0.3 },
     {
-      field: "action",
-      headerName: "Hành động",
-      headerClassName: "font-bold",
+      field: 'action',
+      headerName: 'Hành động',
+      headerClassName: 'font-bold',
       renderCell: (params) => (
         <div className="flex h-full justify-center items-center">
           <Link className=" p-1 hover:bg-blue-500 text-blue-500 hover:text-white  rounded-full">
@@ -176,12 +176,12 @@ function PrintingInformation() {
         </div>
       ),
     },
-  ];
+  ]
 
   return (
     <div>
       <div className="h-screen flex">
-        <LeftSideBar />
+        {/* <LeftSideBar /> */}
         <div className="w-full">
           <div>
             <div className="text-4xl w-80 font-semibold shadow-xl rounded-br-lg p-3 border border-black">
@@ -196,7 +196,7 @@ function PrintingInformation() {
               <FaPlus />
               <div className="text-xl">Thêm máy in</div>
             </button>
-            <Paper sx={{ height: 700, width: "100%" }}>
+            <Paper sx={{ height: 700, width: '100%' }}>
               <DataGrid
                 rows={print}
                 columns={columns}
@@ -206,16 +206,16 @@ function PrintingInformation() {
                 disableExtendRowFullWidth
                 getRowId={(row) => row.id}
                 sx={{
-                  "& .MuiDataGrid-columnHeaders": {
-                    backgroundColor: "#f5f5f5",
+                  '& .MuiDataGrid-columnHeaders': {
+                    backgroundColor: '#f5f5f5',
                   },
-                  "& .MuiDataGrid-row:hover": {
-                    backgroundColor: "#e0e0e0",
+                  '& .MuiDataGrid-row:hover': {
+                    backgroundColor: '#e0e0e0',
                   },
-                  "& .MuiTablePagination-displayedRows": {
+                  '& .MuiTablePagination-displayedRows': {
                     margin: 0,
                   },
-                  "& .MuiTablePagination-selectLabel": {
+                  '& .MuiTablePagination-selectLabel': {
                     margin: 0,
                   },
                 }}
@@ -223,147 +223,183 @@ function PrintingInformation() {
             </Paper>
           </div>
         </div>
+        <div className="w-full px-[25px] py-20">
+          <button
+            onClick={() => toggleAddFormVisibility()}
+            className="no-underline w-70 font-semibold flex items-center gap-3 justify-center bg-blue-500 rounded-lg p-3 mb-3"
+          >
+            <FaPlus />
+            <div className="text-xl">Thêm máy in</div>
+          </button>
+          <Paper sx={{ height: 700, width: '100%' }}>
+            <DataGrid
+              rows={print}
+              columns={columns}
+              pageSizeOptions={[5, 10, 20, 50, 100]}
+              rowHeight={80}
+              checkboxSelection
+              disableExtendRowFullWidth
+              getRowId={(row) => row.id}
+              sx={{
+                '& .MuiDataGrid-columnHeaders': {
+                  backgroundColor: '#f5f5f5',
+                },
+                '& .MuiDataGrid-row:hover': {
+                  backgroundColor: '#e0e0e0',
+                },
+                '& .MuiTablePagination-displayedRows': {
+                  margin: 0,
+                },
+                '& .MuiTablePagination-selectLabel': {
+                  margin: 0,
+                },
+              }}
+            />
+          </Paper>
+        </div>
       </div>
-      {isAddFormVisible && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-end z-40">
-          <div className="bg-white min-w-[80vh] m-auto p-6 rounded-lg shadow-lg">
-            <form onSubmit={handleSubmit(createInformation)} noValidate>
-              <div className="flex justify-between mb-3">
+    </div>
+  )
+  {
+    isAddFormVisible && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-end z-40">
+        <div className="bg-white min-w-[80vh] m-auto p-6 rounded-lg shadow-lg">
+          <form onSubmit={handleSubmit(createInformation)} noValidate>
+            <div className="flex justify-between mb-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                onClick={() => {
+                  toggleAddFormVisibility()
+                }}
+                className="size-10 text-red-500 cursor-pointer"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+
+              <button type="submit">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  onClick={() => {
-                    toggleAddFormVisibility();
-                  }}
-                  className="size-10 text-red-500 cursor-pointer"
+                  className="size-10 text-green-500 cursor-pointer"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                   />
                 </svg>
-
-                <button type="submit">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-10 text-green-500 cursor-pointer"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                    />
-                  </svg>
-                </button>
+              </button>
+            </div>
+            <h3 className="mb-3 text-xl lg:text-2xl font-bold">
+              Add a information
+            </h3>
+            <div className="grid grid-cols-2 grid-rows-3 gap-6">
+              <div className="mb-4 relative col-span-1">
+                <label className="absolute -top-[12px] text-lg left-3 text-red-500 bg-white font-semibold">
+                  Model
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter model"
+                  className="w-full p-3 px-2 text-lg bg-white border border-black rounded-lg focus:outline-none transition-colors duration-200"
+                  {...register('model', {
+                    required: 'Model is required',
+                  })}
+                />
+                {errors.model && (
+                  <p className="text-red-500 absolute lg:text-lg text-sm">
+                    {errors.model.message}
+                  </p>
+                )}
               </div>
-              <h3 className="mb-3 text-xl lg:text-2xl font-bold">
-                Add a information
-              </h3>
-              <div className="grid grid-cols-2 grid-rows-3 gap-6">
-                <div className="mb-4 relative col-span-1">
-                  <label className="absolute -top-[12px] text-lg left-3 text-red-500 bg-white font-semibold">
-                    Model
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Enter model"
-                    className="w-full p-3 px-2 text-lg bg-white border border-black rounded-lg focus:outline-none transition-colors duration-200"
-                    {...register("model", {
-                      required: "Model is required",
-                    })}
-                  />
-                  {errors.model && (
-                    <p className="text-red-500 absolute lg:text-lg text-sm">
-                      {errors.model.message}
-                    </p>
-                  )}
-                </div>
-                <div className="mb-4 relative col-span-1">
-                  <label className="absolute -top-[12px] lg:text-lg text-sm left-3 text-red-500 bg-white font-semibold">
-                    Brand
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Enter brand"
-                    className="w-full p-3 px-2 text-lg bg-white border border-black rounded-lg focus:outline-none transition-colors duration-200"
-                    {...register("brand", {
-                      required: "Brand is required",
-                    })}
-                  />
-                  {errors.brand && (
-                    <p className="text-red-500 absolute lg:text-lg text-sm">
-                      {errors.brand.message}
-                    </p>
-                  )}
-                </div>
-                <div className="mb-2 relative col-span-1">
-                  <label className="absolute -top-[12px] lg:text-lg text-sm left-3 text-red-500 bg-white font-semibold">
-                    Location
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Enter location"
-                    className="w-full p-3 px-2 text-lg bg-white border border-black rounded-lg focus:outline-none transition-colors duration-200"
-                    {...register("location", {
-                      required: "Location is required",
-                    })}
-                  />
-                  {errors.location && (
-                    <p className="text-red-500 absolute lg:text-lg text-sm">
-                      {errors.location.message}
-                    </p>
-                  )}
-                </div>
-                <div className="mb-2 relative col-span-1">
-                  <label className="absolute -top-[12px] text-lg left-3 text-red-500 bg-white font-semibold">
-                    Allowed types
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Enter allowed types"
-                    className="w-full p-3 px-2 text-lg bg-white border border-black rounded-lg focus:outline-none transition-colors duration-200"
-                    {...register("allowed_types", {
-                      required: "Allowed types is required",
-                    })}
-                  />
-                  {errors.allowed_types && (
-                    <p className="text-red-500 absolute lg:text-lg text-sm">
-                      {errors.allowed_types.message}
-                    </p>
-                  )}
-                </div>
-                <div className="mb-2 relative col-span-1">
-                  <label className="absolute -top-[12px] text-lg left-3 text-red-500 bg-white font-semibold">
-                    Active
-                  </label>
-                  <select
-                    className="w-full p-3 px-2 text-lg bg-white border border-black rounded-lg focus:outline-none transition-colors duration-200"
-                    {...register("active", { required: "Active is required" })}
-                  >
-                    <option value="active">Active</option>
-                    <option value="inActive">inActive</option>
-                  </select>
-                  {errors.active && (
-                    <p className="text-red-500 absolute lg:text-lg text-sm">
-                      {errors.active.message}
-                    </p>
-                  )}
-                </div>
+              <div className="mb-4 relative col-span-1">
+                <label className="absolute -top-[12px] lg:text-lg text-sm left-3 text-red-500 bg-white font-semibold">
+                  Brand
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter brand"
+                  className="w-full p-3 px-2 text-lg bg-white border border-black rounded-lg focus:outline-none transition-colors duration-200"
+                  {...register('brand', {
+                    required: 'Brand is required',
+                  })}
+                />
+                {errors.brand && (
+                  <p className="text-red-500 absolute lg:text-lg text-sm">
+                    {errors.brand.message}
+                  </p>
+                )}
               </div>
-            </form>
-          </div>
+              <div className="mb-2 relative col-span-1">
+                <label className="absolute -top-[12px] lg:text-lg text-sm left-3 text-red-500 bg-white font-semibold">
+                  Location
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter location"
+                  className="w-full p-3 px-2 text-lg bg-white border border-black rounded-lg focus:outline-none transition-colors duration-200"
+                  {...register('location', {
+                    required: 'Location is required',
+                  })}
+                />
+                {errors.location && (
+                  <p className="text-red-500 absolute lg:text-lg text-sm">
+                    {errors.location.message}
+                  </p>
+                )}
+              </div>
+              <div className="mb-2 relative col-span-1">
+                <label className="absolute -top-[12px] text-lg left-3 text-red-500 bg-white font-semibold">
+                  Allowed types
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter allowed types"
+                  className="w-full p-3 px-2 text-lg bg-white border border-black rounded-lg focus:outline-none transition-colors duration-200"
+                  {...register('allowed_types', {
+                    required: 'Allowed types is required',
+                  })}
+                />
+                {errors.allowed_types && (
+                  <p className="text-red-500 absolute lg:text-lg text-sm">
+                    {errors.allowed_types.message}
+                  </p>
+                )}
+              </div>
+              <div className="mb-2 relative col-span-1">
+                <label className="absolute -top-[12px] text-lg left-3 text-red-500 bg-white font-semibold">
+                  Active
+                </label>
+                <select
+                  className="w-full p-3 px-2 text-lg bg-white border border-black rounded-lg focus:outline-none transition-colors duration-200"
+                  {...register('active', { required: 'Active is required' })}
+                >
+                  <option value="active">Active</option>
+                  <option value="inActive">inActive</option>
+                </select>
+                {errors.active && (
+                  <p className="text-red-500 absolute lg:text-lg text-sm">
+                    {errors.active.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </form>
         </div>
-      )}
-    </div>
-  );
+      </div>
+    )
+  }
 }
 
 export default PrintingInformation

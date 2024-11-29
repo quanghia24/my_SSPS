@@ -55,3 +55,9 @@
     font-size: 1.2rem;
     margin-left: 10px;
   }
+  @media (max-width: 991px) {
+    .navbar {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }

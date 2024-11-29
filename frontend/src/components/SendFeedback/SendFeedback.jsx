@@ -43,10 +43,10 @@ const Feedback = () => {
   return (
     <div className="container-feedback">
       
-      <div className="card-content">
-        <div className="card-body">
-          <h2 className="card-title p-3">Đóng góp Ý kiến</h2>
-          <p className="card-text text-muted mb-6">
+      <div className="card-content " style={{paddingTop: '20vh'}}>
+        <div className="card-body " >
+          <h1 className="card-title p-3">Đóng góp Ý kiến</h1>
+          <p className="card-text text-muted mb-6" style={{fontSize: '1.3rem'}}>
             Đóng góp của bạn là vô cùng quan trọng và cần thiết trong quá trình phát triển của chúng tôi.
           </p>
           <div className="d-flex justify-content-center mb-4">
@@ -81,13 +81,13 @@ const Feedback = () => {
               <img src={Emotion5} alt="Love Emoji" className="me-2 emotion-icon" />
             </div>
           </div>
-          <textarea 
+          {/* <textarea 
             className="form-control mb-4"
             rows={4}
             placeholder="abc..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-          ></textarea>
+          ></textarea> */}
           <textarea
             className="form-control mb-4"
             rows={4}

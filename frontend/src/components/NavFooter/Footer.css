@@ -2,6 +2,8 @@
     background-color: rgba(26, 52, 83, 1);
     font-size: 1.2rem;
     padding : 10px;
+    margin-top: vh;
+
 }
 .logo-media{
     margin-right: 20px;
@@ -10,3 +12,9 @@
     color:rgba(79, 156, 249, 1) ;
     font-size: 2rem;
 }
+@media (max-width: 991px) {
+    .footer-container {
+      margin-top: 40px;
+      padding: 20px;
+    }
+  }

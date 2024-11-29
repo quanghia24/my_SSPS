@@ -1,22 +1,22 @@
-import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/image.png";
-import image from "../../assets/image (1).png";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import axios from "axios";
+import { Link, useNavigate } from 'react-router-dom'
+import logo from '../../assets/image.png'
+import image from '../../assets/image (1).png'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import axios from 'axios'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { jwtDecode } from 'jwt-decode'
 
 function Login() {
-  const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm()
 
   const login = async (data) => {
     try {
@@ -31,7 +31,8 @@ function Login() {
       if (user && user.access) {
         localStorage.setItem('access', user.access)
         localStorage.setItem('refresh', user.refresh)
-        const decoded = jwtDecode(user.access)
+      const decoded = jwtDecode(user.access)
+      console.log(decoded)
         localStorage.setItem('user_id', decoded.user_id)
         localStorage.setItem('username', decoded.name)
         localStorage.setItem('role', decoded.role)
@@ -39,10 +40,10 @@ function Login() {
         // eslint-disable-next-line default-case
         switch (role) {
           case 'customer':
-            navigate('/member/student')
+            navigate('/student/student_home')
             break
           case 'admin':
-            navigate('/admin/printInformation')
+            navigate('/admin_home')
             break
         }
       }
@@ -188,4 +189,4 @@ function Login() {
   )
 }
 
-export default Login;
+export default Login

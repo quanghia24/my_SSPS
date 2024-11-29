@@ -93,7 +93,7 @@ useEffect(() => {
   return (
     <div>       
         <div className='h-screen flex'>
-          <LeftSideBar />
+          {/* <LeftSideBar /> */}
           <div className="w-full">
             <div>
               <div className='text-4xl w-80 font-semibold shadow-xl rounded-br-lg p-3 border border-black'>

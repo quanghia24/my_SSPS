@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { IoHomeOutline } from "react-icons/io5";
+import { IoDocumentTextOutline, IoHomeOutline, IoInformationCircleOutline, IoPersonOutline, IoSettingsOutline, IoTimeOutline, IoWalletOutline } from "react-icons/io5";
 import { IoPrintOutline } from "react-icons/io5";
 import { useState } from 'react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
@@ -22,7 +22,7 @@ function LeftSideBar() {
     <div>
       <div className="flex flex-col h-screen w-[250px] border-r border-black">
         <div className="">
-          <NavLink to='/' end className={({ isActive }) => {
+          <NavLink to='/admin_home' end className={({ isActive }) => {
             const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
             return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
           }}>
@@ -33,7 +33,7 @@ function LeftSideBar() {
               <span className='font-semibold no-underline text-2xl'>Trang chủ</span>
             </div>
           </NavLink>
-          <NavLink  onClick={toggle} to='/admin/printInformation' className={({ isActive }) => {
+          <NavLink  onClick={toggle} to='/admin_home/printInformation' className={({ isActive }) => {
             const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
             return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
           }}>
@@ -51,32 +51,102 @@ function LeftSideBar() {
           </NavLink>
           {expand && (
             <>
-              <NavLink to='/admin/printInformation' className={({ isActive }) => {
+              <NavLink to='/admin_home/printInformation' className={({ isActive }) => {
                 const active = isActive ? 'bg-blue-300 text-black' : 'bg-white text-black'
                 return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
               }}>
-                    <span className='font-semibold no-underline text-2xl text-center w-full'>Thông tin</span>             
+
+
+                <div className='flex items-center'>
+                <div className='w-7 h-7 mr-3'>
+                  <IoInformationCircleOutline className='w-full h-full' />
+              </div>
+               <span className='font-semibold no-underline text-2xl text-center w-full'>Thông tin</span> 
+            </div> 
+                               
               </NavLink>
-              <NavLink to='/admin/printStatus' className={({ isActive }) => {
+              <NavLink to='/admin_home/printStatus' className={({ isActive }) => {
                 const active = isActive ? 'bg-blue-300 text-black' : 'bg-white text-black'
                 return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
               }}>
-                    <span className='font-semibold no-underline text-2xl text-center w-full'>Trạng thái</span>             
+                  <div className='flex items-center'>
+                <div className='w-7 h-7 mr-3'>
+                  <IoSettingsOutline className='w-full h-full' />
+              </div>
+              <span className='font-semibold no-underline text-2xl text-center w-full'>Trạng thái</span>  
+            </div>          
               </NavLink>
             </>
 
           )}
-          <NavLink to='/a' className={({ isActive }) => {
+          {/* <NavLink to='/admin_home/printStatus' className={({ isActive }) => {
             const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
             return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
           }}>
             <div className='flex items-center'>
                 <div className='w-7 h-7 mr-3'>
-                  <IoPrintOutline className='w-full h-full' />
+                  <IoSettingsOutline className='w-full h-full' />
               </div>
               <span className='font-semibold no-underline text-2xl'>Cấu hình</span>
             </div>
+          </NavLink> */}
+
+          <NavLink to='/' end className={({ isActive }) => {
+            const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
+          }}>
+            <div className='flex items-center'>
+                <div className='w-7 h-7 mr-3'>
+                  <IoDocumentTextOutline className='w-full h-full' />
+              </div>
+              <span className='font-semibold no-underline text-2xl'>Báo cáo</span>
+            </div>
           </NavLink>
+
+
+
+
+          <NavLink to='/admin_home/history' end className={({ isActive }) => {
+            const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
+          }}>
+            <div className='flex items-center'>
+                <div className='w-7 h-7 mr-3'>
+                  <IoTimeOutline className='w-full h-full' />
+              </div>
+              <span className='font-semibold no-underline text-2xl'>Lịch sử in</span>
+            </div>
+          </NavLink>
+
+
+
+
+          <NavLink to='/admin_home/admin_payment' end className={({ isActive }) => {
+            const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
+          }}>
+            <div className='flex items-center'>
+                <div className='w-7 h-7 mr-3'>
+                  <IoWalletOutline className='w-full h-full' />
+              </div>
+              <span className='font-semibold no-underline text-2xl'>Thanh toán</span>
+            </div>
+          </NavLink>
+
+
+
+          <NavLink to='/admin_home/users' end className={({ isActive }) => {
+            const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
+          }}>
+            <div className='flex items-center'>
+                <div className='w-7 h-7 mr-3'>
+                  <IoPersonOutline className='w-full h-full' />
+              </div>
+              <span className='font-semibold no-underline text-2xl'>Người dùng</span>
+            </div>
+          </NavLink>
+
         </div>
       </div>
     </div>

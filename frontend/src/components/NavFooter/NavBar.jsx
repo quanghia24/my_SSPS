@@ -7,16 +7,18 @@ import StudentFeature from './StudentFeature';
 function Navbar() {
   return (
     <nav className="navbar">
+      <Link to="/student/student_home">
       <div className="logo-content">
          <img src={LogoBK} alt="" />
       <div className="navbar-logo">SSPS</div>
       </div>
+      </Link>
      
       <ul className="navbar-links">
-        <li> <Link to="/in-tai-lieu">In tài liệu</Link></li>
-        <li><Link to="/send_feedback">Đóng góp ý kiến</Link></li>
-        <li><Link to="/buy_printing_paper">Mua giấy</Link></li>
-        <li><Link to="/print_history">Lịch sử</Link></li>
+        <li> <Link to="studenr/in-tai-lieu">In tài liệu</Link></li>
+        <li><Link to="/student/send_feedback">Đóng góp ý kiến</Link></li>
+        <li><Link to="/student/buy_printing_paper">Mua giấy</Link></li>
+        <li><Link to="/student/printing_history">Lịch sử</Link></li>
       </ul>
       <StudentFeature/>
     </nav>

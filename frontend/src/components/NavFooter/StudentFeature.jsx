@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import  axios  from "axios";
 import './StudentFeature.css';
 
 
@@ -7,29 +7,50 @@ import { NavLink } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
 
 function Setting() {
+  const [balance,setBalance] = useState(0);
+  useEffect(()=>{
+   const fetchTokenBalance = async () => {
+    try {
+      const tokens ={
+        refresh: localStorage.getItem("refresh"),
+        access: localStorage.getItem("access")
+      }
+      const userResponse = await axios.get('http://127.0.0.1:8000//api/users/balance/',{
+        headers:{
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      });
+      setBalance(userResponse.data.balance);
+      console.log(userResponse.data.balance);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+   }
+   fetchTokenBalance(); 
+  },[])
   return (
     <div className="setting">
     
       <div className="setting-block paperNo">
         <p >Số trang in</p>
-        <p>100</p>
+       <p>{balance}</p> 
       </div>
       <div className="setting-block logo AccountInfo">
         <NavLink to="/" className="setting-block-link">
-          <i class="bx bx-user"></i>
+          <i className="bx bx-user"></i>
           <p>Thông tin tài khoản</p>
         </NavLink>
       </div>
       <div className="setting-block logo logOut">
         <NavLink to="/" className="setting-block-link">
-          <i class="bx bx-log-out"></i>
+          <i className="bx bx-log-out"></i>
           <p>Đăng xuất</p>
         </NavLink>
       </div>
     </div>
   );
 }
-const username = localStorage.getItem('username')
+const username = localStorage.getItem('user_id')
 
 function StudentFeature() {
   const [showSetting, setShowSetting] = useState (false);

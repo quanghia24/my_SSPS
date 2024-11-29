@@ -23,6 +23,7 @@
     "react-scripts": "^5.0.1",
     "react-select": "^5.8.3",
     "react-toastify": "^10.0.6",
+    "recharts": "^2.13.3",
     "sisteransi": "^1.0.5",
     "sweetalert2": "^11.14.5",
     "web-vitals": "^2.1.4"
