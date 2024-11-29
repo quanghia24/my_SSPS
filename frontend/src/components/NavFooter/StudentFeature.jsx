@@ -36,7 +36,7 @@ function Setting() {
        <p>{balance}</p> 
       </div>
       <div className="setting-block logo AccountInfo">
-        <NavLink to="/" className="setting-block-link">
+        <NavLink to="/student/profile" className="setting-block-link">
           <i className="bx bx-user"></i>
           <p>Thông tin tài khoản</p>
         </NavLink>
@@ -63,18 +63,18 @@ function StudentFeature() {
     <nav className="navbar-nav">
       <ul className="navbar-nav-ul">
         <li className="navbar-nav-ul-li">
-          <NavLink to="/" className="navbar-nav-ul-li-link">
+          <NavLink to="/student/profile" className="navbar-nav-ul-li-link">
             <i className="bx bx-message-rounded"></i>
           </NavLink>
         </li>
         <li className="navbar-nav-ul-li">
-          <NavLink to="/" className="navbar-nav-ul-li-link">
+          <NavLink to="/student/profile" className="navbar-nav-ul-li-link">
             <i className="bx bx-bell"></i>
           </NavLink>
         </li>
         <li className="navbar-nav-ul-li">
           <NavLink
-            to="/"
+            to="/student/profile"
             className="navbar-nav-ul-li-link navbar-nav-ul-li-link__admin"
           >
             <i className="bx bx-user-circle"></i>
