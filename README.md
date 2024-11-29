@@ -15,7 +15,9 @@ source .env/bin/active    (*only works on linux/mac)
 ```
 pip install -r requirements.txt
 ```
-3. start up server
+3. in the same folder of setting.py, add file .env (./backend/core/)
+  
+4. start up server
 ```
 python3 manage.py runserver
 ```
