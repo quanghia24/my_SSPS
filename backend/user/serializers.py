@@ -6,6 +6,7 @@ class NumberPaperDefaultSerializer(serializers.ModelSerializer):
     class Meta:
         model = NumberPaperDefault
         fields = "__all__"
+        
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

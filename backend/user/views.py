@@ -7,8 +7,23 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
-from .models import User
-from .serializers import UserProfileSerializer
+from .models import User, NumberPaperDefault
+from .serializers import UserProfileSerializer, NumberPaperDefaultSerializer
+
+class DefaultPaperViewSet(APIView):
+    permission_classes = (IsAdminUser,)
+
+    def get(self, request, *args, **kwargs):
+        serializer = NumberPaperDefaultSerializer(NumberPaperDefault.objects.last())
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def post(self, request, *args, **kwargs):
+        serializer = NumberPaperDefaultSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class RegisterUserView(APIView):
     parser_classes = [JSONParser, MultiPartParser, FormParser]
     def post(self, request):
