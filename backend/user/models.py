@@ -26,6 +26,10 @@ class UserProfileManager(BaseUserManager):
         user = self.model(email=email, name=name, user_id = user_id)
 
         user.set_password(password)
+        
+        if user.balance is None:
+            latest_paper_default = NumberPaperDefault.objects.last()
+            user.balance = latest_paper_default.amount if latest_paper_default else 101
         user.save(using=self._db)
 
         return user
@@ -38,6 +42,21 @@ class UserProfileManager(BaseUserManager):
         user.is_staff = True
         user.save(using=self._db)
 
+
+class NumberPaperDefault(models.Model):
+    amount = models.FloatField(default=200)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Current Paper number at default: {self.amount}"
+
+class ResetDate(models.Model):
+    resetDate = models.DateTimeField()
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Current Paper number at default: {self.amount}"
+
 class User(AbstractBaseUser, PermissionsMixin):
     name = models.TextField(null=True)
     email = models.EmailField(max_length=255, unique=True)
@@ -45,7 +64,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # username = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    balance = models.IntegerField(default=100)
+    balance = models.IntegerField(blank=True, null=True)
     phone_number = models.CharField(max_length=10, default="", null=True)
     dob = models.DateField(auto_now_add=True)
     faculty = models.CharField(max_length=100, default="Computer Science and Engineering")

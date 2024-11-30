@@ -1,14 +1,83 @@
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
+from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
-from .models import User
-from .serializers import UserProfileSerializer
+from .models import User, NumberPaperDefault, ResetDate
+from .serializers import UserProfileSerializer, NumberPaperDefaultSerializer, ResetDateSerializer
+from django.utils.timezone import now
+
+class ResetDateView(APIView):
+    permission_classes = (IsAdminUser,)
+
+    def get(self, request, *args, **kwargs):
+        serializer = ResetDateSerializer(ResetDate.objects.last())
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def post(self, request, *args, **kwargs):
+        serializer = ResetDateSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class ResetAllBalanceView(APIView):
+    permission_classes = (IsAdminUser,)
+    queryset = User.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        # Get the current reset date object
+        reset_date_obj = ResetDate.objects.last()
+
+        if not reset_date_obj:
+            return Response({"error": "Reset date is not configured."}, status=400)
+        
+        reset_date = reset_date_obj.resetDate
+        current_date = now()
+
+        # Check if the current date has passed the reset date
+        if current_date > reset_date:
+            # Increment resetDate by one month
+            new_reset_date = reset_date + timedelta(days=30)  # Approximation for one month
+            reset_date_obj.resetDate = new_reset_date
+            reset_date_obj.save()
+
+            # Get the default paper amount
+            default_paper_obj = NumberPaperDefault.objects.last()
+            if not default_paper_obj:
+                return Response({"error": "Default paper amount is not configured."}, status=400)
+            
+            default_paper_amount = default_paper_obj.amount
+
+            # Reset all user balances
+            User.objects.all().update(balance=default_paper_amount)
+
+            return Response({
+                "message": "User balances reset successfully.",
+                "new_reset_date": new_reset_date,
+                "default_paper_amount": default_paper_amount,
+            }, status=200)
+
+        return Response({"message": "No reset required. The reset date has not yet passed."}, status=200)
+    
+class DefaultPaperViewSet(APIView):
+    permission_classes = (IsAdminUser,)
+
+    def get(self, request, *args, **kwargs):
+        serializer = NumberPaperDefaultSerializer(NumberPaperDefault.objects.last())
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def post(self, request, *args, **kwargs):
+        serializer = NumberPaperDefaultSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class RegisterUserView(APIView):
     parser_classes = [JSONParser, MultiPartParser, FormParser]
     def post(self, request):
