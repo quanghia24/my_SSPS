@@ -1,33 +1,23 @@
-.statisticalContainer {
-    margin-left: 194px;
-    position: relative;
+.title{
+    display: grid;
+    place-items: center;
+    margin: 0 0 24px 0;
 }
-
-.bar1Container {
-    width: 800px;
-    position: relative;
+.filterContain{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 0 24px 0;
 }
-
-#bar1Select {
-    position: absolute;
-    background-color: #F8F8FF;
-    width: 150px;
-    border-radius: 12px;
-    right: 0;
+.filterContain .filterInput1 select{
+    display: inline;
 }
-
-#bar2Select {
-    position: absolute;
-    background-color: #F8F8FF;
-    width: 150px;
-    border-radius: 12px;
-    right: 0;
+.filterContain .filterInput2 select{
+    display: inline;
 }
-
-.bar2Container {
-    width: 800px;
-    position: absolute;
-    left: 30%;
-    top: 100%;
+.filterContain .filterInput3 select{
+    display: inline;
 }
-
+.tableContain table{
+    table-layout: fixed;
+}
