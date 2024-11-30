@@ -65,7 +65,7 @@ const Statistical = () => {
               <td style={{ padding: "8px" }}>{item.month}</td>
               <td style={{ padding: "8px" }}>{item.year}</td>
               <td style={{ padding: "8px" }}>
-                <Link to={`/report${index+1}`}>{item.details}</Link></td>
+                <Link to={`report${index+1}`}>{item.details}</Link></td>
             </tr>
           ))}
         </tbody>

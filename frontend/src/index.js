@@ -12,6 +12,9 @@ import SendFeedback from './components/SendFeedback/SendFeedback'
 import PrintingHistory from './components/PrintingLog/PrintingHistory'
 import BuyPrintingPaper from './components/BuyPaper/BuyPrintingPaper'
 import App from './App'
+import PrintingPage from './components/PrintingPage/FileUpload'
+import PrintingPage2 from './components/PrintingPage2/FileUpload2'
+
 // import Home from './components/HomePage/HomeStudent/Home';
 import Admin from '../src/components/admin/Admin'
 import AdminPrintHis from './components/admin/AdminPrintHis/AdminPrintHis'
@@ -73,6 +76,13 @@ const router = createBrowserRouter([
             element: <HomeStudent />,
           },
           {
+            path: 'printing_page',
+            element: <PrintingPage />,
+          },{
+            path: 'printing_page/printing_page2',
+            element: <PrintingPage2 />,
+          },
+          {
             path: 'profile',
             element: <Profile />,
           },
@@ -132,7 +142,7 @@ const router = createBrowserRouter([
             element: <BuyPrintingPaper />,
           },
           {
-            path: 'report',
+            path: '',
             element: <Report />
           },
           {
