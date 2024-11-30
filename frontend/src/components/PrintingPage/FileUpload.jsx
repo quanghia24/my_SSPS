@@ -46,7 +46,7 @@ const FileUpload = () => {
         console.log(fileName)
         console.log(statusPrinter)
 
-        navigate("printing_page2", { state: { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile,fileName,statusPrinter } })
+        navigate("/student/printing_page2", { state: { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile,fileName,statusPrinter } })
     }
     const fetchBalance = async () => {
         try {
