@@ -39,22 +39,22 @@ function MyTable() {
             </Pagination.Item>
         );
     }
-    const handleClickCheck = () => {   
-        console.log("Check"); 
-    }
+    // const handleClickCheck = () => {   
+    //     console.log("Check"); 
+    // }
     const DisplayData = currentItems.map((info) => (
         <tr key={info.id}>
             <td className="my-sm-3 text-center">{info.id}</td>
             {/* <td className="my-sm-5 text-center">{info.user}</td> */}
-            <td className="my-sm-3 text-center">{info.order_name}</td>
-            <td className="my-sm-5 text-center">{info.timer_start}</td>
-            <td className="my-sm-5 text-center">{info.printer}</td>
-             <td className="my-sm-5 text-center">{info.status}</td>
-            <td className="my-sm-5 text-center">{info.page_side}</td>
-            <td className="my-sm-5 text-center">{info.page_cost}</td>
-            <Button variant="primary " className="me-2 " style={{marginLeft:'10vh'}} onClick={handleClickCheck}>
+            <td className="my-sm-3 text-center">{info.title}</td>
+            <td className="my-sm-5 text-center">{info.content}</td>
+            {/* <td className="my-sm-5 text-center">{info.printer}</td> */}
+             <td className="my-sm-5 text-center">{info.rating}</td>
+            <td className="my-sm-5 text-center">{info.date_created}</td>
+            {/* <td className="my-sm-5 text-center">{info.page_cost}</td> */}
+            {/* <Button variant="primary " className="me-2 " style={{marginLeft:'10vh'}} onClick={handleClickCheck}>
             <i className="bi bi-check"></i>
-            </Button>
+            </Button> */}
 
         </tr> 
     ));
@@ -65,7 +65,7 @@ function MyTable() {
                     refresh: localStorage.getItem("refresh"),
                     access: localStorage.getItem("access"),
                   };
-            const response = await axios.get('http://localhost:8000/api/prints/orders/',{
+            const response = await axios.get('http://localhost:8000/api/reports/',{
                 headers:{
                     Authorization: `Bearer ${tokens.access}`,
                 },
@@ -80,7 +80,7 @@ function MyTable() {
         }
             fetchPrintingHistory(); 
         
-    },[document]);
+    },[]);
 
     return (
         <div >
@@ -102,13 +102,13 @@ function MyTable() {
                         <tr>
                             <th className="my-sm-3 bg-info text-center">ID</th>
                             {/* <th className="my-sm-5 bg-info text-center">Sinh viên</th> */}
-                            <th className="my-sm-3 bg-info text-center">Tên File</th>
-                            <th className="my-sm-5 bg-info text-center">Thời gian in</th>
-                            <th className="my-sm-5 bg-info text-center">Máy in</th>
-                             <th className="my-sm-5 bg-info text-center">Trạng thái</th>
-                            <th className="my-sm-5 bg-info text-center">Size</th>
+                            <th className="my-sm-3 bg-info text-center">Chủ đề</th>
+                            <th className="my-sm-5 bg-info text-center">Nội dung</th>
+                            <th className="my-sm-5 bg-info text-center">Rating</th>
+                             <th className="my-sm-5 bg-info text-center">Ngày gửi</th>
+                            {/* <th className="my-sm-5 bg-info text-center">Size</th>
                             <th className="my-sm-5 bg-info text-center">Số trang</th>
-                            <th className="my-sm-5 bg-info text-center">Cập nhật</th>
+                            <th className="my-sm-5 bg-info text-center">Cập nhật</th> */}
                         </tr>
                     </thead>
                     <tbody>{DisplayData}</tbody>

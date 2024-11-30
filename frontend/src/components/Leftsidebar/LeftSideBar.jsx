@@ -91,7 +91,7 @@ function LeftSideBar() {
             </div>
           </NavLink> */}
 
-          <NavLink to='/' end className={({ isActive }) => {
+          <NavLink to='/admin_home/list_feedback' end className={({ isActive }) => {
             const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
             return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
           }}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import './admin_home.css';
-import Recent from '../../PrintingLog/PrintingHistory';
+import Recent from './Recent/myTable';
 const data = [
   {day: '14/11', quantity: 73},
   {day: '15/11', quantity: 46},

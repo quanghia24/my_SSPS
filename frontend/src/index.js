@@ -29,7 +29,7 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword'
 import Login from './components/Login/Login'
 import Profile from './components/User/UserProfile'
 import HomeGuest from './components/HomePage/HomeGuest'
-
+import AdminFeedback from './components/admin/AdminFeedback/AdminFeedback'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -118,6 +118,11 @@ const router = createBrowserRouter([
             path: 'buy_printing_paper',
             element: <BuyPrintingPaper />,
           },
+          {
+            path:'list_feedback',
+            element: <AdminFeedback/>
+
+          }
         ],
       },
     ],
