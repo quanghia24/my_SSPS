@@ -8,9 +8,11 @@ import Emotion4 from '../../assets/emotion4.png';
 import Emotion5 from '../../assets/emotion5.png';
 import Navbar from '../NavFooter/NavBar';
 import Footer from '../NavFooter/Footer';
+import axios from 'axios';
 
 const Feedback = () => {
-   const [userID,setUserID] = useState('2212432');
+  //  const [userID,setUserID] = useState('2212432');
+  const userID=localStorage.getItem('user_id');
   const [rating,setRating] = useState(5);
   const [title,setTitle] = useState('');
   const [content,setContent] = useState('');
@@ -19,27 +21,42 @@ const Feedback = () => {
   const handleEmojiClick = (emoji) => {
     setSelectedEmoji((prevEmoji) => (prevEmoji === emoji ? null : emoji));
   };
-  const handleSend = () => {
-    const PayLoad={
-      'user_id':userID,
-      'rating': rating,
-      'title': title,
-      'content': content,
-    };
-    const url = 'http://localhost:8000/api/reports/';
-    fetch(url,{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(PayLoad) ,
-    }).then((res) =>  res.json())
-    .then(res => console.log(res))
-     console.log("send");
-     console.log(PayLoad);
-   
-  };
 
+
+  const [isSending, setIsSending] = useState(false);
+
+  const handleSend = () => {
+    setIsSending(true);
+    const payload = {
+      title: title,
+      content: content,
+      rating: rating,
+    };
+  
+    const url = 'http://localhost:8000/api/reports/';
+    const tokens = {
+      refresh: localStorage.getItem("refresh"),
+      access: localStorage.getItem("access"),
+    };
+  
+    axios.post(url, payload, {
+      headers: {
+        Authorization: `Bearer ${tokens.access}`,
+      },
+    })
+    .then((res) => {
+      // console.log(res.data);
+      alert('Phản hồi của bạn đã được gửi. Cảm ơn!');
+    })
+    .catch((error) => {
+      console.error('Error sending feedback:', error);
+      alert('Đã xảy ra lỗi khi gửi phản hồi. Vui lòng thử lại.');
+    })
+    .finally(() => {
+      setIsSending(false);
+    });
+  };
+  
   return (
     <div className="container-feedback">
       
@@ -81,13 +98,13 @@ const Feedback = () => {
               <img src={Emotion5} alt="Love Emoji" className="me-2 emotion-icon" />
             </div>
           </div>
-          {/* <textarea 
-            className="form-control mb-4"
-            rows={4}
-            placeholder="abc..."
+          <textarea 
+            className="form-control mb-1"
+            rows={2}
+            placeholder="Tiêu đề gửi phản hồi"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-          ></textarea> */}
+          ></textarea>
           <textarea
             className="form-control mb-4"
             rows={4}
@@ -95,7 +112,15 @@ const Feedback = () => {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
-          <button className="btn btn-primary button-feedback" onClick={handleSend}>Gửi ngay</button>
+          {/* <button className="btn btn-primary button-feedback" onClick={handleSend}>Gửi ngay</button> */}
+          <button 
+            className="btn btn-primary button-feedback" 
+            onClick={handleSend} 
+            disabled={isSending}
+          >
+  {isSending ? 'Đang gửi...' : 'Gửi ngay'}
+</button>
+
         </div>
       </div>
       

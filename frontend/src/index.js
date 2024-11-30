@@ -33,7 +33,7 @@ import Report4 from './components/StatisticalDetail/StatisticalDetail4'
 import Report5 from './components/StatisticalDetail/StatisticalDetail5'
 import Report6 from './components/StatisticalDetail/StatisticalDetail6'
 import Report7 from './components/StatisticalDetail/StatisticalDetail7'
-import Report8 from './components/StatisticalDetail/StatisticalDetail8'
+import Report8 from './components/StatisticalDetail/StatisticalDetali8'
 import Report9 from './components/StatisticalDetail/StatisticalDetail9'
 import Report10 from './components/StatisticalDetail/StatisticalDetail10'
 import Report11 from './components/StatisticalDetail/StatisticalDetail11'
@@ -45,7 +45,8 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword'
 import Login from './components/Login/Login'
 import Profile from './components/User/UserProfile'
 import HomeGuest from './components/HomePage/HomeGuest'
-
+import AdminFeedback from './components/admin/AdminFeedback/AdminFeedback'
+import FileUpload from './components/PrintingPage/FileUpload'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -79,8 +80,12 @@ const router = createBrowserRouter([
             path: 'printing_page',
             element: <PrintingPage />,
           },{
-            path: 'printing_page/printing_page2',
+            path: 'printing_page2',
             element: <PrintingPage2 />,
+          },
+          {
+            path: 'file_upload',
+            element: <FileUpload/>,
           },
           {
             path: 'profile',
@@ -191,6 +196,11 @@ const router = createBrowserRouter([
             path: 'report12',
             element:<Report12/>
           },
+          {
+            path:'list_feedback',
+            element: <AdminFeedback/>
+
+          }
         ],
       },
     ],

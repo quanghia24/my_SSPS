@@ -43,10 +43,10 @@ const FileUpload2 = () => {
             console.error('Error:', error); // Xử lý lỗi
         }
     };
-    useEffect(() => {
-        fetchBalance();
+    // useEffect(() => {
+    //     fetchBalance();
         
-    }, []);
+    // }, []);
     return (
         <div className="FileUpload2Main">
             <div className="balance2">

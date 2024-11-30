@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
 
 function Setting() {
+  
   const [balance,setBalance] = useState(0);
   useEffect(()=>{
    const fetchTokenBalance = async () => {
@@ -50,7 +51,6 @@ function Setting() {
     </div>
   );
 }
-const username = localStorage.getItem('user_id')
 
 function StudentFeature() {
   const [showSetting, setShowSetting] = useState (false);
@@ -58,6 +58,29 @@ function StudentFeature() {
   const handleShowSetting = () => {
     setShowSetting(!showSetting);
   }
+  const [username,setUsername] = useState("");
+
+useEffect(() => {
+  const fetchUsername = async () => {
+    try {
+      const tokens = {
+        refresh: localStorage.getItem("refresh"),
+        access: localStorage.getItem("access"),
+      };
+      const response = await axios.get('http://127.0.0.1:8000/api/users/profile/', {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      });
+      console.log(response.data); // Handle the response data as needed
+      setUsername(response.data.name);
+    } catch (error) {
+      console.error('Error fetching username:', error);
+    }
+  };
+
+  fetchUsername();
+}, []);
 
   return (
     <nav className="navbar-nav">
