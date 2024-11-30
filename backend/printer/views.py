@@ -10,6 +10,11 @@ import json
 from django.contrib.auth.decorators import login_required
 # Tạo các view xử lý ở đây.
 
+
+# add put
+
+
+
 @csrf_exempt # Tắt bảo vệ CSRF cho view
 def printer_list(request):
     if request.method == "GET":
@@ -26,6 +31,8 @@ def printer_list(request):
             return JsonResponse(serializer.data, status = 201)
         return JsonResponse(serializer.errors, status = 400)
     
+    
+
     elif request.method == 'PATCH':
         data = JSONParser().parse(request)
         printer = Printer.objects.get(id=data['id'])
