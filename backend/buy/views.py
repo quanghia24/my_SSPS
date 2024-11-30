@@ -55,7 +55,23 @@ class PurchaseOrderViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
 
 
-    # def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
+        try:
+            user = User.objects.get(email=request.user.email)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        if user.is_staff:
+            queryset = PurchaseOrder.objects.all()
+            serializer = self.serializer_class(queryset, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            queryset = PurchaseOrder.objects.filter(user=user)
+            serializer = self.serializer_class(queryset, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+
     #     try:
     #         body = json.loads(request.body)
     #         user_id = body.get('user_id')

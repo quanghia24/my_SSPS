@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import print_order, print_file
 from user.models import User
+from printer.models import Printer
 from .serializers import PrintOrderSerializer, PrintFileSerializer
 from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets
@@ -67,6 +68,8 @@ class PrintOrderViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         user = User.objects.get(user_id=request.user.user_id)
+        printer = Printer.objects.get(id = request.data.get('printer'))
+                                      
         file_id = request.data.get('file')
         page_cost = request.data.get('page_cost', 0)
 
@@ -80,7 +83,13 @@ class PrintOrderViewSet(viewsets.ModelViewSet):
         if user.balance < int(page_cost):  # Assuming user profile has a `balance` field
             return Response({'error': 'Insufficient balance'}, status=status.HTTP_400_BAD_REQUEST)
 
+        if printer.status == 'inactive':
+            return Response({'error': 'Printer is not available'}, status=status.HTTP_400_BAD_REQUEST)
         # Deduct balance
+        printer.frequency += 1
+        printer.printed_papers += page_cost
+        printer.save()
+
         user.balance -= int(page_cost)
         user.save()
 

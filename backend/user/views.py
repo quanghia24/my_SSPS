@@ -12,7 +12,6 @@ from .serializers import UserProfileSerializer
 class RegisterUserView(APIView):
     parser_classes = [JSONParser, MultiPartParser, FormParser]
     def post(self, request):
-
         # if email is already in use
         if User.objects.filter(email=request.data['email']).exists():
             return Response({'error': 'Email already registered'}, status=status.HTTP_400_BAD_REQUEST)
@@ -24,7 +23,7 @@ class RegisterUserView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class UserView(APIView):
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     parser_classes = [JSONParser, MultiPartParser, FormParser]
 
     def get(self, request):
@@ -35,7 +34,6 @@ class UserView(APIView):
     def patch(self, request):
 
         user = User.objects.get(user_id=request.user.user_id)
-
         updated_fields = []
 
         if user.faculty != request.data.get('faculty', user.faculty):
@@ -55,11 +53,21 @@ class UserView(APIView):
             user.phone_number = request.data.get('phone_number', user.phone_number)
             updated_fields.append('phone_number')
 
+                                        
         if updated_fields:
             user.save()
             return Response({'message': f'Updated: {", ".join(updated_fields)}'}, status=status.HTTP_200_OK)
         else:
+            if user.is_staff and request.data.get('user_id'):
+                try:
+                    customer = User.objects.get(user_id = request.data.get('user_id'))
+                except User.DoesNotExist:
+                    return Response({'message': 'No updates made'}, status=status.HTTP_200_OK)
+                customer.is_staff = True
+                customer.save()
+                return Response({'message': f'User {customer.user_id} is now a staff'}, status=status.HTTP_200_OK)
             return Response({'message': 'No updates made'}, status=status.HTTP_200_OK)
+        
 class BalanceView(APIView):
     # permission_classes = {}
     permission_classes = (IsAuthenticated,)
@@ -148,7 +156,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # token['username'] = user.username
         token['email'] = user.email
         token['password'] = user.password
-        token['role'] = "admin" if user.is_superuser else "customer"
+        token['role'] = "admin" if user.is_superuser or user.is_staff else "customer"
 
 
         return token
