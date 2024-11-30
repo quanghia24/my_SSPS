@@ -1,0 +1,54 @@
+.configPrinterMainContain {
+
+    margin-left: 192px;
+}
+
+.configPrinterContent {
+    display: flex;
+    height: 652px;
+}
+
+.configPrinterContentLeft {
+    width: 698px;
+    position: relative;
+    border-bottom: 1px solid black;
+    margin-top: 168px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    gap: 12px;
+}
+
+.configPrinterContentLeft div input {
+    display: block;
+    width: 328px;
+    height: 36px;
+    background-color: #EDF5F4;
+    font-weight: bold;
+}
+
+.configPrinterContentRight .imgPrinter {
+    margin: 112px 0 0 0;
+}
+
+.configPrinterText {
+    display: inline-block;
+    padding: 24px;
+    border-radius: 12px;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.configPrinterContentRight .namePrinter p {
+    text-align: center;
+}
+
+.namePrinter {
+    background-color: #4F9CF9;
+    padding: 8px 4px;
+    border-radius: 12px;
+    margin: 8px 0 0 200px;
+}
