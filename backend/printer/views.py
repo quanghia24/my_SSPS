@@ -11,7 +11,6 @@ from django.contrib.auth.decorators import login_required
 # Tạo các view xử lý ở đây.
 
 @csrf_exempt # Tắt bảo vệ CSRF cho view
-@login_required
 def printer_list(request):
     if request.method == "GET":
         printers = Printer.objects.all()
