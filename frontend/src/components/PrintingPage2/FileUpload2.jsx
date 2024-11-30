@@ -1,23 +1,26 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import './FileUpload2.css'
 import printer from './Assets/printer.png'
 import React from 'react'
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const FileUpload2 = () => {
+    const navigate=useNavigate()
     const location = useLocation();
-    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyNzg0NTE1LCJpYXQiOjE3MzI3ODI3MTUsImp0aSI6IjQ5N2EyOTc2M2YwYzRmNWViYTg4MWFkZDUwZmI1MGJjIiwidXNlcl9pZCI6MTMsImVtYWlsIjoibGFtMUBoY211dC5lZHUudm4iLCJwYXNzd29yZCI6InBia2RmMl9zaGEyNTYkODcwMDAwJDF6RkVZbXV6Sng0RlRNNDZZMkZOeUEkMmEyQmJKTklZRzhqa0prbktCMWROSTVlLzliM1Z4U3Rta2Zpb21PcWpJST0iLCJyb2xlIjoiY3VzdG9tZXIifQ.sVtKB1kfCtBuChy5Mdh3E8vKHMxi3ClFyJfHlwy3Y6k"
+    const accessToken = localStorage.getItem('access')
+    const { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile, fileName ,statusPrinter} = location.state || {}
     const data={
-        "file": 2,
+        "file": idFile,
         "order_name": "order123",
-        "orientation": "portrait",
-        "sided": "single",
-        "page_side": "A4",
-        "copies": 1,
-        "printer": "12",
-        "page_cost": 10
+        "orientation": orientation,
+        "sided": optionPrint,
+        "page_side": sizePaper,
+        "copies": Number(printNumber),
+        "printer": `13`,
+        "page_cost": Number(numberPrint)
     }
-    const { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile, fileName } = location.state || {}
+    console.log(printNumber)
     const handleConfirm = async () => {
         try {
             const response = await fetch('http://localhost:8000/api/prints/orders/', {
@@ -35,11 +38,15 @@ const FileUpload2 = () => {
 
             const result = await response.json();
             console.log('Success:', result); // Xử lý kết quả nếu cần
+            navigate('student_home')
         } catch (error) {
             console.error('Error:', error); // Xử lý lỗi
         }
     };
-    
+    useEffect(() => {
+        fetchBalance();
+        
+    }, []);
     return (
         <div className="FileUpload2Main">
             <div className="balance2">

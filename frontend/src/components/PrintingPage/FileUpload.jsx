@@ -4,7 +4,17 @@ import uploadFile from '././Assets/delete.png';
 import { useNavigate } from "react-router-dom";
 
 const FileUpload = () => {
-    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyNzg0NTE1LCJpYXQiOjE3MzI3ODI3MTUsImp0aSI6IjQ5N2EyOTc2M2YwYzRmNWViYTg4MWFkZDUwZmI1MGJjIiwidXNlcl9pZCI6MTMsImVtYWlsIjoibGFtMUBoY211dC5lZHUudm4iLCJwYXNzd29yZCI6InBia2RmMl9zaGEyNTYkODcwMDAwJDF6RkVZbXV6Sng0RlRNNDZZMkZOeUEkMmEyQmJKTklZRzhqa0prbktCMWROSTVlLzliM1Z4U3Rta2Zpb21PcWpJST0iLCJyb2xlIjoiY3VzdG9tZXIifQ.sVtKB1kfCtBuChy5Mdh3E8vKHMxi3ClFyJfHlwy3Y6k"
+    const data={
+        "file": 2,
+        "order_name": "order123",
+        "orientation": "portrait",
+        "sided": "single",
+        "page_side": "A4",
+        "copies": 1,
+        "printer": "12",
+        "page_cost": 10
+    }
+    const accessToken = localStorage.getItem('access')
     const navigate = useNavigate();
     const [fileName, setFileName] = useState('')
     const [file, setFile] = useState(null)
@@ -17,7 +27,7 @@ const FileUpload = () => {
     const [optionPrint, setOptionPrint] = useState('')
     const [orientation, setOrientation] = useState('')
     const [idFile, setIdFile] = useState('')
-    
+    const [statusPrinter, setStatusPrinter] = useState('')
     function handleFileChange(event) {
         const file = event.target.files[0];
         setFile(file)
@@ -27,7 +37,16 @@ const FileUpload = () => {
         setFileName(prev => '')
     }
     function handleNext() {
-        navigate("/fileupload2", { state: { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile,fileName } })
+        console.log(printNumber)
+        console.log(sizePaper)
+        console.log(numberPrint)
+        console.log(optionPrint)
+        console.log(orientation)
+        console.log(idFile)
+        console.log(fileName)
+        console.log(statusPrinter)
+
+        navigate("printing_page2", { state: { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile,fileName,statusPrinter } })
     }
     const fetchBalance = async () => {
         try {
@@ -53,7 +72,7 @@ const FileUpload = () => {
     };
     const fetchPrinter = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/printers/status_printers/", {
+            const response = await fetch("http://127.0.0.1:8000/api/", {
                 method: "POST",
                 body:JSON.stringify({status:"active"})
             });
@@ -65,7 +84,12 @@ const FileUpload = () => {
             }
 
             const data = await response.json();
-            console.log(data)
+           
+              
+              // Random một object từ mảng
+              const randomObject = data[Math.floor(Math.random() * data.length)];
+              
+              setStatusPrinter(randomObject.id);
         } catch (error) {
             // Lưu thông báo lỗi
         }
@@ -191,16 +215,16 @@ const FileUpload = () => {
                             <label htmlFor="mySelect4">Tùy chọn in</label>
                             <select id="mySelect4" onChange={(e) => setOptionPrint(e.target.value)}>
                                 <option value="">-- Chọn --</option>
-                                <option value="In 2 mặt">In 2 mặt</option>
-                                <option value="In 1 mặt">In 1 mặt</option>
+                                <option value="double">In 2 mặt</option>
+                                <option value="single">In 1 mặt</option>
                             </select>
                         </div>
                         <div className="select5">
                             <label htmlFor="mySelect5">Khổ</label>
                             <select id="mySelect5" onChange={(e) => setOrientation(e.target.value)} >
                                 <option value="">-- Chọn --</option>
-                                <option value="dọc">Chiều dọc</option>
-                                <option value="ngang">Chiều ngang</option>
+                                <option value="portrait">Chiều dọc</option>
+                                <option value="landscape">Chiều ngang</option>
                             </select>
                         </div>
                     </div>
