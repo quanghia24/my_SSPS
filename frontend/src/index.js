@@ -30,7 +30,7 @@ import Report4 from './components/StatisticalDetail/StatisticalDetail4'
 import Report5 from './components/StatisticalDetail/StatisticalDetail5'
 import Report6 from './components/StatisticalDetail/StatisticalDetail6'
 import Report7 from './components/StatisticalDetail/StatisticalDetail7'
-import Report8 from './components/StatisticalDetail/StatisticalDetail8'
+import Report8 from './components/StatisticalDetail/StatisticalDetali8'
 import Report9 from './components/StatisticalDetail/StatisticalDetail9'
 import Report10 from './components/StatisticalDetail/StatisticalDetail10'
 import Report11 from './components/StatisticalDetail/StatisticalDetail11'
@@ -43,6 +43,7 @@ import Login from './components/Login/Login'
 import Profile from './components/User/UserProfile'
 import HomeGuest from './components/HomePage/HomeGuest'
 import AdminFeedback from './components/admin/AdminFeedback/AdminFeedback'
+import FileUpload from './components/PrintingPage/FileUpload'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
           {
             path: 'student_home',
             element: <HomeStudent />,
+          },
+          {
+            path: 'file_upload',
+            element: <FileUpload/>,
           },
           {
             path: 'profile',
