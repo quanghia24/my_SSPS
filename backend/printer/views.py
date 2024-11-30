@@ -31,7 +31,19 @@ def printer_list(request):
             return JsonResponse(serializer.data, status = 201)
         return JsonResponse(serializer.errors, status = 400)
     
-    
+    elif request.method == "PUT":
+        data = JSONParser().parse(request)  # Parse JSON data from the request body
+        try:
+            printer = Printer.objects.get(id=data['id'])  # Fetch the printer by ID
+        except Printer.DoesNotExist:
+            return JsonResponse({"error": "Printer not found"}, status=404)
+
+        serializer = PrinterSerializer(printer, data=data)  # Full update
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=200)
+        return JsonResponse(serializer.errors, status=400)
+
 
     elif request.method == 'PATCH':
         data = JSONParser().parse(request)
