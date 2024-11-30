@@ -1,6 +1,6 @@
 import json
-from .serializers import PurchaseOrderSerializer
-from .models import PurchaseOrder
+from .serializers import PurchaseOrderSerializer, PaperPriceSerializer
+from .models import PurchaseOrder, PaperPrice
 from user.models import User
 from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
@@ -9,49 +9,68 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 from rest_framework import viewsets
+from django.http import JsonResponse
+from .models import PaperPrice
 
+def get_current_price(request):
+    try:
+        curr_price = PaperPrice.objects.last()
+    except PaperPrice.DoesNotExist:
+        # serializer = self.serializer_class()
+        # serializer.is_valid(raise_exception=True)
+        # serializer.save()
+        PaperPrice.objects.create()
+        curr_price = PaperPrice.objects.last()
+        return JsonResponse({"price": curr_price.price}, status=status.HTTP_200_OK)
 
+    return JsonResponse({"price": curr_price.price}, status=status.HTTP_200_OK)
+
+class PaperPriceViewSet(viewsets.ModelViewSet):
+    queryset = PaperPrice.objects.all()
+    serializer_class = PaperPriceSerializer
+    permission_classes = [IsAdminUser]
 # Create your views here.
 class PurchaseOrderViewSet(viewsets.ModelViewSet):
     queryset = PurchaseOrder.objects.all()
     serializer_class = PurchaseOrderSerializer
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, *args, **kwargs):
-        user = request.user  # Get the user from JWT
-        data = request.data
+    # def post(self, request, *args, **kwargs):
+    #     user = request.user  # Get the user from JWT
+    #     # data = request.data
 
-        # Validate required fields
-        amount = data.get("amount")
-        price = data.get("price")
+    #     # Validate required fields
+    #     amount = request.get("amount")
+    #     curr_price = PaperPrice.objects.last()
+    #     price = curr_price.price if curr_price else 0  # If no price is set, use the last saved price
 
-        if not all([amount, price]):
-            raise ValidationError(detail="Missing required fields: amount or price.")
+    #     if not all([amount, price]):
+    #         raise ValidationError(detail="Missing required fields: amount or price.")
 
-        # Ensure amount and price are positive
-        if float(amount) <= 0 or float(price) <= 0:
-            raise ValidationError(detail="Amount and price must be positive numbers.")
+    #     # Ensure amount and price are positive
+    #     if float(amount) <= 0 or float(price) <= 0:
+    #         raise ValidationError(detail="Amount and price must be positive numbers.")
 
-        # Calculate the total cost
-        total_cost = float(amount) * float(price)
+    #     # Calculate the total cost
+    #     total_cost = float(amount) * float(price)
 
 
-        # Update the user's balance and money_spent
-        user.balance += total_cost
-        user.money_spent += total_cost
-        user.save()
+    #     # Update the user's balance and money_spent
+    #     user.balance += total_cost
+    #     user.money_spent += total_cost
+    #     user.save()
 
-        # Create the purchase order
-        purchase_data = {
-            "amount": amount,
-            "price": price,
-            "user": user,
-        }
-        serializer = self.serializer_class(data=purchase_data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+    #     # Create the purchase order
+    #     purchase_data = {
+    #         "amount": amount,
+    #         "price": price,
+    #         "user": user.id,
+    #     }
+    #     serializer = self.serializer_class(data=purchase_data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
 
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
     # permission_classes = [IsAuthenticated]
 
 
@@ -72,61 +91,43 @@ class PurchaseOrderViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-    #     try:
-    #         body = json.loads(request.body)
-    #         user_id = body.get('user_id')
-    #         order_id = body.get('order_id')
-    #     except json.JSONDecodeError:
-    #         user_id = order_id = None
-
-    #     if user_id and order_id:
-    #         raise ValidationError(detail='Ambiguity when supplying both user_id and order_id.')
-
-    #     if order_id:
-    #         order = get_object_or_404(PurchaseOrder, id=order_id)
-    #         serializer = self.serializer_class(order)
-    #         return Response(serializer.data)
-
-    #     if user_id:
-    #         orders = get_object_or_404(User, user=user_id).purchaseorder_set.all()
-    #     else:
-    #         orders = get_list_or_404(PurchaseOrder)
-
-    #     serializer = self.serializer_class(orders, many=True)
-    #     return Response(serializer.data)
-    
-    def create(self, request, *args, **kwargs):
-        data = request.data
+    def create(self, request, *args, **kwargs):  # DRF uses `create` instead of `post` in `ModelViewSet`
+        user = request.user  # Get the user from the authenticated request
 
         # Validate required fields
-        amount = data.get("amount")
-        price = data.get("price")
-        # user_id = data.get("user_id")
-        user = request.user
+        amount = request.data.get("amount")
+        curr_price = PaperPrice.objects.last()
+        price = curr_price.price if curr_price else 0  # If no price is set, use 0
 
-        if not all([amount, price]):
-            raise ValidationError(detail="Missing required fields: amount, price, or user_id.")
+        if not amount:
+            raise ValidationError(detail="Missing required field: amount.")
+        if not price:
+            raise ValidationError(detail="Paper price is not set. Please contact the administrator.")
 
         # Ensure amount and price are positive
-        if float(amount) <= 0 or float(price) <= 0:
+        try:
+            amount = int(amount)
+            if amount <= 0 or price <= 0:
+                raise ValueError
+        except ValueError:
             raise ValidationError(detail="Amount and price must be positive numbers.")
 
+        # Calculate the total cost
+        total_cost = amount * price
 
-        # Fetch the user and update balance
-        # try:
-        #     user = User.objects.get(user_id=user_id)
-        # except User.DoesNotExist:
-        #     raise ValidationError(detail="User not found.")
-
-
-        # Deduct the total cost from the user's balance
-        user.balance += amount
-        user.money_spent += (float(price) * float(amount))
-        user.save()
+        # Update the user's balance and money spent (ensure these fields exist in your User model)
+        if hasattr(user, "balance") and hasattr(user, "money_spent"):
+            user.balance -= total_cost  # Deduct from balance
+            user.money_spent += total_cost  # Add to money spent
+            user.save()
 
         # Create the purchase order
-        serializer = self.get_serializer(data=data)
+        purchase_data = {
+            "amount": amount,
+            "price": price,
+        }
+        serializer = self.serializer_class(data=purchase_data)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
+        serializer.save(user=user)  # Pass the authenticated user explicitly to the serializer
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
