@@ -156,7 +156,7 @@ DATABASES = {
         'PORT': '25554',
         'OPTIONS': {
             'ssl': {
-                'ca': '..\..\my_SSPS\ca.pem',  # Replace with the path to your CA certificate
+                'ca': '..\..\BE\ca.pem',  # Replace with the path to your CA certificate
             }
         },
     }
