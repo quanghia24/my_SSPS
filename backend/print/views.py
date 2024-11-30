@@ -53,18 +53,21 @@ class PrintOrderViewSet(viewsets.ModelViewSet):
 
         queryset = super().get_queryset()
 
+        # Filter by user ID
         if user_id:
-            try:
-                user = User.objects.get(id=user_id)  # Corrected to `id` for User model
-                queryset = queryset.filter(user=user)
-            except User.ObjectDoesNotExist:
-                return queryset.none()
+            queryset = queryset.filter(user_id=user_id)  # Use `user_id` directly to avoid extra queries
+
+        # Filter by print ID
         if print_id:
             queryset = queryset.filter(file_id=print_id)
+
+        # Filter by status
         if status:
             queryset = queryset.filter(status=status)
 
         return queryset
+
+   
 
     def create(self, request, *args, **kwargs):
         user = User.objects.get(user_id=request.user.user_id)
@@ -99,8 +102,6 @@ class PrintOrderViewSet(viewsets.ModelViewSet):
         serializer.save(user=user, file=file)  # Save with user and file info
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
 
 
 # spso set status

@@ -35,44 +35,6 @@ class PurchaseOrderViewSet(viewsets.ModelViewSet):
     serializer_class = PurchaseOrderSerializer
     permission_classes = [IsAuthenticated]
 
-    # def post(self, request, *args, **kwargs):
-    #     user = request.user  # Get the user from JWT
-    #     # data = request.data
-
-    #     # Validate required fields
-    #     amount = request.get("amount")
-    #     curr_price = PaperPrice.objects.last()
-    #     price = curr_price.price if curr_price else 0  # If no price is set, use the last saved price
-
-    #     if not all([amount, price]):
-    #         raise ValidationError(detail="Missing required fields: amount or price.")
-
-    #     # Ensure amount and price are positive
-    #     if float(amount) <= 0 or float(price) <= 0:
-    #         raise ValidationError(detail="Amount and price must be positive numbers.")
-
-    #     # Calculate the total cost
-    #     total_cost = float(amount) * float(price)
-
-
-    #     # Update the user's balance and money_spent
-    #     user.balance += total_cost
-    #     user.money_spent += total_cost
-    #     user.save()
-
-    #     # Create the purchase order
-    #     purchase_data = {
-    #         "amount": amount,
-    #         "price": price,
-    #         "user": user.id,
-    #     }
-    #     serializer = self.serializer_class(data=purchase_data)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save()
-
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-    # permission_classes = [IsAuthenticated]
-
 
     def get(self, request, *args, **kwargs):
         try:
@@ -89,7 +51,6 @@ class PurchaseOrderViewSet(viewsets.ModelViewSet):
             queryset = PurchaseOrder.objects.filter(user=user)
             serializer = self.serializer_class(queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
-
 
     def create(self, request, *args, **kwargs):  # DRF uses `create` instead of `post` in `ModelViewSet`
         user = request.user  # Get the user from the authenticated request
