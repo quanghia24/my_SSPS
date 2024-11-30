@@ -6,35 +6,37 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
+import { FaUser } from 'react-icons/fa'
+import { MdDriveFileRenameOutline } from 'react-icons/md'
 
 function Register() {
-  const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm();
+  } = useForm()
 
-  const password = watch("password");
+  const password = watch('password')
 
   const login = async (data) => {
     try {
-      await axios.post("http://127.0.0.1:8000/api/users/register/", {
+      await axios.post('http://127.0.0.1:8000/api/users/register/', {
         email: data.email,
         password: data.password,
         name: data.name,
-        user_id: Math.floor(Math.random() * 9000000) + 1000000,
-      });
-      toast.success("Register success");
-      navigate("/login");
+        user_id: data.user_id,
+      })
+      toast.success('Register success')
+      navigate('/login')
     } catch (err) {
-      toast.error("Register fail!!");
-      console.log(err);
+      toast.error('Register fail!!')
+      console.log(err)
     }
-  };
+  }
 
   return (
     <div>
@@ -70,11 +72,11 @@ function Register() {
                       type="text"
                       placeholder="example@hcmut.edu.vn"
                       className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
-                      {...register("email", {
-                        required: "Email is required",
+                      {...register('email', {
+                        required: 'Email is required',
                         pattern: {
                           value: /^[a-zA-Z0-9._%+-]+@hcmut\.edu\.vn$/,
-                          message: "Email is inValid",
+                          message: 'Email is inValid',
                         },
                       })}
                     />
@@ -85,30 +87,18 @@ function Register() {
                     )}
                   </div>
                 </div>
-              </div>         
+              </div>
               <div className="relative w-full mt-8 bg-gray-200 rounded-lg">
                 <div className="rounded-xl px-3 flex w-full gap-4 relative">
-                  <svg
-                    width={30}
-                    height={24}
-                    viewBox="0 0 30 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="mt-[35px]"
-                  >
-                    <path
-                      d="M27 0H3C1.35 0 0.015 1.35 0.015 3L0 21C0 22.65 1.35 24 3 24H27C28.65 24 30 22.65 30 21V3C30 1.35 28.65 0 27 0ZM27 6L15 13.5L3 6V3L15 10.5L27 3V6Z"
-                      fill="black"
-                    />
-                  </svg>
+                  <FaUser className="mt-[35px] size-7" />
                   <div className="flex flex-col w-full py-3">
                     <div className="text-lg">Name</div>
                     <input
                       type="text"
                       placeholder="Nguyen Van A"
                       className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
-                      {...register("name", {
-                        required: "Name is required",         
+                      {...register('name', {
+                        required: 'Name is required',
                       })}
                     />
                     {errors.name && (
@@ -119,7 +109,31 @@ function Register() {
                   </div>
                 </div>
               </div>
-              
+              <div className="relative w-full mt-8 bg-gray-200 rounded-lg">
+                <div className="rounded-xl px-3 flex w-full gap-4 relative">
+                  <MdDriveFileRenameOutline className="mt-[35px] size-7" />
+                  <div className="flex flex-col w-full py-3">
+                    <div className="text-lg">MSSV</div>
+                    <input
+                      type="text"
+                      placeholder="1234567"
+                      className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
+                      {...register('user_id', {
+                        required: 'UserID is required',
+                        pattern: {
+                          value: /^\d{7}$/,
+                          message: 'UserID must be exactly 7 digits',
+                        },
+                      })}
+                    />
+                    {errors.user_id && (
+                      <p className="text-red-500 absolute top-20 text-lg">
+                        {errors.user_id.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
               <div className="relative w-full mt-8 bg-gray-200 rounded-lg">
                 <div className="rounded-xl px-3 flex justify-between items-center gap-4">
                   <div className="flex gap-4">
@@ -140,11 +154,11 @@ function Register() {
                     <div className="flex flex-col py-3 w-full">
                       <div className="text-lg">Password</div>
                       <input
-                        type={showPassword ? "text" : "password"}
+                        type={showPassword ? 'text' : 'password'}
                         placeholder="**************"
                         className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
-                        {...register("password", {
-                          required: "Password is required",
+                        {...register('password', {
+                          required: 'Password is required',
                         })}
                       />
                       {errors.password && (
@@ -202,14 +216,14 @@ function Register() {
                     <div className="flex flex-col py-3 w-full">
                       <div className="text-lg">Confirm Password</div>
                       <input
-                        type={showPassword ? "text" : "password"}
+                        type={showPassword ? 'text' : 'password'}
                         placeholder="**************"
                         className="border-none outline-none w-full text-black font-bold placeholder:text-black placeholder:opacity-60 bg-gray-200"
-                        {...register("confirm_password", {
-                          required: "Confirm Password is required",
+                        {...register('confirm_password', {
+                          required: 'Confirm Password is required',
                           validate: (value) =>
                             value === password ||
-                            "Confirm password does not match",
+                            'Confirm password does not match',
                         })}
                       />
                       {errors.confirm_password && (
@@ -267,7 +281,7 @@ function Register() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default Register;

@@ -25,14 +25,14 @@ function Login() {
         {
           email: data.email,
           password: data.password,
-        }
+        },
       )
       const user = response.data
       if (user && user.access) {
         localStorage.setItem('access', user.access)
         localStorage.setItem('refresh', user.refresh)
-      const decoded = jwtDecode(user.access)
-      console.log(decoded)
+        const decoded = jwtDecode(user.access)
+        console.log(decoded)
         localStorage.setItem('user_id', decoded.user_id)
         localStorage.setItem('username', decoded.name)
         localStorage.setItem('role', decoded.role)
@@ -167,12 +167,20 @@ function Login() {
                 </div>
               </div>
             </div>
-            <Link
-              to="http://127.0.0.1:8000/password-reset/"
-              className="text-blue-800 no-underline text-end w-full mt-3"
-            >
-              Quên mật khẩu?
-            </Link>
+            <div className="flex justify-between w-full">
+              <Link
+                to="/register"
+                className="text-blue-800 no-underline text-start w-full mt-3"
+              >
+                Đăng kí
+              </Link>
+              <Link
+                to="http://127.0.0.1:8000/password-reset/"
+                className="text-blue-800 no-underline text-end w-full mt-3"
+              >
+                Quên mật khẩu?
+              </Link>
+            </div>
             <button
               type="submit"
               className="bg-blue-400 px-8 py-3 mt-4 text-white rounded-xl"
