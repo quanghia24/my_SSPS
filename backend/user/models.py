@@ -50,6 +50,13 @@ class NumberPaperDefault(models.Model):
     def __str__(self):
         return f"Current Paper number at default: {self.amount}"
 
+class ResetDate(models.Model):
+    resetDate = models.DateTimeField()
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Current Paper number at default: {self.amount}"
+
 class User(AbstractBaseUser, PermissionsMixin):
     name = models.TextField(null=True)
     email = models.EmailField(max_length=255, unique=True)
