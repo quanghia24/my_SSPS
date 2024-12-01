@@ -80,7 +80,7 @@ const router = createBrowserRouter([
             path: 'printing_page',
             element: <PrintingPage />,
           },{
-            path: 'printing_page2',
+            path: 'printing_page/printing_page2',
             element: <PrintingPage2 />,
           },
           {

@@ -27,7 +27,11 @@ const FileUpload = () => {
     const [optionPrint, setOptionPrint] = useState('')
     const [orientation, setOrientation] = useState('')
     const [idFile, setIdFile] = useState('')
-    const [statusPrinter, setStatusPrinter] = useState('')
+    
+    const handleDestructor =()=>{
+        window.location.reload();
+    }
+    
     function handleFileChange(event) {
         const file = event.target.files[0];
         setFile(file)
@@ -37,16 +41,16 @@ const FileUpload = () => {
         setFileName(prev => '')
     }
     function handleNext() {
-        console.log(printNumber)
-        console.log(sizePaper)
-        console.log(numberPrint)
-        console.log(optionPrint)
-        console.log(orientation)
-        console.log(idFile)
-        console.log(fileName)
-        console.log(statusPrinter)
+        if(numberPrint>balance){
+            navigate("/student/buy_printing_paper",{ replace: true })
+        }
+        else{
 
-        navigate("/student/printing_page2", { state: { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile,fileName,statusPrinter } })
+            navigate("printing_page2", { state: { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile,fileName } })
+        }
+
+
+
     }
     const fetchBalance = async () => {
         try {
@@ -70,35 +74,12 @@ const FileUpload = () => {
             // Lưu thông báo lỗi
         }
     };
-    const fetchPrinter = async () => {
-        try {
-            const response = await fetch("http://127.0.0.1:8000/api/", {
-                method: "POST",
-                body:JSON.stringify({status:"active"})
-            });
-
-            if (!response.ok) {
-                // Xử lý lỗi từ server
-                const errorData = await response.json();
-                throw new Error(errorData.message || "Lỗi khi lấy mays in");
-            }
-
-            const data = await response.json();
-           
-              
-              // Random một object từ mảng
-              const randomObject = data[Math.floor(Math.random() * data.length)];
-              
-              setStatusPrinter(randomObject.id);
-        } catch (error) {
-            // Lưu thông báo lỗi
-        }
-    };
+    
 
     // Gọi API khi component được render
     useEffect(() => {
         fetchBalance();
-        fetchPrinter()
+        
     }, []);
 
 
@@ -140,6 +121,9 @@ const FileUpload = () => {
             <div className='MainContain'>
                 <div className="balance">
                     <p>Số giấy: {balance}</p>
+                </div>
+                <div className="destructor">
+                    <button className="button-rs" onClick={handleDestructor}>Hủy</button>
                 </div>
                 <p>{uploadStatus}</p>
                 <div className='UploadContain'>
