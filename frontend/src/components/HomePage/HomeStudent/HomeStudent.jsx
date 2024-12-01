@@ -18,13 +18,16 @@ const HomeStudent = () => {
   const handlePrintingHisClick = () => {
     navigate ('/student/printing_history');
   }
+  const handleFileUpload = () => {
+    navigate ('/student/file_upload');
+  }
   return (
   <div className="">
       
     <div className='container'>
        <div className="main-content  ">
       <div className="card ">
-        <img src={Print} alt="In tài liệu" />
+        <img onClick={handleFileUpload} src={Print} alt="In tài liệu" />
         
       </div>
       <div className="card ">
