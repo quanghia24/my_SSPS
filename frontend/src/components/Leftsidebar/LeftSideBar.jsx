@@ -212,7 +212,7 @@ function LeftSideBar() {
             className={({ isActive }) => {
               const active = isActive
                 ? 'bg-blue-500 text-white'
-                : 'bg-white text-black'
+                : 'bg-rgba(235, 244, 255, 1 text-black'
               return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
             }}
           >

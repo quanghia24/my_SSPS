@@ -16,6 +16,16 @@ function Setting() {
           refresh: localStorage.getItem('refresh'),
           access: localStorage.getItem('access'),
         }
+        const response = await axios.get(
+          'http://127.0.0.1:8000/api/users/profile/',
+          {
+            headers: {
+              Authorization: `Bearer ${tokens.access}`,
+            },
+          },
+        )
+        // console.log(response.data) // Handle the response data as needed
+        setBalance(response.data.balance)
       } catch (error) {
         console.error('Error fetching token balance:', error)
       }
@@ -75,6 +85,7 @@ function StudentFeature() {
         )
         console.log(response.data) // Handle the response data as needed
         setUsername(response.data.name)
+        
       } catch (error) {
         console.error('Error fetching username:', error)
       }

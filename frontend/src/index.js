@@ -81,17 +81,13 @@ const router = createBrowserRouter([
           },
           {
             path: 'file_upload',
-<<<<<<< HEAD
-=======
             element: <FileUpload/>
           },
           {
             path: 'printing_page',
->>>>>>> 4cc97aeaeab3ffdf0368e3fc9d03720a25346721
             element: <PrintingPage />,
           },
           {
-<<<<<<< HEAD
             path: 'file_upload/printing_page2',
             element: <PrintingPage2 />,
           },
@@ -100,8 +96,6 @@ const router = createBrowserRouter([
           //   element: <FileUpload />,
           // },
           {
-=======
->>>>>>> 4cc97aeaeab3ffdf0368e3fc9d03720a25346721
             path: 'profile',
             element: <Profile />,
           },
