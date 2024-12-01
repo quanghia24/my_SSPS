@@ -20,10 +20,10 @@ function LeftSideBar() {
 
   return (
     <div>
-      <div className="flex flex-col h-screen w-[250px] border-r border-black">
+      <div className="flex flex-col h-screen w-[250px] border-r border-black" style={{background:"rgba(235, 244, 255, 1)", height: "80vh"}}>
         <div className="">
           <NavLink to='/admin_home' end className={({ isActive }) => {
-            const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            const active = isActive ? 'bg-blue-500 text-white' : 'bg-rgba(235, 244, 255, 1) text-black'
             return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
           }}>
             <div className='flex items-center'>
@@ -34,7 +34,7 @@ function LeftSideBar() {
             </div>
           </NavLink>
           <NavLink  onClick={toggle} to='/admin_home/printInformation' className={({ isActive }) => {
-            const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            const active = isActive ? 'bg-blue-500 text-white' : 'bg-rgba(235, 244, 255, 1) text-black'
             return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
           }}>
             <div className="flex items-center justify-between w-full">
@@ -52,7 +52,7 @@ function LeftSideBar() {
           {expand && (
             <>
               <NavLink to='/admin_home/printInformation' className={({ isActive }) => {
-                const active = isActive ? 'bg-blue-300 text-black' : 'bg-white text-black'
+                const active = isActive ? 'bg-blue-300 text-black' : 'bg-rgba(235, 244, 255, 1) text-black'
                 return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
               }}>
 
@@ -66,7 +66,7 @@ function LeftSideBar() {
                                
               </NavLink>
               <NavLink to='/admin_home/printStatus' className={({ isActive }) => {
-                const active = isActive ? 'bg-blue-300 text-black' : 'bg-white text-black'
+                const active = isActive ? 'bg-blue-300 text-black' : 'bg-rgba(235, 244, 255, 1) text-black'
                 return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
               }}>
                   <div className='flex items-center'>
@@ -92,7 +92,7 @@ function LeftSideBar() {
           </NavLink> */}
 
           <NavLink to='/admin_home/list_feedback' end className={({ isActive }) => {
-            const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            const active = isActive ? 'bg-blue-500 text-white' : 'bg-rgba(235, 244, 255, 1) text-black'
             return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
           }}>
             <div className='flex items-center'>
@@ -107,7 +107,7 @@ function LeftSideBar() {
 
 
           <NavLink to='/admin_home/history' end className={({ isActive }) => {
-            const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            const active = isActive ? 'bg-blue-500 text-white' : 'bg-rgba(235, 244, 255, 1) text-black'
             return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
           }}>
             <div className='flex items-center'>
@@ -122,7 +122,7 @@ function LeftSideBar() {
 
 
           <NavLink to='/admin_home/admin_payment' end className={({ isActive }) => {
-            const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            const active = isActive ? 'bg-blue-500 text-white' : 'bg-rgba(235, 244, 255, 1) text-black'
             return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
           }}>
             <div className='flex items-center'>
@@ -136,7 +136,7 @@ function LeftSideBar() {
 
 
           <NavLink to='/admin_home/users' end className={({ isActive }) => {
-            const active = isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
+            const active = isActive ? 'bg-blue-500 text-white' : 'bg-rgba(235, 244, 255, 1) text-black'
             return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
           }}>
             <div className='flex items-center'>
