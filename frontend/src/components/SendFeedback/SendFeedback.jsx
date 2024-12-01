@@ -114,7 +114,7 @@ const Feedback = () => {
           ></textarea>
           {/* <button className="btn btn-primary button-feedback" onClick={handleSend}>Gửi ngay</button> */}
           <button 
-            className="btn btn-primary button-feedback" 
+            className="btn btn-primary button-feedback button-feedback" 
             onClick={handleSend} 
             disabled={isSending}
           >
