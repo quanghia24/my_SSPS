@@ -27,7 +27,7 @@ const FileUpload = () => {
     const [optionPrint, setOptionPrint] = useState('')
     const [orientation, setOrientation] = useState('')
     const [idFile, setIdFile] = useState('')
-    const [statusPrinter, setStatusPrinter] = useState('')
+    
     function handleFileChange(event) {
         const file = event.target.files[0];
         setFile(file)
@@ -44,9 +44,9 @@ const FileUpload = () => {
         console.log(orientation)
         console.log(idFile)
         console.log(fileName)
-        console.log(statusPrinter)
+        
 
-        navigate("printing_page2", { state: { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile,fileName,statusPrinter } })
+        navigate("printing_page2", { state: { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile,fileName } })
     }
     const fetchBalance = async () => {
         try {
@@ -70,35 +70,12 @@ const FileUpload = () => {
             // Lưu thông báo lỗi
         }
     };
-    const fetchPrinter = async () => {
-        try {
-            const response = await fetch("http://127.0.0.1:8000/api/", {
-                method: "POST",
-                body:JSON.stringify({status:"active"})
-            });
-
-            if (!response.ok) {
-                // Xử lý lỗi từ server
-                const errorData = await response.json();
-                throw new Error(errorData.message || "Lỗi khi lấy mays in");
-            }
-
-            const data = await response.json();
-           
-              
-              // Random một object từ mảng
-              const randomObject = data[Math.floor(Math.random() * data.length)];
-              
-              setStatusPrinter(randomObject.id);
-        } catch (error) {
-            // Lưu thông báo lỗi
-        }
-    };
+    
 
     // Gọi API khi component được render
     useEffect(() => {
         fetchBalance();
-        fetchPrinter()
+        
     }, []);
 
 

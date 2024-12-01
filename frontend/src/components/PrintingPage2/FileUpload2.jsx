@@ -9,7 +9,10 @@ const FileUpload2 = () => {
     const navigate=useNavigate()
     const location = useLocation();
     const accessToken = localStorage.getItem('access')
-    const { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile, fileName ,statusPrinter} = location.state || {}
+    const [balance, setBalance] = useState(0)
+    const [activePrinter, setActivePrinter] = useState([])
+    const [printerId, setPrinterId] = useState('')
+    const { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile, fileName } = location.state || {}
     const data={
         "file": idFile,
         "order_name": "order123",
@@ -17,10 +20,54 @@ const FileUpload2 = () => {
         "sided": optionPrint,
         "page_side": sizePaper,
         "copies": Number(printNumber),
-        "printer": `13`,
+        "printer": printerId,
         "page_cost": Number(numberPrint)
     }
-    console.log(printNumber)
+ 
+    const fetchBalance = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/users/balance/", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${accessToken}`, // Thêm token vào header nếu cần
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!response.ok) {
+                // Xử lý lỗi từ server
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Lỗi khi lấy số dư!");
+            }
+
+            const data = await response.json();
+            setBalance(data.balance); // Giả sử API trả về { balance: 1000 }
+        } catch (error) {
+            // Lưu thông báo lỗi
+        }
+    };
+    const fetchPrinter = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/printers/status_printers/", {
+                method: "POST",
+                body:JSON.stringify({status:"active"})
+            });
+
+            if (!response.ok) {
+                // Xử lý lỗi từ server
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Lỗi khi lấy mays in");
+            }
+
+            const data = await response.json();
+       
+              
+              // Random một object từ mảng
+             setActivePrinter(data)
+        } catch (error) {
+            // Lưu thông báo lỗi
+        }
+    };
     const handleConfirm = async () => {
         try {
             const response = await fetch('http://localhost:8000/api/prints/orders/', {
@@ -38,38 +85,32 @@ const FileUpload2 = () => {
 
             const result = await response.json();
             console.log('Success:', result); // Xử lý kết quả nếu cần
-            navigate('student_home')
+            navigate('/student/student_home',{ replace: true })
         } catch (error) {
             console.error('Error:', error); // Xử lý lỗi
         }
     };
     useEffect(() => {
         fetchBalance();
-        
+        fetchPrinter()
     }, []);
     return (
         <div className="FileUpload2Main">
             <div className="balance2">
-                <p>Số giấy: </p>
+                <p>Số giấy:{balance} </p>
             </div>
             <div className="MainContent">
                 <div className="config2Container">
-                    <div>
-                        <label htmlFor="">Tòa nhà</label>
-                        <select id="mySelect" >
-                            <option value="">-- Chọn --</option>
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
-                        </select>
-                    </div>
+                  
                     <div>
                         <label htmlFor="">Máy in</label>
-                        <select >
-                            <option value="">-- Chọn --</option>
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
+                        <select onChange={e=>setPrinterId(e.target.value)}>
+                            <option value="">Chọn</option>
+                        {activePrinter.map(e => (
+                                <option key={e.id} value={e.id}>
+                                    {e.location}
+                                </option>
+                            ))}
                         </select>
                     </div>
                 </div>
