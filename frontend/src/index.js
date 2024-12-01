@@ -10,6 +10,7 @@ import HomeStudent from './components/HomePage/HomeStudent/HomeStudent'
 import Blank from './components/Blank/Blank'
 import SendFeedback from './components/SendFeedback/SendFeedback'
 import PrintingHistory from './components/PrintingLog/PrintingHistory'
+import PrintingImple from './components/PrintingImple/PrintingImple'
 import BuyPrintingPaper from './components/BuyPaper/BuyPrintingPaper'
 import App from './App'
 // import Home from './components/HomePage/HomeStudent/Home';
@@ -29,6 +30,7 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword'
 import Login from './components/Login/Login'
 import Profile from './components/User/UserProfile'
 import HomeGuest from './components/HomePage/HomeGuest'
+import { ToastContainer } from 'react-toastify'
 
 const router = createBrowserRouter([
   {
@@ -113,10 +115,13 @@ const router = createBrowserRouter([
             path: 'printStatus',
             element: <PrintingStatus />,
           },
-
           {
             path: 'buy_printing_paper',
             element: <BuyPrintingPaper />,
+          },
+          {
+            path: 'printing_imple',
+            element: <PrintingImple />,
           },
         ],
       },
@@ -135,6 +140,7 @@ function Router() {
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
+    <ToastContainer />
     <Router />
   </React.StrictMode>,
 )

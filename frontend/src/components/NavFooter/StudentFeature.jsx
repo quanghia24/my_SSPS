@@ -2,38 +2,40 @@ import React, { useEffect, useState } from "react";
 import  axios  from "axios";
 import './StudentFeature.css';
 
-
-import { NavLink } from "react-router-dom";
-import "boxicons/css/boxicons.min.css";
+import { NavLink } from 'react-router-dom'
+import 'boxicons/css/boxicons.min.css'
 
 function Setting() {
-  const [balance,setBalance] = useState(0);
-  useEffect(()=>{
-   const fetchTokenBalance = async () => {
-    try {
-      const tokens ={
-        refresh: localStorage.getItem("refresh"),
-        access: localStorage.getItem("access")
+  const [balance, setBalance] = useState(0)
+  useEffect(() => {
+    const fetchTokenBalance = async () => {
+      try {
+        const tokens = {
+          refresh: localStorage.getItem('refresh'),
+          access: localStorage.getItem('access'),
+        }
+        const userResponse = await axios.get(
+          'http://127.0.0.1:8000//api/users/balance/',
+          {
+            headers: {
+              Authorization: `Bearer ${tokens.access}`,
+            },
+          },
+        )
+        setBalance(userResponse.data.balance)
+        console.log(userResponse.data.balance)
+      } catch (error) {
+        console.error('Error fetching data:', error)
       }
-      const userResponse = await axios.get('http://127.0.0.1:8000//api/users/balance/',{
-        headers:{
-          Authorization: `Bearer ${tokens.access}`,
-        },
-      });
-      setBalance(userResponse.data.balance);
-      console.log(userResponse.data.balance);
-    } catch (error) {
-      console.error('Error fetching data:', error);
     }
-   }
-   fetchTokenBalance(); 
-  },[])
+    fetchTokenBalance()
+  }, [])
+
   return (
     <div className="setting">
-    
       <div className="setting-block paperNo">
-        <p >Số trang in</p>
-       <p>{balance}</p> 
+        <p>Số trang in</p>
+        <p>{balance}</p>
       </div>
       <div className="setting-block logo AccountInfo">
         <NavLink to="/student/profile" className="setting-block-link">
@@ -48,9 +50,9 @@ function Setting() {
         </NavLink>
       </div>
     </div>
-  );
+  )
 }
-const username = localStorage.getItem('user_id')
+const username = localStorage.getItem('name')
 
 function StudentFeature() {
   const [showSetting, setShowSetting] = useState (false);

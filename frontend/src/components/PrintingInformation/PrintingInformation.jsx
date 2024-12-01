@@ -348,7 +348,7 @@ function PrintingInformation() {
                     {...register('active', { required: 'Active is required' })}
                   >
                     <option value="active">Active</option>
-                    <option value="inActive">inActive</option>
+                    <option value="inactive">inActive</option>
                   </select>
                   {errors.active && (
                     <p className="text-red-500 absolute lg:text-lg text-sm">
