@@ -28,6 +28,10 @@ const FileUpload = () => {
     const [orientation, setOrientation] = useState('')
     const [idFile, setIdFile] = useState('')
     
+    const handleDestructor =()=>{
+        window.location.reload();
+    }
+    
     function handleFileChange(event) {
         const file = event.target.files[0];
         setFile(file)
@@ -37,17 +41,15 @@ const FileUpload = () => {
         setFileName(prev => '')
     }
     function handleNext() {
-        console.log(printNumber)
-        console.log(sizePaper)
-        console.log(numberPrint)
-        console.log(optionPrint)
-        console.log(orientation)
-        console.log(idFile)
-        console.log(fileName)
-        
+        if(numberPrint>balance){
+            navigate("/student/buy_printing_paper",{ replace: true })
+        }
+        else{
+
+            navigate("printing_page2", { state: { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile,fileName } })
+        }
 
 
-        navigate("printing_page2", { state: { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile,fileName } })
 
     }
     const fetchBalance = async () => {
@@ -119,6 +121,9 @@ const FileUpload = () => {
             <div className='MainContain'>
                 <div className="balance">
                     <p>Số giấy: {balance}</p>
+                </div>
+                <div className="destructor">
+                    <button className="button-rs" onClick={handleDestructor}>Hủy</button>
                 </div>
                 <p>{uploadStatus}</p>
                 <div className='UploadContain'>
