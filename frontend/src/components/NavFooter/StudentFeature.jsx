@@ -72,7 +72,10 @@ useEffect(() => {
           Authorization: `Bearer ${tokens.access}`,
         },
       });
-      console.log(response.data); // Handle the response data as needed
+      console.log(response.data);
+       // Handle the response data as needed
+       localStorage.setItem('user_id',response.data.user_id);
+       console.log(localStorage.getItem('user_id'));
       setUsername(response.data.name);
     } catch (error) {
       console.error('Error fetching username:', error);
@@ -101,7 +104,7 @@ useEffect(() => {
             className="navbar-nav-ul-li-link navbar-nav-ul-li-link__admin"
           >
             <i className="bx bx-user-circle"></i>
-            <p>{username}</p>
+            {username}
           </NavLink>
         </li>
         <li className="navbar-nav-ul-li">

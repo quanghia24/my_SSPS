@@ -52,6 +52,10 @@ const FileUpload = () => {
 
 
     }
+    const handleCancel = () => {
+        navigate("/student/student_home");
+    }
+
     const fetchBalance = async () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/users/balance/", {
@@ -122,9 +126,9 @@ const FileUpload = () => {
                 <div className="balance">
                     <p>Số giấy: {balance}</p>
                 </div>
-                <div className="destructor">
+                {/* <div className="destructor">
                     <button className="button-rs" onClick={handleDestructor}>Hủy</button>
-                </div>
+                </div> */}
                 <p>{uploadStatus}</p>
                 <div className='UploadContain'>
                     <div className='fileUpload'>
@@ -214,7 +218,7 @@ const FileUpload = () => {
                     </div>
                     <button onClick={handleNext}>Tiếp theo</button>
                 </div>
-                <button className="button-rs">Hủy bỏ</button>
+                <button onClick={handleCancel} className="button-rs">Hủy bỏ</button>
             </div>
         </div>
     )
