@@ -45,7 +45,7 @@ function PrintingHistory() {
                     Authorization: `Bearer ${tokens.access}`,
             },
             body: {
-                user_id: localStorage.getItem('user_id')
+                "user_id": localStorage.getItem('user_id')
             }
             });
 
@@ -70,7 +70,7 @@ function PrintingHistory() {
                 <td className="my-sm-5 text-center">{info.id}</td>
                 
                 <td className="my-sm-5 text-center">{info.order_name}</td>
-                <td className="my-sm-5 text-center">{info.timer_start}</td>
+                <td className="my-sm-5 text-center">{info.timer_start.slice(0, 10)}</td>
                 <td className="my-sm-5 text-center">{info.page_side}</td>
                 <td className="my-sm-5 text-center">{info.printer}</td>
                 <td className="my-sm-5 text-center">{info.page_cost}</td>
