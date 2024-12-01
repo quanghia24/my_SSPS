@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import print_order, print_file
 from user.models import User
 from printer.models import Printer
+from django.views.decorators.csrf import csrf_exempt 
 from .serializers import PrintOrderSerializer, PrintFileSerializer
 from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets
@@ -11,6 +12,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
+from django.http import JsonResponse
+from rest_framework.parsers import JSONParser
 
 class PrintFileViewSet(viewsets.ModelViewSet):
     queryset = print_file.objects.all()
@@ -41,6 +44,39 @@ class PrintFileViewSet(viewsets.ModelViewSet):
     
 
 # Create your views here.
+@csrf_exempt
+def updatePrintOrder(request):
+    if request.method == "PATCH":  # Ensure the request is a PATCH method
+        try:
+            # Parse JSON data from the request body
+            data = JSONParser().parse(request)
+        except Exception as e:
+            return JsonResponse({'error': 'Invalid JSON data'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Extract `print_id` and `status` from the parsed data
+        print_id = data.get('print_id')
+        status_value = data.get('status')
+
+        # Validate input
+        if not print_id or not status_value:
+            return JsonResponse({'error': 'Both "print_id" and "status" are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # Fetch the print order object
+            print_order_instance = print_order.objects.get(id=print_id)
+        except print_order.DoesNotExist:
+            return JsonResponse({'error': 'Print order not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Update the status
+        print_order_instance.status = status_value
+        print_order_instance.save()
+
+        # Serialize and return the updated data
+        serializer = PrintOrderSerializer(print_order_instance)
+        return JsonResponse(serializer.data, status=status.HTTP_200_OK)
+
+    return JsonResponse({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
 class PrintOrderViewSet(viewsets.ModelViewSet):
     queryset = print_order.objects.all()
     serializer_class = PrintOrderSerializer
@@ -66,8 +102,6 @@ class PrintOrderViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(status=status)
 
         return queryset
-
-   
 
     def create(self, request, *args, **kwargs):
         user = User.objects.get(user_id=request.user.user_id)
@@ -102,6 +136,8 @@ class PrintOrderViewSet(viewsets.ModelViewSet):
         serializer.save(user=user, file=file)  # Save with user and file info
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
 
 
 # spso set status

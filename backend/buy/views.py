@@ -78,7 +78,7 @@ class PurchaseOrderViewSet(viewsets.ModelViewSet):
 
         # Update the user's balance and money spent (ensure these fields exist in your User model)
         if hasattr(user, "balance") and hasattr(user, "money_spent"):
-            user.balance -= total_cost  # Deduct from balance
+            user.balance += amount  # Deduct from balance
             user.money_spent += total_cost  # Add to money spent
             user.save()
 
