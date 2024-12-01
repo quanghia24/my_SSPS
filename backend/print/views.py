@@ -77,17 +77,35 @@ def updatePrintOrder(request):
 
     return JsonResponse({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+@csrf_exempt
+def get_my_prints(request):
+    if request.method == 'GET':
+        user = User.objects.get(user_id=request.user.user_id)
+        if not user:
+            return JsonResponse({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        print_orders = print_order.objects.filter(user=user)
+        serializer = PrintOrderSerializer(print_orders, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    
+    return JsonResponse({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
 class PrintOrderViewSet(viewsets.ModelViewSet):
     queryset = print_order.objects.all()
     serializer_class = PrintOrderSerializer
     permission_classes = [IsAuthenticated]  # Require authentication
 
     def get_queryset(self):
+        queryset = super().get_queryset()
+
+        user = self.request.user
+        if not user.is_staff:
+            queryset = queryset.filter(user=user)
+            return queryset
+        
         user_id = self.request.query_params.get('user_id')  # Use query_params for GET requests
         print_id = self.request.query_params.get('print_id')
         status = self.request.query_params.get('status')
 
-        queryset = super().get_queryset()
 
         # Filter by user ID
         if user_id:

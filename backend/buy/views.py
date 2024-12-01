@@ -30,27 +30,25 @@ class PaperPriceViewSet(viewsets.ModelViewSet):
     serializer_class = PaperPriceSerializer
     permission_classes = [IsAdminUser]
 # Create your views here.
+
+
 class PurchaseOrderViewSet(viewsets.ModelViewSet):
+    
     queryset = PurchaseOrder.objects.all()
     serializer_class = PurchaseOrderSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        user = self.request.user
 
-    def get(self, request, *args, **kwargs):
-        try:
-            user = User.objects.get(email=request.user.email)
-        except User.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        
+        # Staff users can view all purchase orders
         if user.is_staff:
-            queryset = PurchaseOrder.objects.all()
-            serializer = self.serializer_class(queryset, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return super().get_queryset()
 
-        else:
-            queryset = PurchaseOrder.objects.filter(user=user)
-            serializer = self.serializer_class(queryset, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+        # Regular users can only view their own purchase orders
+        return super().get_queryset().filter(user=user)
+
+
 
     def create(self, request, *args, **kwargs):  # DRF uses `create` instead of `post` in `ModelViewSet`
         user = request.user  # Get the user from the authenticated request
