@@ -84,10 +84,6 @@ const router = createBrowserRouter([
             element: <PrintingPage2 />,
           },
           {
-            path: 'file_upload',
-            element: <FileUpload/>,
-          },
-          {
             path: 'profile',
             element: <Profile />,
           },

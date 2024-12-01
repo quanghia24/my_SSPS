@@ -9,13 +9,14 @@ const FileUpload2 = () => {
     const navigate=useNavigate()
     const location = useLocation();
     const accessToken = localStorage.getItem('access')
+    const [orderName, setOrderName] = useState('')
     const [balance, setBalance] = useState(0)
     const [activePrinter, setActivePrinter] = useState([])
     const [printerId, setPrinterId] = useState('')
     const { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile, fileName } = location.state || {}
     const data={
         "file": idFile,
-        "order_name": "order123",
+        "order_name": orderName,
         "orientation": orientation,
         "sided": optionPrint,
         "page_side": sizePaper,
@@ -85,6 +86,7 @@ const FileUpload2 = () => {
 
             const result = await response.json();
             console.log('Success:', result); // Xử lý kết quả nếu cần
+            alert("đơn gửi thành công")
             navigate('/student/student_home',{ replace: true })
         } catch (error) {
             console.error('Error:', error); // Xử lý lỗi
@@ -104,7 +106,10 @@ const FileUpload2 = () => {
             </div>
             <div className="MainContent">
                 <div className="config2Container">
-                  
+                  <div className="orderName">
+                    <label htmlFor="">Nhập tên cho đơn in</label><br />
+                    <input type="text" value={orderName} onChange={e=>{setOrderName(e.target.value)}}/>
+                  </div>
                     <div>
                         <label htmlFor="">Máy in</label>
                         <select onChange={e=>setPrinterId(e.target.value)}>

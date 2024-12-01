@@ -105,10 +105,10 @@ const FileUpload = () => {
             if (response.ok) {
                 const data = await response.json();
                 setIdFile(data.id)
-                setUploadStatus(`Upload thành công: ${JSON.stringify(data)}`);
+                setUploadStatus(`Upload thành công`);
             } else {
                 const errorData = await response.json();
-                setUploadStatus(`Upload thất bại: ${errorData.message || "Lỗi không xác định."}`);
+                setUploadStatus(`Upload thất bại|| "Lỗi không xác định."}`);
             }
         } catch (error) {
             setUploadStatus(`Lỗi: ${error.message}`);

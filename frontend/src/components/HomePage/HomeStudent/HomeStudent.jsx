@@ -19,7 +19,7 @@ const HomeStudent = () => {
     navigate ('/student/printing_history');
   }
   const handleFileUpload = () => {
-    navigate ('/student/file_upload');
+    navigate ('/student/printing_page');
   }
   return (
   <div className="">
