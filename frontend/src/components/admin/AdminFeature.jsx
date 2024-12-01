@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import './StudentFeature.css'
+import './AdminFeature.css'
 
 import { NavLink, useNavigate } from 'react-router-dom'
 import 'boxicons/css/boxicons.min.css'
@@ -30,16 +30,12 @@ function Setting() {
 
   return (
     <div className="setting">
-      <div className="setting-block paperNo">
-        <p>Số trang in</p>
-        <p>{balance}</p>
-      </div>
-      <div className="setting-block logo AccountInfo">
-        <NavLink to="/student/profile" className="setting-block-link">
+      {/* <div className="setting-block logo AccountInfo">
+        <NavLink to="/admin_home" className="setting-block-link">
           <i className="bx bx-user"></i>
           <p>Thông tin tài khoản</p>
         </NavLink>
-      </div>
+      </div> */}
       <div className="setting-block logo logOut">
         <button onClick={() => logout()} className="setting-block-link">
           <i className="bx bx-log-out"></i>
@@ -50,7 +46,7 @@ function Setting() {
   )
 }
 
-function StudentFeature() {
+function AdminFeature() {
   const [showSetting, setShowSetting] = useState(false)
 
   const handleShowSetting = () => {
@@ -87,22 +83,22 @@ function StudentFeature() {
     <nav className="navbar-nav">
       <ul className="navbar-nav-ul">
         <li className="navbar-nav-ul-li">
-          <NavLink to="/student/profile" className="navbar-nav-ul-li-link">
+          <NavLink to="/admin_home" className="navbar-nav-ul-li-link">
             <i className="bx bx-message-rounded"></i>
           </NavLink>
         </li>
         <li className="navbar-nav-ul-li">
-          <NavLink to="/student/profile" className="navbar-nav-ul-li-link">
+          <NavLink to="/admin_home" className="navbar-nav-ul-li-link">
             <i className="bx bx-bell"></i>
           </NavLink>
         </li>
         <li className="navbar-nav-ul-li">
           <NavLink
-            to="/student/profile"
+            to="/admin_home"
             className="navbar-nav-ul-li-link navbar-nav-ul-li-link__admin"
           >
             <i className="bx bx-user-circle"></i>
-            {username}
+            <p>{username}</p>
           </NavLink>
         </li>
         <li className="navbar-nav-ul-li">
@@ -116,4 +112,4 @@ function StudentFeature() {
   )
 }
 
-export default StudentFeature
+export default AdminFeature

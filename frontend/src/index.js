@@ -10,6 +10,7 @@ import HomeStudent from './components/HomePage/HomeStudent/HomeStudent'
 import Blank from './components/Blank/Blank'
 import SendFeedback from './components/SendFeedback/SendFeedback'
 import PrintingHistory from './components/PrintingLog/PrintingHistory'
+import PrintingImple from './components/PrintingImple/PrintingImple'
 import BuyPrintingPaper from './components/BuyPaper/BuyPrintingPaper'
 import App from './App'
 import PrintingPage from './components/PrintingPage/FileUpload'
@@ -45,6 +46,8 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword'
 import Login from './components/Login/Login'
 import Profile from './components/User/UserProfile'
 import HomeGuest from './components/HomePage/HomeGuest'
+import { ToastContainer } from 'react-toastify'
+
 import AdminFeedback from './components/admin/AdminFeedback/AdminFeedback'
 import FileUpload from './components/PrintingPage/FileUpload'
 const router = createBrowserRouter([
@@ -78,16 +81,27 @@ const router = createBrowserRouter([
           },
           {
             path: 'file_upload',
+<<<<<<< HEAD
+=======
             element: <FileUpload/>
           },
           {
             path: 'printing_page',
+>>>>>>> 4cc97aeaeab3ffdf0368e3fc9d03720a25346721
             element: <PrintingPage />,
-          },{
-            path: 'printing_page/printing_page2',
-            element: <PrintingPage2 />,
           },
           {
+<<<<<<< HEAD
+            path: 'file_upload/printing_page2',
+            element: <PrintingPage2 />,
+          },
+          // {
+          //   path: 'file_upload',
+          //   element: <FileUpload />,
+          // },
+          {
+=======
+>>>>>>> 4cc97aeaeab3ffdf0368e3fc9d03720a25346721
             path: 'profile',
             element: <Profile />,
           },
@@ -141,66 +155,70 @@ const router = createBrowserRouter([
             path: 'printStatus',
             element: <PrintingStatus />,
           },
-
           {
             path: 'buy_printing_paper',
             element: <BuyPrintingPaper />,
           },
           {
+            path: 'printing_imple',
+            element: <PrintingImple />,
+          },
+          {
             path: '',
-            element: <Report />
+            element: <Report />,
           },
           {
             path: 'report1',
-            element: <Report1 />
+            element: <Report1 />,
           },
           {
             path: 'report2',
-            element: <Report2 />
-          }, 
+            element: <Report2 />,
+          },
           {
             path: 'report3',
-            element: <Report3 />
+            element: <Report3 />,
           },
           {
             path: 'report4',
-            element:<Report4/>
+            element: <Report4 />,
           },
           {
             path: 'report5',
-            element:<Report5/>
+            element: <Report5 />,
           },
           {
             path: 'report6',
-            element:<Report6/>
+            element: <Report6 />,
           },
           {
             path: 'report7',
-            element:<Report7/>
-          }, {
+            element: <Report7 />,
+          },
+          {
             path: 'report8',
-            element:<Report8/>
-          }, {
+            element: <Report8 />,
+          },
+          {
             path: 'report9',
-            element:<Report9/>
+            element: <Report9 />,
           },
           {
             path: 'report10',
-            element:<Report10/>
+            element: <Report10 />,
           },
           {
             path: 'report11',
-            element:<Report11/>
+            element: <Report11 />,
           },
           {
             path: 'report12',
-            element:<Report12/>
+            element: <Report12 />,
           },
           {
-            path:'list_feedback',
-            element: <AdminFeedback/>
-
-          }
+            path: 'list_feedback',
+            element: <AdminFeedback />,
+          },
         ],
       },
     ],
@@ -218,6 +236,7 @@ function Router() {
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
+    <ToastContainer />
     <Router />
   </React.StrictMode>,
 )

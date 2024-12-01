@@ -1,8 +1,9 @@
-// src/components/Navbar.jsx
-import { Link, NavLink } from 'react-router-dom';
-import React from 'react';
-import './Header.css';
-import LogoBK from '../../assets/logoBK.png';
+import { Link } from 'react-router-dom'
+import React from 'react'
+import '../NavFooter/NavBar.css'
+import LogoBK from '../../assets/logoBK.png'
+import StudentFeature from '../NavFooter/StudentFeature'
+import AdminFeature from './AdminFeature'
 
 function Header() {
   return (
@@ -13,12 +14,9 @@ function Header() {
           <div className="navbar-logo">SSPS</div>
         </div>
       </Link>
-      <NavLink to="/" className="setting-block-link1">
-          <i className="bx bx-log-out"></i>
-          <p>Đăng xuất</p>
-        </NavLink>
+      <AdminFeature />
     </nav>
-  );
+  )
 }
 
-export default Header;
+export default Header
