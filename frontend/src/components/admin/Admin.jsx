@@ -4,6 +4,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import './Admin.css'; // Sử dụng file CSS để tùy chỉnh giao diện
 import LeftSideBar from '../Leftsidebar/LeftSideBar';
+import Footer from '../NavFooter/Footer';
 
 function MainComponent() {
     return (
@@ -17,6 +18,7 @@ function MainComponent() {
                     <Outlet />
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

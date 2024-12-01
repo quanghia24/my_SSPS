@@ -9,54 +9,67 @@ import FilterForm from './FilterForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MyTable() {
-    // State management
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     const [documents, setDocuments] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
 
-    // Pagination calculations
+    const fetchPrintingHistory = async () => {
+        setLoading(true);
+        try {
+            const tokens = {
+                refresh: localStorage.getItem('refresh'),
+                access: localStorage.getItem('access'),
+            };
+
+            const response = await axios.get('http://localhost:8000/api/prints/orders/', {
+                headers: {
+                    Authorization: `Bearer ${tokens.access}`,
+                },
+            });
+
+            setDocuments(response.data);
+        } catch (error) {
+            console.error('Error fetching printing history:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchPrintingHistory();
+    }, []);
+
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = documents.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(documents.length / itemsPerPage);
 
-    // Modal handlers
     const handleShowFilter = () => setShowFilter(true);
     const handleCloseFilter = () => setShowFilter(false);
 
-    // Fetch data from API
-    useEffect(() => {
-        const fetchPrintingHistory = async () => {
-            setLoading(true);
-            try {
-                const tokens = {
-                    refresh: localStorage.getItem('refresh'),
-                    access: localStorage.getItem('access'),
-                };
-
-                const response = await axios.get('http://localhost:8000/api/prints/orders/', {
-                    headers: {
-                        Authorization: `Bearer ${tokens.access}`,
-                    },
-                });
-
-                setDocuments(response.data);
-            } catch (error) {
-                console.error('Error fetching printing history:', error);
-            } finally {
-                setLoading(false);
-            }
+    const handleClickStatus = (info) => {
+        const UpdateContent = {
+            print_id: info.id,
+            status: "success",
         };
+        const url = 'http://127.0.0.1:8000/api/prints/update/';
 
-        fetchPrintingHistory();
-    }, []);
+        axios.patch(url, UpdateContent)
+            .then(() => {
+                console.log("Status updated successfully");
+                setDocuments((prevDocuments) =>
+                    prevDocuments.map((doc) =>
+                        doc.id === info.id ? { ...doc, status: "success" } : doc
+                    )
+                );
+            })
+            .catch((error) => {
+                console.error("Error updating status:", error);
+            });
+    };
 
-
-
-
-    // Pagination items rendering
     const paginationItems = Array.from({ length: totalPages }, (_, index) => (
         <Pagination.Item
             key={index + 1}
@@ -66,12 +79,7 @@ function MyTable() {
             {index + 1}
         </Pagination.Item>
     ));
-    const handleClickStatus = () => {
-        console.log('Handle click status');
-        
 
-    }
-    // Data rendering for the table
     const DisplayData = currentItems.map((info) => (
         <tr key={info.id}>
             <td className="text-center">{info.id}</td>
@@ -82,7 +90,7 @@ function MyTable() {
             <td className="text-center">{info.page_side}</td>
             <td className="text-center">{info.page_cost}</td>
             <td className="text-center">
-                <Button variant="primary" onClick={handleClickStatus}>
+                <Button variant="primary" onClick={() => handleClickStatus(info)}>
                     <i className="bi bi-check"></i>
                 </Button>
             </td>
@@ -91,21 +99,18 @@ function MyTable() {
 
     return (
         <div>
-            {/* Header */}
             <div style={{ margin: '-3.5vh', marginLeft: '-9vh' }}>
                 <div className='text-4xl font-semibold shadow-xl rounded-br-lg p-3 border border-black w-fit'>
                     Lịch sử in
                 </div>
             </div>
 
-            {/* Filter button */}
             <div className="d-flex align-items-center justify-content-end" style={{ width: '175vh' }}>
                 <Button variant="info" onClick={handleShowFilter}>
                     <i className="bi bi-funnel"></i> Lọc kết quả
                 </Button>
             </div>
 
-            {/* Table and Loading Spinner */}
             <div className="d-flex flex-column justify-content-center align-items-center p-2" style={{ height: '50vh', width: '175vh', marginTop: '14vh' }}>
                 {loading ? (
                     <div className="d-flex justify-content-center align-items-center" style={{ height: '100%' }}>
@@ -144,7 +149,6 @@ function MyTable() {
                 )}
             </div>
 
-            {/* Filter Modal */}
             <Modal show={showFilter} onHide={handleCloseFilter} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Lọc kết quả</Modal.Title>
