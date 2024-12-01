@@ -205,6 +205,26 @@ function LeftSideBar() {
               </span>
             </div>
           </NavLink>
+
+          <NavLink
+            to="/admin_home/printing_imple"
+            end
+            className={({ isActive }) => {
+              const active = isActive
+                ? 'bg-blue-500 text-white'
+                : 'bg-white text-black'
+              return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
+            }}
+          >
+            <div className="flex items-center">
+              <div className="w-7 h-7 mr-3">
+                <IoWalletOutline className="w-full h-full" />
+              </div>
+              <span className="font-semibold no-underline text-2xl">
+                Thiết lập
+              </span>
+            </div>
+          </NavLink>
         </div>
       </div>
     </div>

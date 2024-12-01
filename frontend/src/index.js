@@ -80,17 +80,17 @@ const router = createBrowserRouter([
             element: <HomeStudent />,
           },
           {
-            path: 'printing_page',
+            path: 'file_upload',
             element: <PrintingPage />,
           },
           {
-            path: 'printing_page/printing_page2',
+            path: 'file_upload/printing_page2',
             element: <PrintingPage2 />,
           },
-          {
-            path: 'file_upload',
-            element: <FileUpload />,
-          },
+          // {
+          //   path: 'file_upload',
+          //   element: <FileUpload />,
+          // },
           {
             path: 'profile',
             element: <Profile />,
