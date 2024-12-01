@@ -99,7 +99,7 @@ const Profile = () => {
                     <ul className="list-group list-group-flush">
                       {paperLog
                         .sort((a, b) => new Date(b.purchase_time) - new Date(a.purchase_time)) // Sort in descending order by purchase_time
-                        .slice(0, 4) // Take the 4 most recent logs
+                        .slice(0, 3) // Take the 4 most recent logs
                         .map((log) => (
                         <li className="list-group-item d-flex justify-content-between align-items-center p-3">
                           {/* <i className="fas fa-globe fa-lg text-warning"></i> */}
@@ -191,7 +191,7 @@ const Profile = () => {
                         <ul className="list-group list-group-flush">
                       {orderLog
                         .sort((a, b) => new Date(b.timer_start) - new Date(a.timer_start)) // Sort in descending order by purchase_time
-                        .slice(0, 4) // Take the 4 most recent logs
+                        .slice(0, 3) // Take the 4 most recent logs
                         .map((log) => (
                         <li className="list-group-item d-flex justify-content-between align-items-center p-3">
                           <div>

@@ -87,7 +87,7 @@ const FileUpload2 = () => {
             const result = await response.json();
             console.log('Success:', result); // Xử lý kết quả nếu cần
             alert("đơn gửi thành công")
-            navigate('/student/student_home',{ replace: true })
+            navigate('/student/printing_history',{ replace: true })
         } catch (error) {
             console.error('Error:', error); // Xử lý lỗi
         }

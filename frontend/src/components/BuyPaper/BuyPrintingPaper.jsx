@@ -3,10 +3,11 @@ import "./BuyPrintingPaper.css";
 import Navbar from "../NavFooter/NavBar";
 import Footer from "../NavFooter/Footer";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 function BuyPrintingPaperBody() {
+  const navigate = useNavigate();
   const [paperNo, setPaperNo] = useState(0);
-  const [price, setPrice] = useState(1);
+  const [price, setPrice] = useState(-1);
   const [isSending, setIsSending] = useState(false);  // New state for tracking sending status
 
   const handleChange = (event) => {
@@ -47,6 +48,7 @@ function BuyPrintingPaperBody() {
     })
     .then((res) => {
       alert('Yêu cầu của bạn đã được gửi. Cảm ơn!');
+      // navigate('/student/profile',{ replace: true });
     })
     .catch((error) => {
       console.error('Error sending:', error);
