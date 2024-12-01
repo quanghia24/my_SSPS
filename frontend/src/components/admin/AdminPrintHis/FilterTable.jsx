@@ -84,7 +84,7 @@ function MyTable() {
         <tr key={info.id}>
             <td className="text-center">{info.id}</td>
             <td className="text-center">{info.order_name}</td>
-            <td className="text-center">{info.timer_start}</td>
+            <td className="text-center">{info.timer_start.slice(0, 10)}</td>
             <td className="text-center">{info.printer}</td>
             <td className="text-center">{info.status}</td>
             <td className="text-center">{info.page_side}</td>
