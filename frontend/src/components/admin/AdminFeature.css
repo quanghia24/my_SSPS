@@ -1,0 +1,127 @@
+.navbar-nav {
+    
+  position: absolute;
+  display: grid;
+  right: 3em;
+  top: 1.5em;
+  width: auto;
+  background-color: rgba(235, 244, 255, 1);
+  border-radius: 8px;
+}
+
+.navbar-nav-ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.navbar-nav-ul-li {
+  margin: 0.6em 0.6em;
+}
+
+.navbar-nav-ul-li-link {
+  color: black;
+}
+
+.navbar-nav-ul-li-link__admin {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(-0.2em);
+}
+
+.navbar-nav-ul-li-link__admin p {
+  margin-left: 0.3em;
+  font-size: 2.5vh;
+  font-weight: 500;
+  transform: translateY(0.5em);
+}
+
+.navbar-nav-ul-li-link__admin i:hover {
+  color: rgba(79, 156, 249, 1);
+}
+
+.bx-cog:hover {
+  color: rgba(79, 156, 249, 1);
+}
+
+.navbar-nav-ul-li-link i {
+  font-size: 250%;
+}
+
+/*setting*/
+.setting {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: left;
+  transform: translate(-3em, 3em);
+  border: 2px solid rgba(0, 0, 0, 0.436);
+  border-radius: 10px;
+  position: absolute;
+  right: -3em;
+  top: 1.2em;
+  z-index: 1;
+  background-color: rgba(235, 244, 255, 1);
+}
+
+.setting ::selection {
+  background: transparent;
+  color: inherit;
+}
+
+.setting-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid rgba(0, 0, 0, 0.436);
+  height: 5vh;
+  width: 18vw;
+
+}
+
+.setting-block-navBar {
+  border-top: none;
+  height: 8vh;
+  color: black;
+}
+
+.setting-block-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1em;
+  text-decoration: none;
+}
+
+.setting-block p {
+  margin: 0;
+  padding: 0 1em;
+}
+
+.setting-block-link p {
+  padding-left: 0.5em;
+  margin: 0;
+  color: black;
+}
+p{
+  color: black;
+}
+.setting-block-link i {
+  font-size: 4vh;
+}
+
+.logOut .setting-block-link {
+  color: red;
+}
+
+.AccountInfo .setting-block-link {
+  color: black;
+}

@@ -2,15 +2,14 @@ import React from 'react'
 
 
 import FilterTable from './FilterTable';
-const AdminPrintHis = () => {
+const AdminFeedback = () => {
   return (
     <div>
-    <div style={{scale:'0.9', width: '80%'}}>
-      <FilterTable/>
-    </div>
-   
+      <div style={{ scale: '0.9', width: '80%' }}>
+        <FilterTable />
+      </div>
     </div>
   )
 }
 
-export default AdminPrintHis
+export default AdminFeedback
