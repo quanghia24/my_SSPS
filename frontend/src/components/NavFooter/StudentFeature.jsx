@@ -102,7 +102,7 @@ function StudentFeature() {
             className="navbar-nav-ul-li-link navbar-nav-ul-li-link__admin"
           >
             <i className="bx bx-user-circle"></i>
-            <p>{username}</p>
+            {username}
           </NavLink>
         </li>
         <li className="navbar-nav-ul-li">

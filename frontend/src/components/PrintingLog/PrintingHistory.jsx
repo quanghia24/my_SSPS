@@ -11,7 +11,7 @@ import axios from 'axios';
 function PrintingHistory() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
-    const [document,setDocument]=useState(Contentjson);
+    const [document,setDocument]=useState([]);
     // Calculate the indices of the first and last items on the current page
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -32,32 +32,48 @@ function PrintingHistory() {
         );
     }
 
-    // useEffect(()=>{
-    //     const fetchPrintingHistory = async () =>{
-    //         try{
-    //         const response = await axios.get('http://localhost:8000/api/printing-history/');//havent check
+    useEffect(()=>{
+        const fetchPrintingHistory = async () =>{
+            console.log(localStorage.getItem('access'));
+            try{
+                const tokens = {
+                    refresh: localStorage.getItem('refresh'),
+                    access: localStorage.getItem('access'),
+                };
+            const response = await axios.get('http://localhost:8000/api/prints/orders/',{
+                headers:{
+                    Authorization: `Bearer ${tokens.access}`,
+            },
+            body: {
+                user_id: localStorage.getItem('user_id')
+            }
+            });
 
-    //         //need user.id
-    //         setDocument(response.data);
-    //         }catch(err){
-    //             console.log(err);
-    //             alert('Failed to fetch data');
-    //         };
-    //         fetchPrintingHistory(); 
-    //     }
-    // },[]);
+            
+            
+            //need user.id
+            setDocument(response.data);
+            console.log("hello",response.data);
+            }catch(err){
+                console.log(err);
+                alert('Failed to fetch data');
+            };
+            
+        }
+        fetchPrintingHistory(); 
+    },[]);
 
     const DisplayData = currentItems.map((info) => {
         return (
             
             <tr key={info.id}>
                 <td className="my-sm-5 text-center">{info.id}</td>
-                <td className="my-sm-5 text-center">{info.studentName}</td>
-                <td className="my-sm-5 text-center">{info.printingID}</td>
-                <td className="my-sm-5 text-center">{info.printingTime}</td>
-                <td className="my-sm-5 text-center">{info.fileName}</td>
-                <td className="my-sm-5 text-center">{info.numberPage}</td>
-                <td className="my-sm-5 text-center">{info.paperSize}</td>
+                
+                <td className="my-sm-5 text-center">{info.order_name}</td>
+                <td className="my-sm-5 text-center">{info.timer_start}</td>
+                <td className="my-sm-5 text-center">{info.page_side}</td>
+                <td className="my-sm-5 text-center">{info.printer}</td>
+                <td className="my-sm-5 text-center">{info.page_cost}</td>
             </tr>
         );
     });
@@ -74,12 +90,12 @@ function PrintingHistory() {
                     <thead>
                         <tr>
                             <th className="my-sm-5 text-center table-title">STT</th>
-                            <th className="my-sm-5 text-center table-title">Tên sinh viên</th>
-                            <th className="my-sm-5 text-center table-title">Mã máy in</th>
+                            
+                            <th className="my-sm-5 text-center table-title">Mã đơn hàng</th>
                             <th className="my-sm-5 text-center table-title">Thời gian in</th>
-                            <th className="my-sm-5 text-center table-title">Tên file</th>
-                            <th className="my-sm-5 text-center table-title">Số trang</th>
                             <th className="my-sm-5 text-center table-title">Size</th>
+                            <th className="my-sm-5 text-center table-title">Máy in</th>
+                            <th className="my-sm-5 text-center table-title">Số trang</th>
                         </tr>
                     </thead>
                     <tbody>

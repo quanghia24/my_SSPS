@@ -52,6 +52,10 @@ const FileUpload = () => {
 
 
     }
+    const handleCancel = () => {
+        navigate("/student/student_home");
+    }
+
     const fetchBalance = async () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/users/balance/", {
@@ -105,10 +109,10 @@ const FileUpload = () => {
             if (response.ok) {
                 const data = await response.json();
                 setIdFile(data.id)
-                setUploadStatus(`Upload thành công: ${JSON.stringify(data)}`);
+                setUploadStatus(`Upload thành công`);
             } else {
                 const errorData = await response.json();
-                setUploadStatus(`Upload thất bại: ${errorData.message || "Lỗi không xác định."}`);
+                setUploadStatus(`Upload thất bại|| "Lỗi không xác định."}`);
             }
         } catch (error) {
             setUploadStatus(`Lỗi: ${error.message}`);
@@ -122,9 +126,9 @@ const FileUpload = () => {
                 <div className="balance">
                     <p>Số giấy: {balance}</p>
                 </div>
-                <div className="destructor">
+                {/* <div className="destructor">
                     <button className="button-rs" onClick={handleDestructor}>Hủy</button>
-                </div>
+                </div> */}
                 <p>{uploadStatus}</p>
                 <div className='UploadContain'>
                     <div className='fileUpload'>
@@ -214,7 +218,7 @@ const FileUpload = () => {
                     </div>
                     <button onClick={handleNext}>Tiếp theo</button>
                 </div>
-                <button className="button-rs">Hủy bỏ</button>
+                <button onClick={handleCancel} className="button-rs">Hủy bỏ</button>
             </div>
         </div>
     )
