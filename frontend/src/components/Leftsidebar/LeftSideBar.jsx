@@ -39,7 +39,7 @@ function LeftSideBar() {
             className={({ isActive }) => {
               const active = isActive
                 ? 'bg-blue-500 text-white'
-                : 'bg-white text-black'
+                : 'bg-rgba(235, 244, 255, 1) text-black'
               return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
             }}
           >
@@ -58,7 +58,7 @@ function LeftSideBar() {
             className={({ isActive }) => {
               const active = isActive
                 ? 'bg-blue-500 text-white'
-                : 'bg-white text-black'
+                : 'bg-rgba(235, 244, 255, 1) text-black'
               return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
             }}
           >
@@ -81,7 +81,7 @@ function LeftSideBar() {
                 className={({ isActive }) => {
                   const active = isActive
                     ? 'bg-blue-300 text-black'
-                    : 'bg-white text-black'
+                    : 'bg-rgba(235, 244, 255, 1) text-black'
                   return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
                 }}
               >
@@ -99,7 +99,7 @@ function LeftSideBar() {
                 className={({ isActive }) => {
                   const active = isActive
                     ? 'bg-blue-300 text-black'
-                    : 'bg-white text-black'
+                    : 'bg-rgba(235, 244, 255, 1) text-black'
                   return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
                 }}
               >
@@ -132,7 +132,7 @@ function LeftSideBar() {
             className={({ isActive }) => {
               const active = isActive
                 ? 'bg-blue-500 text-white'
-                : 'bg-white text-black'
+                : 'bg-rgba(235, 244, 255, 1) text-black'
               return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
             }}
           >
@@ -141,7 +141,7 @@ function LeftSideBar() {
                 <IoDocumentTextOutline className="w-full h-full" />
               </div>
               <span className="font-semibold no-underline text-2xl">
-                Báo cáo
+                Phản hồi
               </span>
             </div>
           </NavLink>
@@ -152,7 +152,7 @@ function LeftSideBar() {
             className={({ isActive }) => {
               const active = isActive
                 ? 'bg-blue-500 text-white'
-                : 'bg-white text-black'
+                : 'bg-rgba(235, 244, 255, 1) text-black'
               return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
             }}
           >
@@ -172,7 +172,7 @@ function LeftSideBar() {
             className={({ isActive }) => {
               const active = isActive
                 ? 'bg-blue-500 text-white'
-                : 'bg-white text-black'
+                : 'bg-rgba(235, 244, 255, 1) text-black'
               return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
             }}
           >
@@ -192,7 +192,7 @@ function LeftSideBar() {
             className={({ isActive }) => {
               const active = isActive
                 ? 'bg-blue-500 text-white'
-                : 'bg-white text-black'
+                : 'bg-rgba(235, 244, 255, 1) text-black'
               return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
             }}
           >
@@ -202,26 +202,6 @@ function LeftSideBar() {
               </div>
               <span className="font-semibold no-underline text-2xl">
                 Người dùng
-              </span>
-            </div>
-          </NavLink>
-
-          <NavLink
-            to="/admin_home/printing_imple"
-            end
-            className={({ isActive }) => {
-              const active = isActive
-                ? 'bg-blue-500 text-white'
-                : 'bg-white text-black'
-              return `${active} w-full no-underline px-3 py-3 border-b border-black flex justify-between items-center`
-            }}
-          >
-            <div className="flex items-center">
-              <div className="w-7 h-7 mr-3">
-                <IoWalletOutline className="w-full h-full" />
-              </div>
-              <span className="font-semibold no-underline text-2xl">
-                Thiết lập
               </span>
             </div>
           </NavLink>

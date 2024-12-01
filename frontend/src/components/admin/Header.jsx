@@ -14,10 +14,7 @@ function Header() {
           <div className="navbar-logo">SSPS</div>
         </div>
       </Link>
-      <NavLink to="/" className="setting-block-link">
-        <i className="bx bx-log-out"></i>
-        <p>Đăng xuất</p>
-      </NavLink>
+      <AdminFeature />
     </nav>
   )
 }
