@@ -121,7 +121,7 @@ useEffect(() => {
   };
 
   fetchTokensAndData();
-}, []);
+}, [documentsList]);
 
 // useEffect(()=>{
 //   const fetchUser = async () => {

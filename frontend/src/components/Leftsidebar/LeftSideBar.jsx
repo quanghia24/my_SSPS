@@ -1,22 +1,30 @@
-import { NavLink } from "react-router-dom";
-import { IoDocumentTextOutline, IoHomeOutline, IoInformationCircleOutline, IoPersonOutline, IoSettingsOutline, IoTimeOutline, IoWalletOutline } from "react-icons/io5";
-import { IoPrintOutline } from "react-icons/io5";
+import { NavLink } from 'react-router-dom'
+import {
+  IoDocumentTextOutline,
+  IoHomeOutline,
+  IoInformationCircleOutline,
+  IoPersonOutline,
+  IoSettingsOutline,
+  IoTimeOutline,
+  IoWalletOutline,
+} from 'react-icons/io5'
+import { IoPrintOutline } from 'react-icons/io5'
 import { useState } from 'react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 
 function LeftSideBar() {
   const [expand, setExpand] = useState(() => {
-    const savedExpand = localStorage.getItem('expand');
-    return savedExpand === 'true'; 
-  });
-  
+    const savedExpand = localStorage.getItem('expand')
+    return savedExpand === 'true'
+  })
+
   const toggle = () => {
     setExpand((prevExpand) => {
-      const newExpand = !prevExpand;
-      localStorage.setItem('expand', newExpand); 
-      return newExpand;
-    });
-  };
+      const newExpand = !prevExpand
+      localStorage.setItem('expand', newExpand)
+      return newExpand
+    })
+  }
 
   return (
     <div>
@@ -116,7 +124,7 @@ function LeftSideBar() {
           </NavLink> */}
 
           <NavLink
-            to="/"
+            to="/admin_home/list_feedback"
             end
             className={({ isActive }) => {
               const active = isActive

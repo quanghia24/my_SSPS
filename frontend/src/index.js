@@ -13,6 +13,9 @@ import PrintingHistory from './components/PrintingLog/PrintingHistory'
 import PrintingImple from './components/PrintingImple/PrintingImple'
 import BuyPrintingPaper from './components/BuyPaper/BuyPrintingPaper'
 import App from './App'
+import PrintingPage from './components/PrintingPage/FileUpload'
+import PrintingPage2 from './components/PrintingPage2/FileUpload2'
+
 // import Home from './components/HomePage/HomeStudent/Home';
 import Admin from '../src/components/admin/Admin'
 import AdminPrintHis from './components/admin/AdminPrintHis/AdminPrintHis'
@@ -23,6 +26,19 @@ import UpdateUser from './components/admin/AdminUser/UpdateUser'
 import AdminSPSO from '../src/components/admin/AdminSPSO/admin_home'
 import PrintingInformation from '../src/components/PrintingInformation/PrintingInformation'
 import PrintingStatus from '../src/components/PrintingStatus/PrintingStatus'
+import Report from './components/Statistical/Statistical'
+import Report1 from './components/StatisticalDetail/StatisticalDetail'
+import Report2 from './components/StatisticalDetail/StatisticalDetail2'
+import Report3 from './components/StatisticalDetail/StatisticalDetail3'
+import Report4 from './components/StatisticalDetail/StatisticalDetail4'
+import Report5 from './components/StatisticalDetail/StatisticalDetail5'
+import Report6 from './components/StatisticalDetail/StatisticalDetail6'
+import Report7 from './components/StatisticalDetail/StatisticalDetail7'
+import Report8 from './components/StatisticalDetail/StatisticalDetali8'
+import Report9 from './components/StatisticalDetail/StatisticalDetail9'
+import Report10 from './components/StatisticalDetail/StatisticalDetail10'
+import Report11 from './components/StatisticalDetail/StatisticalDetail11'
+import Report12 from './components/StatisticalDetail/StatisticalDetail12'
 // import BuyPrintingPaper from '../src/components/BuyPaper/BuyPrintingPaper';
 
 import Register from './components/Register/Register'
@@ -32,6 +48,8 @@ import Profile from './components/User/UserProfile'
 import HomeGuest from './components/HomePage/HomeGuest'
 import { ToastContainer } from 'react-toastify'
 
+import AdminFeedback from './components/admin/AdminFeedback/AdminFeedback'
+import FileUpload from './components/PrintingPage/FileUpload'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -60,6 +78,18 @@ const router = createBrowserRouter([
           {
             path: 'student_home',
             element: <HomeStudent />,
+          },
+          {
+            path: 'printing_page',
+            element: <PrintingPage />,
+          },
+          {
+            path: 'printing_page/printing_page2',
+            element: <PrintingPage2 />,
+          },
+          {
+            path: 'file_upload',
+            element: <FileUpload />,
           },
           {
             path: 'profile',
@@ -122,6 +152,62 @@ const router = createBrowserRouter([
           {
             path: 'printing_imple',
             element: <PrintingImple />,
+          },
+          {
+            path: '',
+            element: <Report />,
+          },
+          {
+            path: 'report1',
+            element: <Report1 />,
+          },
+          {
+            path: 'report2',
+            element: <Report2 />,
+          },
+          {
+            path: 'report3',
+            element: <Report3 />,
+          },
+          {
+            path: 'report4',
+            element: <Report4 />,
+          },
+          {
+            path: 'report5',
+            element: <Report5 />,
+          },
+          {
+            path: 'report6',
+            element: <Report6 />,
+          },
+          {
+            path: 'report7',
+            element: <Report7 />,
+          },
+          {
+            path: 'report8',
+            element: <Report8 />,
+          },
+          {
+            path: 'report9',
+            element: <Report9 />,
+          },
+          {
+            path: 'report10',
+            element: <Report10 />,
+          },
+          {
+            path: 'report11',
+            element: <Report11 />,
+          },
+          {
+            path: 'report12',
+            element: <Report12 />,
+          },
+          {
+            path: 'list_feedback',
+            element: <AdminFeedback />,
           },
         ],
       },

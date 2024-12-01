@@ -154,7 +154,7 @@ function PrintingStatus() {
                       <div>Hiệu suất</div>
                       <div className="text-3xl">
                         {a.paperCount !== undefined
-                          ? (a.paperCount / paper) * 100
+                          ? Math.floor((a.paperCount / paper) * 100)
                           : '0'}
                         %
                       </div>

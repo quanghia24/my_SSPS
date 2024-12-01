@@ -36,6 +36,10 @@ const HomeStudent = () => {
     }
   }
 
+  const handleFileUpload = () => {
+    navigate('/student/file_upload')
+  }
+
   useEffect(() => {
     getStatus()
   }, [])
@@ -45,7 +49,7 @@ const HomeStudent = () => {
       <div className="container">
         <div className="main-content  ">
           <div className="card ">
-            <img src={Print} alt="In tài liệu" />
+            <img onClick={handleFileUpload} src={Print} alt="In tài liệu" />
           </div>
           <div className="card ">
             <img

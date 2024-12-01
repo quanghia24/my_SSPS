@@ -26,14 +26,11 @@ function PrintingImple() {
         },
       )
       setBalance(res.data)
+      toast.success('reset balance success!')
     } catch (error) {
       console.error(error)
     }
   }
-
-  useEffect(() => {
-    getBalance()
-  }, [])
 
   const setPage = async (data) => {
     try {
@@ -130,7 +127,7 @@ function PrintingImple() {
                       htmlFor="email"
                       className="block mb-2 text-sm font-medium text-gray-900"
                     >
-                      Input paper
+                      Thiết lập số giấy mặc định
                     </label>
                     <input
                       type="text"
@@ -144,7 +141,7 @@ function PrintingImple() {
                     type="submit"
                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
-                    Set Paper
+                    Thay đổi
                   </button>
                 </div>
               </form>
@@ -158,7 +155,7 @@ function PrintingImple() {
                       htmlFor="email"
                       className="block mb-2 text-sm font-medium text-gray-900"
                     >
-                      Input Price
+                      Thiết lập giá của mỗi trang in
                     </label>
                     <input
                       type="text"
@@ -172,7 +169,7 @@ function PrintingImple() {
                     type="submit"
                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
-                    Set Price
+                    Thay đổi
                   </button>
                 </div>
               </form>
@@ -186,7 +183,7 @@ function PrintingImple() {
                       htmlFor="email"
                       className="block mb-2 text-sm font-medium text-gray-900"
                     >
-                      Input Date
+                      Thiết lập ngày cung cấp số trang mặc định
                     </label>
                     <input
                       type="date"
@@ -200,10 +197,27 @@ function PrintingImple() {
                     type="submit"
                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
-                    Set Date
+                    Thay đổi
                   </button>
                 </div>
               </form>
+
+              <div class="max-w-sm mx-auto w-full">
+                <div className="mb-3">
+                  <label
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Thiết lập số dư mặc định
+                  </label>
+                </div>
+                <button
+                  onClick={() => getBalance()}
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Thay đổi
+                </button>
+              </div>
             </div>
           </div>
         </div>

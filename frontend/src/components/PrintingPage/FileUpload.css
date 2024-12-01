@@ -1,0 +1,209 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+div,
+span,
+a,
+img {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EBF4FF;
+}
+
+select {
+    display: block;
+    width: 328px;
+    height: 36px;
+    background-color: #EDF5F4;
+    font-weight: bold;
+}
+
+.MainContain {
+    width: 1300px;
+    padding-top: 137px;
+    margin: auto;
+    position: relative;
+}
+
+.balance {
+    position: absolute;
+    display: inline-block;
+    border: 1px solid black;
+    padding: 10px;
+    right: -12px;
+    top: 8%;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+/* second {
+    height: 260px;
+} */
+
+#fileupload {
+    display: none;
+}
+
+.UploadContain {
+    border: 1px solid black;
+    display: flex;
+}
+
+.fileUpload {
+    width: 232px;
+    border-right: 1px solid black;
+}
+
+.fileUpload-Content {
+    height: 132px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row, */
+    display: grid;
+    place-items: center;
+
+}
+
+.fileUpload-text {
+    text-align: center;
+    font-weight: bold;
+}
+
+.fileuploadImage {
+    height: 56px;
+    width: 44px;
+    /* fill: #3276E8; */
+    fill: red;
+}
+
+.fileUploadFrame {
+    display: grid;
+    place-items: center;
+    height: 94px;
+    width: 190px;
+    border: 1px solid black;
+    border-radius: 12px;
+    background-color: white;
+}
+
+.upload-text {
+    color: #909090
+}
+
+.uploadStatus {
+    display: grid;
+    place-items: center;
+    flex: 1
+}
+
+.statusContainer {
+    height: 50px;
+    width: 934px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    align-items: center;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.statusText {
+    margin-left: 12px;
+}
+
+.statusText p:nth-child(1) {
+    font-weight: bold;
+}
+
+.statusText p:nth-child(2) {
+    color: #3276E8;
+}
+
+.statusIcon {
+    margin-right: 8px;
+}
+
+.statusIcon img {
+    width: 22px;
+    height: 24px;
+}
+
+.configContainer {
+    position: relative;
+    height: 262px;
+    display: grid;
+    place-items: center;
+    border: 1px solid black;
+    margin-top: 42px;
+}
+
+.config1Container {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 56px;
+}
+
+.select3 input {
+    display: block;
+    width: 328px;
+    height: 36px;
+    background-color: #EDF5F4;
+}
+
+.select1 {
+    margin-left: 96px;
+}
+
+.select4 {
+    margin-left: 96px;
+}
+
+.configContainer button {
+    position: absolute;
+    width: 144px;
+    height: 44px;
+    right: 10%;
+    bottom: 12%;
+    background-color: #0D99FF;
+    border-radius: 12px;
+    color: white;
+}
+
+.button-rs {
+    background-color: #0D99FF;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: white;
+    margin: 12px 14px;
+}
+.destructor{
+    position: absolute;
+    top: 19%;
+    right: 99%;
+}
