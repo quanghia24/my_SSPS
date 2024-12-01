@@ -77,6 +77,10 @@ const router = createBrowserRouter([
             element: <HomeStudent />,
           },
           {
+            path: 'file_upload',
+            element: <FileUpload/>
+          },
+          {
             path: 'printing_page',
             element: <PrintingPage />,
           },{
