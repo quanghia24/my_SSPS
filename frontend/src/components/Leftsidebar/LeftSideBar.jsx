@@ -28,7 +28,10 @@ function LeftSideBar() {
 
   return (
     <div>
-      <div className="flex flex-col h-screen w-[250px] border-r border-black">
+      <div
+        className="flex flex-col h-screen w-[250px] border-r border-black"
+        style={{ background: 'rgba(235, 244, 255, 1)', height: '80vh' }}
+      >
         <div className="">
           <NavLink
             to="/admin_home"
