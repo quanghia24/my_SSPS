@@ -34,7 +34,6 @@ function Login() {
         const decoded = jwtDecode(user.access)
         console.log(decoded)
         localStorage.setItem('user_id', decoded.user_id)
-        localStorage.setItem('username', decoded.name)
         localStorage.setItem('role', decoded.role)
         const role = decoded.role
         // eslint-disable-next-line default-case

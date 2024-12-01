@@ -47,3 +47,10 @@
     margin-bottom: 10vh;
     
 }
+.button-feedback{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    margin-left: 20vw;
+    margin-bottom: 10vh;
+}

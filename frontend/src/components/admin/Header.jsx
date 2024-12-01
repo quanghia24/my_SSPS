@@ -13,7 +13,7 @@ function Header() {
           <div className="navbar-logo">SSPS</div>
         </div>
       </Link>
-      <NavLink to="/" className="setting-block-link">
+      <NavLink to="/" className="setting-block-link1">
           <i className="bx bx-log-out"></i>
           <p>Đăng xuất</p>
         </NavLink>

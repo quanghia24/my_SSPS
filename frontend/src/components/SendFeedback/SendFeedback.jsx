@@ -162,15 +162,14 @@ const Feedback = () => {
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
           {/* <button className="btn btn-primary button-feedback" onClick={handleSend}>Gửi ngay</button> */}
-          <div>
-            <button
-              className="btn btn-primary button-feedback "
-              onClick={handleSend}
-              disabled={isSending}
-            >
-              {isSending ? 'Đang gửi...' : 'Gửi ngay'}
-            </button>
-          </div>
+          <button 
+            className="btn btn-primary button-feedback button-feedback" 
+            onClick={handleSend} 
+            disabled={isSending}
+          >
+  {isSending ? 'Đang gửi...' : 'Gửi ngay'}
+</button>
+
         </div>
       </div>
     </div>
