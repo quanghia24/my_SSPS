@@ -1,6 +1,8 @@
 # CNPM_HCMUT_SSPS
 Welcome to our HCMUT_SSPS.
 
+![Guest's homepage](./doc/asset/guesthome.png)
+
 ## Overview
 HCMUT_SSPS is a smart printing service for HCMUT students to use the printing facilities in HCMUT more efficiently. The students can use this system to pre-order their printing needs without having to wait in a line in traditional method. The system also provides a feature of storing your printing information, such as the metadata of the document, amount, date, time, location... of each of your order. Students can then view all the details of their system usage in the history.
 
@@ -22,36 +24,22 @@ To use the application, you can follow the following steps:
 Open a terminal at a directory of your choice and enter these commands (change the folder name if you want to):
 First you want to clone the backend repo with:
 ```
-  git clone -b backend_main 
-  mv my_SSPS backend_main
-  cd backend_main
   cd backend  (*folder that has manage.py file)
 ```
 Start with seting up your virtual environment
 ```
 $ python3 -m venv .env
-
 .. to startup the venv, the code depends heavily on your system
 
 $ source .env/bin/active    (*only works on linux/mac)
 $ .env\Scripts\activate.bat (*or)
 $ .env\bin\Activated.ps1    (*or)
 ```
-Install required libraries
+
+Install required libraries and start the app
 ```
 pip install -r requirements.txt
-```
-We are conning to a database provider that is Aiven, with mySQL database, for security reason, all sensitive data were saved in an .env file. So in order to be able to connect with the server, you have to get yourself an Aiven account and create a server, set up an .env file inside backend/core/ folder (*the same folder with setting.py) with those attribute below, or setting it back to use mysql in your local machine, or just use the default sqlite3. It's up to you.
-Email me at [nghia.truongquang@hcmut.edu.vn] if you were having problem with this.
-```
-DB_NAME=_______
-DB_USER=_______
-DB_PASSWORD=_______
-DB_HOST=_______.aivencloud.com
-DB_PORT=_______
-```
-Start up the server
-```
+python3 manage.py migrate 
 python3 manage.py runserver
 ```
 
@@ -59,14 +47,7 @@ python3 manage.py runserver
 Open a terminal at a directory of your choice and enter these commands (change the folder name if you want to):
 First you want to clone the backend repo with:
 ```
-  git clone -b frontend_main 
-  mv my_SSPS frontend_main
-  cd frontend_main
   cd frontend
-```
-
-Next, install dependencies
-```
   npm install
 ```
 Then run the app with
@@ -85,7 +66,6 @@ To log in as an admin: (will take you to a seperate admin panel)
 * Password: `12345`
 
 You are now ready to explore our application!
-
 
 ## Contributors
 This project is developed by a group of Computer Science students from Ho Chi Minh University of Technology (HCMUT). Our members of the team:
