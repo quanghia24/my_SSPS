@@ -1,5 +1,7 @@
-# CNPM_HCMUT_SSPS
-Welcome to our HCMUT_SSPS.
+# CNPM_HCMUT_SPSS
+Welcome to our HCMUT_SPSS.
+
+Have a look at our app [here](spss-frontend-1-n107ztocq-quanghias-projects.vercel.app)
 
 ![Guest's homepage](./doc/asset/guesthome.png)
 
