@@ -159,8 +159,8 @@ DATABASES = {
         'NAME': "defaultdb",
         'USER': "avnadmin",
         'PASSWORD': "AVNS_-ChbzYZjql8pUKDd33Z",
-        'HOST': ssps-quanghia-quanghia.b.aivencloud.com,
-        'PORT': DB_PORT=25554
+        'HOST': "ssps-quanghia-quanghia.b.aivencloud.com",
+        'PORT': "25554"
     }
 }
 
