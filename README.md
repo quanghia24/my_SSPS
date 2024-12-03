@@ -1,5 +1,7 @@
-# CNPM_HCMUT_SSPS
-Welcome to our HCMUT_SSPS.
+# CNPM_HCMUT_SPSS
+Welcome to our HCMUT_SPSS.
+
+Have a look at our app [here](https://spss-frontend-1.vercel.app/)
 
 ![Guest's homepage](./doc/asset/guesthome.png)
 
@@ -17,7 +19,7 @@ The system is managed by the Student Printing Service Officer (SPSO). They are r
 - Payment methods not integrated
 
 ## Installation
-To use the application, you can follow the following steps:
+To run the application, you can follow the following steps:
 
 ### Clone the repository
 #### Setting up backend
@@ -43,20 +45,12 @@ python3 manage.py migrate
 python3 manage.py runserver
 ```
 
-#### Setting up frontend
-Open a terminal at a directory of your choice and enter these commands (change the folder name if you want to):
-First you want to clone the backend repo with:
-```
-  cd frontend
-  npm install
-```
-Then run the app with
-```
-npm start
-```
 You are ready now.
+#### Setting up frontend
+[Click here](https://spss-frontend-1.vercel.app/) to redirect to the webpage
 
-The application should be starting. The ReactJS application will run on http://localhost:3000
+You can create an user accout or:
+
 To log in as a student: (will take you to user site)
 * Email: `nghia@hcmut.edu.vn`
 * Password: `12345`
