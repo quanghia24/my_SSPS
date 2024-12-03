@@ -12,9 +12,11 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "boxicons": "^2.1.4",
+    "chart.js": "^4.4.6",
     "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-bootstrap-validation": "^0.1.11",
+    "react-chartjs-2": "^5.2.0",
     "react-cookie": "^7.2.2",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.2",
@@ -23,8 +25,9 @@
     "react-scripts": "^5.0.1",
     "react-select": "^5.8.3",
     "react-toastify": "^10.0.6",
-    "sisteransi": "^1.0.5",
     "recharts": "^2.13.3",
+    "sisteransi": "^1.0.5",
+    "sweetalert2": "^11.14.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

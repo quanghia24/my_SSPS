@@ -17,6 +17,7 @@ class print_file(models.Model):
 class print_order(models.Model):
     file = models.ForeignKey(print_file, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    printer = models.ForeignKey(Printer, on_delete=models.CASCADE)
 
 
     order_name = models.CharField(max_length=125, blank=True, null=True)
@@ -25,11 +26,8 @@ class print_order(models.Model):
     sided = models.CharField(max_length=6, choices=(('single', 'single'), ('double', 'double')), default='single')    
     page_side = models.CharField(max_length=2, choices=(('A3', 'A3'), ('A4', 'A4')), default='A4')
     copies = models.IntegerField(default=1)
-
     timer_start = models.DateTimeField(auto_now_add=True)
     timer_end = models.DateTimeField(blank=True, null=True)
-
-    printer = models.ForeignKey(Printer, on_delete=models.CASCADE)
     page_cost = models.IntegerField(default=0, blank=True)
 
         

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import print_order, print_file
 from user.models import User
 from printer.models import Printer
+from django.views.decorators.csrf import csrf_exempt 
 from .serializers import PrintOrderSerializer, PrintFileSerializer
 from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets
@@ -11,6 +12,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
+from django.http import JsonResponse
+from rest_framework.parsers import JSONParser
 
 class PrintFileViewSet(viewsets.ModelViewSet):
     queryset = print_file.objects.all()
@@ -41,26 +44,78 @@ class PrintFileViewSet(viewsets.ModelViewSet):
     
 
 # Create your views here.
+@csrf_exempt
+def updatePrintOrder(request):
+    if request.method == "PATCH":  # Ensure the request is a PATCH method
+        try:
+            # Parse JSON data from the request body
+            data = JSONParser().parse(request)
+        except Exception as e:
+            return JsonResponse({'error': 'Invalid JSON data'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Extract `print_id` and `status` from the parsed data
+        print_id = data.get('print_id')
+        status_value = data.get('status')
+
+        # Validate input
+        if not print_id or not status_value:
+            return JsonResponse({'error': 'Both "print_id" and "status" are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # Fetch the print order object
+            print_order_instance = print_order.objects.get(id=print_id)
+        except print_order.DoesNotExist:
+            return JsonResponse({'error': 'Print order not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Update the status
+        print_order_instance.status = status_value
+        print_order_instance.save()
+
+        # Serialize and return the updated data
+        serializer = PrintOrderSerializer(print_order_instance)
+        return JsonResponse(serializer.data, status=status.HTTP_200_OK)
+
+    return JsonResponse({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+@csrf_exempt
+def get_my_prints(request):
+    if request.method == 'GET':
+        user = User.objects.get(user_id=request.user.user_id)
+        if not user:
+            return JsonResponse({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        print_orders = print_order.objects.filter(user=user)
+        serializer = PrintOrderSerializer(print_orders, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    
+    return JsonResponse({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
 class PrintOrderViewSet(viewsets.ModelViewSet):
     queryset = print_order.objects.all()
     serializer_class = PrintOrderSerializer
     permission_classes = [IsAuthenticated]  # Require authentication
 
     def get_queryset(self):
+        queryset = super().get_queryset()
+
+        user = self.request.user
+        if not user.is_staff:
+            queryset = queryset.filter(user=user)
+            return queryset
+        
         user_id = self.request.query_params.get('user_id')  # Use query_params for GET requests
         print_id = self.request.query_params.get('print_id')
         status = self.request.query_params.get('status')
 
-        queryset = super().get_queryset()
 
+        # Filter by user ID
         if user_id:
-            try:
-                user = User.objects.get(id=user_id)  # Corrected to `id` for User model
-                queryset = queryset.filter(user=user)
-            except User.ObjectDoesNotExist:
-                return queryset.none()
+            queryset = queryset.filter(user_id=user_id)  # Use `user_id` directly to avoid extra queries
+
+        # Filter by print ID
         if print_id:
             queryset = queryset.filter(file_id=print_id)
+
+        # Filter by status
         if status:
             queryset = queryset.filter(status=status)
 

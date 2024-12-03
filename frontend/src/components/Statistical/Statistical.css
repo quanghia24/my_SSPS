@@ -1,0 +1,23 @@
+.title{
+    display: grid;
+    place-items: center;
+    margin: 0 0 24px 0;
+}
+.filterContain{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 0 24px 0;
+}
+.filterContain .filterInput1 select{
+    display: inline;
+}
+.filterContain .filterInput2 select{
+    display: inline;
+}
+.filterContain .filterInput3 select{
+    display: inline;
+}
+.tableContain table{
+    table-layout: fixed;
+}
