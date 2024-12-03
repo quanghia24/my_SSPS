@@ -36,7 +36,7 @@ const AddUser = () => {
       payload.append(key, formData[key]);
     });
 
-    const url = 'http://localhost:8000/api/users/';
+    const url = 'https://spss-backend-2.vercel.app/api/users/';
     try {
       const response = await fetch(url, {
         method: 'POST',

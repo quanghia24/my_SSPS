@@ -21,7 +21,7 @@ function Login() {
   const login = async (data) => {
     try {
       const response = await axios.post(
-        'http://127.0.0.1:8000/api/users/login/',
+        'https://spss-backend-2.vercel.app/api/users/login/',
         {
           email: data.email,
           password: data.password,
@@ -174,7 +174,7 @@ function Login() {
                 Đăng kí
               </Link>
               <Link
-                to="http://127.0.0.1:8000/password-reset/"
+                to="https://spss-backend-2.vercel.app/password-reset/"
                 className="text-blue-800 no-underline text-end w-full mt-3"
               >
                 Quên mật khẩu?

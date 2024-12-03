@@ -16,7 +16,7 @@ function ForgotPassword() {
 
   const getToken = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/password-reset/')
+      const response = await axios.get('https://spss-backend-2.vercel.app//password-reset/')
 
       const html = response.data
       const parser = new DOMParser()
@@ -41,7 +41,7 @@ function ForgotPassword() {
     try {
       const a = localStorage.getItem('a')
       const response2 = await axios.post(
-        'http://127.0.0.1:8000/password-reset/',
+        'https://spss-backend-2.vercel.app/password-reset/',
         {
           email: data.email,
         },

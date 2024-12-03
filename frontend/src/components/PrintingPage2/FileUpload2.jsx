@@ -27,7 +27,7 @@ const FileUpload2 = () => {
  
     const fetchBalance = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/users/balance/", {
+            const response = await fetch("https://spss-backend-2.vercel.app/api/users/balance/", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${accessToken}`, // Thêm token vào header nếu cần
@@ -49,7 +49,7 @@ const FileUpload2 = () => {
     };
     const fetchPrinter = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/printers/status_printers/", {
+            const response = await fetch("https://spss-backend-2.vercel.app/api/printers/status_printers/", {
                 method: "POST",
                 body:JSON.stringify({status:"active"})
             });
@@ -71,7 +71,7 @@ const FileUpload2 = () => {
     };
     const handleConfirm = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/prints/orders/', {
+            const response = await fetch('https://spss-backend-2.vercel.app/api/prints/orders/', {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,

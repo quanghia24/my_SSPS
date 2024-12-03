@@ -4,7 +4,7 @@ const refreshToken = async () => {
   const refresh_token = localStorage.getItem('refresh')
   try {
     const res = await axios.post(
-      'http://127.0.0.1:8000/api/users/token/refresh/',
+      'https://spss-backend-2.vercel.app/api/users/token/refresh/',
       {
         refresh_token,
       },
@@ -21,7 +21,7 @@ const refreshToken = async () => {
 let refreshTokenRequest = null
 
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/',
+  baseURL: 'https://spss-backend-2.vercel.app/api/',
 })
 
 instance.interceptors.request.use(

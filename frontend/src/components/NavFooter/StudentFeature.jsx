@@ -17,7 +17,7 @@ function Setting() {
           access: localStorage.getItem('access'),
         }
         const response = await axios.get(
-          'http://127.0.0.1:8000/api/users/profile/',
+          'https://spss-backend-2.vercel.app/api/users/profile/',
           {
             headers: {
               Authorization: `Bearer ${tokens.access}`,
@@ -76,7 +76,7 @@ function StudentFeature() {
           access: localStorage.getItem('access'),
         }
         const response = await axios.get(
-          'http://127.0.0.1:8000/api/users/profile/',
+          'https://spss-backend-2.vercel.app/api/users/profile/',
           {
             headers: {
               Authorization: `Bearer ${tokens.access}`,

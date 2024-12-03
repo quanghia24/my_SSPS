@@ -66,7 +66,7 @@ function MyTable() {
 
             try {
                 setLoading(true);  // Start loading
-                const response = await axios.get('http://localhost:8000/api/buys/orders/', {
+                const response = await axios.get('https://spss-backend-2.vercel.app/api/buys/orders/', {
                     headers: {
                         Authorization: `Bearer ${tokens.access}`,
                     },

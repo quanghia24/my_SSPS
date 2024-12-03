@@ -40,7 +40,7 @@ function PrintingHistory() {
                     refresh: localStorage.getItem('refresh'),
                     access: localStorage.getItem('access'),
                 };
-            const response = await axios.get('http://localhost:8000/api/prints/orders/',{
+            const response = await axios.get('https://spss-backend-2.vercel.app/api/prints/orders/',{
                 headers:{
                     Authorization: `Bearer ${tokens.access}`,
             },

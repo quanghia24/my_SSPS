@@ -11,7 +11,7 @@ const Profile = () => {
   const [receiveOrder, setReceiveOrder] = useState(false)
   const navigate = useNavigate();
   useEffect(() =>{
-    const url = 'http://127.0.0.1:8000/api/users/profile/';
+    const url = 'https://spss-backend-2.vercel.app/api/users/profile/';
     fetch(url, {
       method: 'GET',
       headers: {
@@ -31,7 +31,7 @@ const Profile = () => {
   }, [receiveData])
 
   useEffect(() =>{
-    const url2 = 'http://127.0.0.1:8000/api/buys/orders/';
+    const url2 = 'https://spss-backend-2.vercel.app/api/buys/orders/';
     fetch(url2, {
       method: 'GET',
       headers: {
@@ -44,7 +44,7 @@ const Profile = () => {
   }, [receiveLog])
 
   useEffect(() =>{
-    const url3 = 'http://127.0.0.1:8000/api/prints/orders/';
+    const url3 = 'https://spss-backend-2.vercel.app/api/prints/orders/';
     fetch(url3, {
       method: 'GET',
       headers: {

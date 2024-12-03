@@ -32,7 +32,7 @@ const Feedback = () => {
       rating: rating,
     }
 
-    const url = 'http://localhost:8000/api/reports/'
+    const url = 'https://spss-backend-2.vercel.app/api/reports/'
     const tokens = {
       refresh: localStorage.getItem('refresh'),
       access: localStorage.getItem('access'),

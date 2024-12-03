@@ -14,7 +14,7 @@ function PrintingStatus() {
   const getPaper = async () => {
     try {
       const access = localStorage.getItem('access')
-      const res = await axios.get('http://127.0.0.1:8000/api/users/paper/', {
+      const res = await axios.get('https://spss-backend-2.vercel.app/api/users/paper/', {
         headers: {
           Authorization: `Bearer ${access}`,
         },
@@ -32,7 +32,7 @@ function PrintingStatus() {
   const getPaperId = async (id) => {
     try {
       const access = localStorage.getItem('access')
-      const res = await axios.get(`http://127.0.0.1:8000/api/printers/${id}`, {
+      const res = await axios.get(`https://spss-backend-2.vercel.app/api/printers/${id}`, {
         headers: {
           Authorization: `Bearer ${access}`,
         },
@@ -57,7 +57,7 @@ function PrintingStatus() {
   const getStatus = async () => {
     try {
       const access = localStorage.getItem('access')
-      const res = await axios.get('http://127.0.0.1:8000/api/printers/', {
+      const res = await axios.get('https://spss-backend-2.vercel.app/api/printers/', {
         headers: {
           Authorization: `Bearer ${access}`,
         },
@@ -91,7 +91,7 @@ function PrintingStatus() {
       const access = localStorage.getItem('access')
       const newStatus = currentStatus === 'inactive' ? 'active' : 'inactive'
       await axios.patch(
-        'http://127.0.0.1:8000/api/printers/',
+        'https://spss-backend-2.vercel.app/api/printers/',
         {
           id: id,
           status: newStatus,

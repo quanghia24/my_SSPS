@@ -24,7 +24,7 @@ function Register() {
 
   const login = async (data) => {
     try {
-      await axios.post('http://127.0.0.1:8000/api/users/register/', {
+      await axios.post('https://spss-backend-2.vercel.app/api/users/register/', {
         email: data.email,
         password: data.password,
         name: data.name,

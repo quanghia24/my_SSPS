@@ -20,7 +20,7 @@ function BuyPrintingPaperBody() {
   useEffect(() => {
     const fetchPrice = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/buys/current-price/');
+        const response = await axios.get('https://spss-backend-2.vercel.app/api/buys/current-price/');
         setPrice(response.data.price);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -35,7 +35,7 @@ function BuyPrintingPaperBody() {
       amount: paperNo,
     };
 
-    const url = 'http://localhost:8000/api/buys/orders/';
+    const url = 'https://spss-backend-2.vercel.app/api/buys/orders/';
     const tokens = {
       refresh: localStorage.getItem("refresh"),
       access: localStorage.getItem("access"),
