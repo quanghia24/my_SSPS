@@ -10,6 +10,8 @@ HCMUT_SSPS is a smart printing service for HCMUT students to use the printing fa
 
 The system is managed by the Student Printing Service Officer (SPSO). They are responsible for configuring the system, managing the printers and viewing the statistics and performance of the HCMUT_SSPS. SPSO can also view users' printing history.
 
+The service is now online and you can have a try on it.
+
 ## Technology Stack
 - Front-end: ReactJS, Bootstrap, Tailwinds and other additional libraries provided by npm.
 - Back-end: Django.
