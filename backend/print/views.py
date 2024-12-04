@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from .models import print_order, print_file2
-from .models import print_order, print_file2
 from user.models import User
 from printer.models import Printer
 from django.views.decorators.csrf import csrf_exempt 
@@ -19,21 +18,10 @@ from rest_framework.parsers import JSONParser
 
 class PrintFileViewSet(viewsets.ModelViewSet):
     queryset = print_file2.objects.all()
-    queryset = print_file2.objects.all()
     serializer_class = PrintFileSerializer
     permission_classes = [IsAuthenticated]  # Require authentication
     parser_classes = [MultiPartParser, FormParser, JSONParser]  # Enable handling file uploads
 
-    # def create(self, request, *args, **kwargs):  # Use 'create' instead of 'post' for consistency with DRF conventions
-    #     user = request.user
-    #     file = request.data.get('file')
-    #     if not file:
-    #         return Response({'error': 'File is required'}, status=status.HTTP_400_BAD_REQUEST)
-
-    #     serializer = self.get_serializer(data={'file': file, 'user': user.id})
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save()
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
     def create(self, request, *args, **kwargs):
         user = request.user
         serializer = self.get_serializer(data=request.data)  # Handle both JSON and form-data
@@ -45,7 +33,6 @@ class PrintFileViewSet(viewsets.ModelViewSet):
         if user.is_staff:  # Corrected the method call to `is_staff`
             files = print_file2.objects.all()
         else:
-            files = print_file2.objects.filter(user=user)
             files = print_file2.objects.filter(user=user)
 
         serializer = self.get_serializer(files, many=True)

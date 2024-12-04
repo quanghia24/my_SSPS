@@ -13,12 +13,6 @@ class print_file2(models.Model):
         return f"File {self.file} | by {self.user.name}"
 
 
-class print_file2(models.Model):
-    file = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-
-    def __str__(self):
-        return f"File {self.file} | by {self.user.name}"
 
 
 class print_order(models.Model):
