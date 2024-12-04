@@ -34,9 +34,10 @@ const FileUpload = () => {
     
     function handleFileChange(event) {
         const file = event.target.files[0];
-        setFile(file)
+        // setFile(file)
         setFileName(prev => file.name)
     }
+
     function handleRemoveFile() {
         setFileName(prev => '')
     }
@@ -83,27 +84,31 @@ const FileUpload = () => {
     // Gọi API khi component được render
     useEffect(() => {
         fetchBalance();
-        
-    }, []);
+    }, [balance]);
 
 
 
     const handleUpload = async () => {
-        if (!file) {
+        if (!fileName) {
             setUploadStatus("Vui lòng chọn file trước khi upload.");
             return;
         }
 
-        const formData = new FormData();
-        formData.append("file", file); // 'file' là tên trường mà API yêu cầu
+        const formData = {
+            "file": fileName
+        }
+        
+        // const formData = new FormData();
+        // formData.append("file", fileName); // 'file' là tên trường mà API yêu cầu
 
         try {
             const response = await fetch("http://127.0.0.1:8000/api/prints/files/", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${accessToken}`, // Thêm token vào header
+                    "Content-Type": "application/json"
                 },
-                body: formData, // Dữ liệu file
+                body: JSON.stringify(formData), // Dữ liệu file
             });
 
             if (response.ok) {
@@ -111,7 +116,6 @@ const FileUpload = () => {
                 setIdFile(data.id)
                 setUploadStatus(`Upload thành công`);
             } else {
-                const errorData = await response.json();
                 setUploadStatus(`Upload thất bại|| "Lỗi không xác định."}`);
             }
         } catch (error) {
@@ -136,7 +140,6 @@ const FileUpload = () => {
                             <p>Tải tài liệu</p>
                         </div>
                         <div className='fileUpload-Content'>
-
                             <div className="fileUploadFrame">
                                 <div className='fileUpload-labelContain'>
                                     <label htmlFor="fileupload">
@@ -173,6 +176,8 @@ const FileUpload = () => {
                         {fileName && <button className="button-rs" onClick={handleUpload}>Xác nhận</button>}
                     </div>
                 </div>
+
+                
                 <div className="configContainer">
                     <div className="config1Container">
                         <div className="select1">

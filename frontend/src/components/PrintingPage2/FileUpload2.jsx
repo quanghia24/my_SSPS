@@ -14,7 +14,7 @@ const FileUpload2 = () => {
     const [activePrinter, setActivePrinter] = useState([])
     const [printerId, setPrinterId] = useState('')
     const { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile, fileName } = location.state || {}
-    const data={
+    const data = {
         "file": idFile,
         "order_name": orderName,
         "orientation": orientation,
@@ -151,7 +151,7 @@ const FileUpload2 = () => {
                         </div>
                     </div>
                 </div>
-                <button className="button-rs" onClick={handleConfirm }>Xác nhận</button>
+                <button className="button-rs" onClick={handleConfirm}>Xác nhận</button>
             </div>
             <div className="printer">
                 <img src={printer} alt="" />
