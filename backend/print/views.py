@@ -25,12 +25,10 @@ class PrintFileViewSet(viewsets.ModelViewSet):
         user = request.user
         file_name = request.data.get('file')  # Extract the file name from the request
 
-        print(user, file_name)
 
         if not file_name:
             return Response({'error': 'File name is required'}, status=status.HTTP_400_BAD_REQUEST)
 
-        print("yes")
         # Save the file name and user to the database
         serializer = self.get_serializer(data={'file': file_name, 'user': user.id})
         serializer.is_valid(raise_exception=True)
