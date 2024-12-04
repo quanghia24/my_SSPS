@@ -29,7 +29,7 @@ To log in as a student: (will take you to user site)
 * Email: `nghia@hcmut.edu.vn`
 * Password: `12345`
 
-To log in as an admin: (will take you to a seperate admin panel)
+To log in as an admin: (you will be taken to a seperate panel for admin user)
 * Username: `admin1@hcmut.edu.vn`
 * Password: `12345`
 
