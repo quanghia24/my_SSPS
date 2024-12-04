@@ -1,14 +1,16 @@
 # CNPM_HCMUT_SPSS
 Welcome to our HCMUT_SPSS.
 
-Have a look at our app [here](https://spss-frontend-1.vercel.app/)
+Have a look at our app by [clicking here](https://spss-frontend-1.vercel.app/)
 
-![Guest's homepage](./doc/asset/guesthome.png)
+[<img src="./doc/asset/guesthome.png">](https://spss-frontend-1.vercel.app/)
 
 ## Overview
 HCMUT_SSPS is a smart printing service for HCMUT students to use the printing facilities in HCMUT more efficiently. The students can use this system to pre-order their printing needs without having to wait in a line in traditional method. The system also provides a feature of storing your printing information, such as the metadata of the document, amount, date, time, location... of each of your order. Students can then view all the details of their system usage in the history.
 
 The system is managed by the Student Printing Service Officer (SPSO). They are responsible for configuring the system, managing the printers and viewing the statistics and performance of the HCMUT_SSPS. SPSO can also view users' printing history.
+
+The service is now online and you can have a try on it.
 
 ## Technology Stack
 - Front-end: ReactJS, Bootstrap, Tailwinds and other additional libraries provided by npm.
@@ -18,38 +20,10 @@ The system is managed by the Student Printing Service Officer (SPSO). They are r
 ## Drawbacks
 - Payment methods not integrated
 
-## Installation
-To run the application, you can follow the following steps:
-
-### Clone the repository
-#### Setting up backend
-Open a terminal at a directory of your choice and enter these commands (change the folder name if you want to):
-First you want to clone the backend repo with:
-```
-  cd backend  (*folder that has manage.py file)
-```
-Start with seting up your virtual environment
-```
-$ python3 -m venv .env
-.. to startup the venv, the code depends heavily on your system
-
-$ source .env/bin/active    (*only works on linux/mac)
-$ .env\Scripts\activate.bat (*or)
-$ .env\bin\Activated.ps1    (*or)
-```
-
-Install required libraries and start the app
-```
-pip install -r requirements.txt
-python3 manage.py migrate 
-python3 manage.py runserver
-```
-
-You are ready now.
-#### Setting up frontend
+## Using the app
 [Click here](https://spss-frontend-1.vercel.app/) to redirect to the webpage
 
-You can create an user accout or:
+You can create an user account on your own or using the two below:
 
 To log in as a student: (will take you to user site)
 * Email: `nghia@hcmut.edu.vn`
