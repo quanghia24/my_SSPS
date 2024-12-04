@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import print_order, print_file
+from .models import print_order, print_file2
+from .models import print_order, print_file2
 from user.models import User
 from printer.models import Printer
 from django.views.decorators.csrf import csrf_exempt 
@@ -15,29 +16,37 @@ from rest_framework import status
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
 
+
 class PrintFileViewSet(viewsets.ModelViewSet):
-    queryset = print_file.objects.all()
+    queryset = print_file2.objects.all()
+    queryset = print_file2.objects.all()
     serializer_class = PrintFileSerializer
     permission_classes = [IsAuthenticated]  # Require authentication
-    parser_classes = [MultiPartParser, FormParser]  # Enable handling file uploads
+    parser_classes = [MultiPartParser, FormParser, JSONParser]  # Enable handling file uploads
 
-    def create(self, request, *args, **kwargs):  # Use 'create' instead of 'post' for consistency with DRF conventions
+    # def create(self, request, *args, **kwargs):  # Use 'create' instead of 'post' for consistency with DRF conventions
+    #     user = request.user
+    #     file = request.data.get('file')
+    #     if not file:
+    #         return Response({'error': 'File is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    #     serializer = self.get_serializer(data={'file': file, 'user': user.id})
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+    def create(self, request, *args, **kwargs):
         user = request.user
-        file = request.FILES.get('file')
-        if not file:
-            return Response({'error': 'File is required'}, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer = self.get_serializer(data={'file': file, 'user': user.id})
+        serializer = self.get_serializer(data=request.data)  # Handle both JSON and form-data
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        serializer.save(user=user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
     def list(self, request, *args, **kwargs):  # Use 'list' for GET requests
         user = request.user
         if user.is_staff:  # Corrected the method call to `is_staff`
-            files = print_file.objects.all()
+            files = print_file2.objects.all()
         else:
-            files = print_file.objects.filter(user=user)
+            files = print_file2.objects.filter(user=user)
+            files = print_file2.objects.filter(user=user)
 
         serializer = self.get_serializer(files, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -130,8 +139,10 @@ class PrintOrderViewSet(viewsets.ModelViewSet):
 
         # Check if file exists
         try:
-            file = print_file.objects.get(id=file_id)
-        except print_file.ObjectDoesNotExist:
+            file = print_file2.objects.get(id=file_id)
+        except print_file2.ObjectDoesNotExist:
+            file = print_file2.objects.get(id=file_id)
+        except print_file2.ObjectDoesNotExist:
             return Response({'error': 'File not found'}, status=status.HTTP_404_NOT_FOUND)
 
         # Check user's balance

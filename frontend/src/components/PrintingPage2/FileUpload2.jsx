@@ -14,7 +14,7 @@ const FileUpload2 = () => {
     const [activePrinter, setActivePrinter] = useState([])
     const [printerId, setPrinterId] = useState('')
     const { printNumber, sizePaper, numberPrint, optionPrint, orientation, idFile, fileName } = location.state || {}
-    const data={
+    const data = {
         "file": idFile,
         "order_name": orderName,
         "orientation": orientation,
@@ -47,6 +47,7 @@ const FileUpload2 = () => {
             // Lưu thông báo lỗi
         }
     };
+    
     const fetchPrinter = async () => {
         try {
             const response = await fetch("https://spss-backend-2.vercel.app/api/printers/status_printers/", {
@@ -62,13 +63,13 @@ const FileUpload2 = () => {
 
             const data = await response.json();
        
-              
               // Random một object từ mảng
              setActivePrinter(data)
         } catch (error) {
             // Lưu thông báo lỗi
         }
     };
+
     const handleConfirm = async () => {
         try {
             const response = await fetch('https://spss-backend-2.vercel.app/api/prints/orders/', {

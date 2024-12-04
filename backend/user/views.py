@@ -91,6 +91,7 @@ class RegisterUserView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 class UserView(APIView):
     permission_classes = (IsAuthenticated,)
     parser_classes = [JSONParser, MultiPartParser, FormParser]
@@ -140,13 +141,13 @@ class UserView(APIView):
 class BalanceView(APIView):
     # permission_classes = {}
     permission_classes = (IsAuthenticated,)
-
     def get(self, request):
         try:
             user = User.objects.get(user_id=request.user.user_id)
         except User.DoesNotExist:
             return Response({'message': 'User with this id does not exist.'}, status=status.HTTP_404_NOT_FOUND)
         return Response({'balance': user.balance}, status=status.HTTP_200_OK)
+    
 class DeleteView(APIView):
     permission_classes = (IsAdminUser,)
     def delete(self, request):
@@ -163,7 +164,6 @@ class DeleteView(APIView):
         return Response({'message': f"Deleted user with id:{temp}"}, status=status.HTTP_200_OK)
 class AllUsersView(APIView):
     permission_classes = (IsAdminUser,)
-
 
     def get(self, request):
         user_id = request.data.get('user_id', None)
@@ -215,6 +215,7 @@ class AllUsersView(APIView):
             return Response({'message': f'Updated: {", ".join(updated_fields)}'}, status=status.HTTP_200_OK)
         else:
             return Response({'message': 'No updates made'}, status=status.HTTP_200_OK)
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod

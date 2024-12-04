@@ -5,9 +5,16 @@ from datetime import datetime
 
 
 # Create your models here.
+class print_file2(models.Model):
+    file = models.TextField();
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
-class print_file(models.Model):
-    file = models.FileField()
+    def __str__(self):
+        return f"File {self.file} | by {self.user.name}"
+
+
+class print_file2(models.Model):
+    file = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
@@ -15,7 +22,7 @@ class print_file(models.Model):
 
 
 class print_order(models.Model):
-    file = models.ForeignKey(print_file, on_delete=models.CASCADE)
+    file = models.ForeignKey(print_file2, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     printer = models.ForeignKey(Printer, on_delete=models.CASCADE)
 

@@ -15,7 +15,7 @@ function Navbar() {
       </Link>
      
       <ul className="navbar-links">
-        <li> <Link to="/student/file_upload">In tài liệu</Link></li>
+        <li><Link to="/student/file_upload">In tài liệu</Link></li>
         <li><Link to="/student/send_feedback">Đóng góp ý kiến</Link></li>
         <li><Link to="/student/buy_printing_paper">Mua giấy</Link></li>
         <li><Link to="/student/printing_history">Lịch sử</Link></li>

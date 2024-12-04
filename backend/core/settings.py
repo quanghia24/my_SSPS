@@ -45,15 +45,11 @@ INSTALLED_APPS = [
     'print',
     'printer',
     'report',
-
 ]
 REST_FRAMEWORK = {
-
     'DEFAULT_AUTHENTICATION_CLASSES': (
-
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
-
 }
 
 
@@ -128,7 +124,6 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
@@ -156,7 +151,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': "defaultdb",
+        'NAME': "newdb",
         'USER': "avnadmin",
         'PASSWORD': "AVNS_-ChbzYZjql8pUKDd33Z",
         'HOST': "ssps-quanghia-quanghia.b.aivencloud.com",

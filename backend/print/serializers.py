@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import print_order, print_file
+from .models import print_order, print_file2
 
 class PrintOrderSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,9 +9,9 @@ class PrintOrderSerializer(serializers.ModelSerializer):
         
 class PrintFileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = print_file
+        model = print_file2
         fields = ['id', 'file', 'user']  # User will be set automatically
 
     def create(self, validated_data):
         # Link the file with the authenticated user
-        return print_file.objects.create(**validated_data)
+        return print_file2.objects.create(**validated_data)
