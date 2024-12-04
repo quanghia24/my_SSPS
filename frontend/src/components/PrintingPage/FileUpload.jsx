@@ -59,7 +59,7 @@ const FileUpload = () => {
 
     const fetchBalance = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/users/balance/", {
+            const response = await fetch("https://spss-backend-2.vercel.app/api/users/balance/", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${accessToken}`, // Thêm token vào header nếu cần
@@ -102,7 +102,7 @@ const FileUpload = () => {
         // formData.append("file", fileName); // 'file' là tên trường mà API yêu cầu
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/prints/files/", {
+            const response = await fetch("https://spss-backend-2.vercel.app/api/prints/files/", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${accessToken}`, // Thêm token vào header
