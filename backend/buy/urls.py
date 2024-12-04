@@ -1,5 +1,5 @@
 from rest_framework.routers import DefaultRouter
-from .views import PurchaseOrderViewSet, PaperPriceViewSet, get_current_price, DeletePurchaseOrderView
+from .views import PurchaseOrderViewSet, PaperPriceViewSet, get_current_price
 from django.urls import path, include
 
 

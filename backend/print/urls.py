@@ -10,7 +10,7 @@ router.register('files', PrintFileViewSet, basename='files_logs')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('update/', updatePrintOrder),
+    path('update/', updatePrintOrder),    
     path('myprints/', get_my_prints),
     path('download_file/', download_file, name='download_file')
 ]
