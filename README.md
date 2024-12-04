@@ -3,7 +3,7 @@ Welcome to our HCMUT_SPSS.
 
 Have a look at our app by [clicking here](https://spss-frontend-1.vercel.app/)
 
-![Guest's homepage](./doc/asset/guesthome.png)
+[<img src="./doc/asset/guesthome.png">](https://spss-frontend-1.vercel.app/)
 
 ## Overview
 HCMUT_SSPS is a smart printing service for HCMUT students to use the printing facilities in HCMUT more efficiently. The students can use this system to pre-order their printing needs without having to wait in a line in traditional method. The system also provides a feature of storing your printing information, such as the metadata of the document, amount, date, time, location... of each of your order. Students can then view all the details of their system usage in the history.
